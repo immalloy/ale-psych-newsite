@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ALE PSYCH</title>
+    <link rel="icon" href="https://ale-psych-crew.github.io/ALE-Psych-Website/assets/images/engine-branding/icon.png" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Background -->
+    <div class="bg-glow" aria-hidden="true">
+      <div class="bg-base"></div>
+
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+      <div class="blob blob-3"></div>
+      <div class="blob blob-4"></div>
+      <div class="blob blob-5"></div>
+
+      <div class="vignette"></div>
+      <div class="grid-overlay"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="topbar">
+      <div class="container topbar-inner">
+        <div class="topbar-left">
+          <button class="icon-btn" id="openSidebarBtn" aria-label="Open sidebar" type="button">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </button>
+
+          <div class="brand">
+            <div class="brand-icon">
+              <img
+                src="https://ale-psych-crew.github.io/ALE-Psych-Website/assets/images/engine-branding/icon.png"
+                alt="ALE PSYCH icon"
+                draggable="false"
+              />
+            </div>
+            <div class="brand-text">
+              <div class="brand-title">ALE PSYCH</div>
+              <div class="brand-subtitle">FNF modding engine</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main -->
+    <main class="container main">
+      <section class="hero">
+        <div class="hero-inner">
+          <h1 class="hero-title">
+            Make FNF mods with
+            <span class="grad-text">style and speed</span>
+          </h1>
+
+          <p class="hero-desc">
+            A purpose-built Friday Night Funkin’ modding engine: clean foundations, flexible systems, and a workflow that
+            feels familiar without losing its own personality.
+          </p>
+
+          <div class="hero-actions">
+            <button class="btn-primary" type="button">
+              Get Started
+              <span class="btn-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M5 12h9M12 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+            </button>
+            <button class="btn-ghost" type="button">
+              Documentation
+              <span class="btn-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5V4.5Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              </span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Banner image-only -->
+        <div class="banner-card">
+          <div class="banner-bg" aria-hidden="true"></div>
+          <div class="banner-pad">
+            <div class="media-frame">
+              <div class="aspect-video">
+                <img
+                  src="https://ale-psych-crew.github.io/ALE-Psych-Website/assets/images/engine-branding/brandpitcure.png"
+                  alt="ALE PSYCH banner"
+                  draggable="false"
+                  loading="eager"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Why it feels right (auto cycles, one box) -->
+      <section class="section">
+        <div class="section-head">
+          <h2 class="section-title">Why it feels right</h2>
+          <p class="section-subtitle">One clear idea at a time — cycling automatically.</p>
+        </div>
+
+        <div class="why-card" id="whyCard">
+          <div class="why-bg" aria-hidden="true"></div>
+
+          <div class="why-content" id="whyContent">
+            <div class="pill">
+              <span class="dot dot-fuchsia"></span>
+              <span id="whyKicker">No friction</span>
+            </div>
+
+            <div class="why-main">
+              <div class="why-title" id="whyTitle">Ease of Use</div>
+              <p class="why-text" id="whyText">
+                You shouldn’t need a tutorial marathon to start charting. ALE PSYCH stays out of your way and lets you build.
+              </p>
+            </div>
+          </div>
+
+          <div class="why-controls">
+            <div class="dots" id="whyDots" aria-label="Why carousel dots"></div>
+            <div class="arrows">
+              <button class="icon-btn" id="whyPrev" aria-label="Previous" type="button">
+                <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <button class="icon-btn" id="whyNext" aria-label="Next" type="button">
+                <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Preview carousel -->
+      <section class="section">
+        <div class="section-head">
+          <h2 class="section-title">Preview</h2>
+          <p class="section-subtitle">Feature previews, in motion.</p>
+        </div>
+
+        <div class="preview-card">
+          <div class="preview-bg" aria-hidden="true"></div>
+
+          <div class="preview-grid">
+            <div class="preview-media">
+              <div class="aspect-video">
+                <img id="prevImg" alt="" draggable="false" loading="lazy" />
+              </div>
+
+              <div class="preview-arrows">
+                <button class="icon-btn" id="prevPrev" aria-label="Previous" type="button">
+                  <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+                <button class="icon-btn" id="prevNext" aria-label="Next" type="button">
+                  <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <div class="preview-info">
+              <div class="pill">
+                <span class="dot dot-violet"></span>
+                <span id="prevCount">1 / 4</span>
+              </div>
+
+              <div class="preview-title" id="prevTitle">Ingame console</div>
+              <p class="preview-desc" id="prevDesc">Debug faster with an in-game console overlay.</p>
+
+              <div class="chips" id="prevChips"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section class="cta">
+        <div class="cta-bg" aria-hidden="true"></div>
+        <div class="cta-inner">
+          <div>
+            <div class="cta-title">Ready to build?</div>
+            <div class="cta-sub">Start modding in minutes.</div>
+          </div>
+
+          <div class="cta-actions">
+            <button class="btn-primary" type="button">
+              Get Started
+              <span class="btn-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M5 12h9M12 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+            </button>
+            <button class="btn-ghost" type="button">
+              Read Docs
+              <span class="btn-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5V4.5Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              </span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <div class="footer-inner">
+          <div class="footer-title">
+            <span class="underline-wrap">
+              <span class="underline-text">ALE Psych Crew</span>
+              <span class="underline-bar" aria-hidden="true"></span>
+            </span>
+          </div>
+
+          <div class="footer-meta">
+            <div>© <span id="yearSpan"></span> ALE PSYCH</div>
+            <div class="muted">Website by Malloy</div>
+          </div>
+        </div>
+      </footer>
+    </main>
+
+    <!-- Sidebar -->
+    <div class="overlay" id="overlay" hidden></div>
+
+    <aside class="sidebar" id="sidebar" aria-label="Sidebar" aria-modal="true" role="dialog" hidden>
+      <div class="sidebar-top">
+        <div class="sidebar-brand">
+          <div class="brand-icon">
+            <img
+              src="https://ale-psych-crew.github.io/ALE-Psych-Website/assets/images/engine-branding/icon.png"
+              alt="ALE PSYCH icon"
+              draggable="false"
+            />
+          </div>
+          <div>
+            <div class="brand-subtitle">ALE PSYCH</div>
+            <div class="sidebar-title">navigation</div>
+          </div>
+        </div>
+
+        <button class="icon-btn" id="closeSidebarBtn" aria-label="Close" type="button">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M18 6 6 18M6 6l12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="sidebar-body">
+        <div class="sidebar-kicker">sections</div>
+        <nav class="sidebar-nav" id="sidebarNav"></nav>
+      </div>
+    </aside>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
+
