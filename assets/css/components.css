@@ -425,7 +425,10 @@
   inset:0;
   z-index:40;
   background: rgba(0,0,0,.60);
+  opacity:0;
+  transition: opacity .2s ease;
 }
+.overlay.visible{ opacity:1; }
 .sidebar{
   position:fixed;
   top:0;

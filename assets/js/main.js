@@ -1,6 +1,7 @@
 import { NAV_SECTIONS, WHY_SLIDES, SHOWCASE } from "./data.js";
 
 const AUTO_INTERVAL_MS = 5200;
+const PREVIEW_INTERVAL_MS = 6200;
 
 const yearSpan = document.getElementById("yearSpan");
 if (yearSpan) yearSpan.textContent = String(new Date().getFullYear());
@@ -10,13 +11,32 @@ const overlay = document.getElementById("overlay");
 const openSidebarBtn = document.getElementById("openSidebarBtn");
 const closeSidebarBtn = document.getElementById("closeSidebarBtn");
 const sidebarNav = document.getElementById("sidebarNav");
+let sidebarCloseTimer = null;
 
 const setSidebarOpen = (open) => {
   if (!sidebar || !overlay) return;
-  sidebar.hidden = !open;
-  overlay.hidden = !open;
-  sidebar.classList.toggle("open", open);
-  document.body.style.overflow = open ? "hidden" : "";
+  if (open) {
+    if (sidebarCloseTimer) {
+      window.clearTimeout(sidebarCloseTimer);
+      sidebarCloseTimer = null;
+    }
+    sidebar.hidden = false;
+    overlay.hidden = false;
+    requestAnimationFrame(() => {
+      sidebar.classList.add("open");
+      overlay.classList.add("visible");
+    });
+    document.body.style.overflow = "hidden";
+    return;
+  }
+
+  sidebar.classList.remove("open");
+  overlay.classList.remove("visible");
+  document.body.style.overflow = "";
+  sidebarCloseTimer = window.setTimeout(() => {
+    sidebar.hidden = true;
+    overlay.hidden = true;
+  }, 220);
 };
 
 if (sidebarNav) {
@@ -28,6 +48,9 @@ if (sidebarNav) {
         </button>
       `
   ).join("");
+  [...sidebarNav.querySelectorAll("button")].forEach((button) => {
+    button.addEventListener("click", () => setSidebarOpen(false));
+  });
 }
 
 if (openSidebarBtn) openSidebarBtn.addEventListener("click", () => setSidebarOpen(true));
@@ -57,7 +80,10 @@ const renderWhyDots = () => {
     )
     .join("");
   [...whyDots.querySelectorAll("button")].forEach((button) => {
-    button.addEventListener("click", () => setWhyIndex(Number(button.getAttribute("data-i"))));
+    button.addEventListener("click", () => {
+      setWhyIndex(Number(button.getAttribute("data-i")));
+      startWhyTimer();
+    });
   });
 };
 
@@ -89,21 +115,29 @@ const stopWhyTimer = () => {
   whyTimer = null;
 };
 
-if (whyPrev) whyPrev.addEventListener("click", () => setWhyIndex(whyIdx - 1));
-if (whyNext) whyNext.addEventListener("click", () => setWhyIndex(whyIdx + 1));
+if (whyPrev)
+  whyPrev.addEventListener("click", () => {
+    setWhyIndex(whyIdx - 1);
+    startWhyTimer();
+  });
+if (whyNext)
+  whyNext.addEventListener("click", () => {
+    setWhyIndex(whyIdx + 1);
+    startWhyTimer();
+  });
 renderWhyDots();
 setWhyIndex(0);
 startWhyTimer();
 
-document.addEventListener("visibilitychange", () => {
-  if (document.hidden) {
-    stopWhyTimer();
-    return;
-  }
-  startWhyTimer();
-});
+const whyCard = document.getElementById("whyCard");
+if (whyCard) {
+  whyCard.addEventListener("pointerenter", stopWhyTimer);
+  whyCard.addEventListener("pointerleave", startWhyTimer);
+}
 
 let prevIdx = 0;
+let prevTimer = null;
+let prevSwapTimeout = null;
 const prevImg = document.getElementById("prevImg");
 const prevTitle = document.getElementById("prevTitle");
 const prevDesc = document.getElementById("prevDesc");
@@ -111,6 +145,7 @@ const prevCount = document.getElementById("prevCount");
 const prevChips = document.getElementById("prevChips");
 const prevPrev = document.getElementById("prevPrev");
 const prevNext = document.getElementById("prevNext");
+const previewCard = document.getElementById("previewCard");
 
 const renderChips = () => {
   if (!prevChips) return;
@@ -120,7 +155,10 @@ const renderChips = () => {
   }).join("");
 
   [...prevChips.querySelectorAll("button")].forEach((button) => {
-    button.addEventListener("click", () => setPrevIndex(Number(button.getAttribute("data-i"))));
+    button.addEventListener("click", () => {
+      setPrevIndex(Number(button.getAttribute("data-i")));
+      startPrevTimer();
+    });
   });
 };
 
@@ -130,7 +168,8 @@ const setPrevIndex = (next) => {
 
   if (prevImg) {
     prevImg.classList.add("swap");
-    window.setTimeout(() => {
+    if (prevSwapTimeout) window.clearTimeout(prevSwapTimeout);
+    prevSwapTimeout = window.setTimeout(() => {
       prevImg.src = slide.src;
       prevImg.alt = slide.title;
       prevImg.classList.remove("swap");
@@ -142,10 +181,45 @@ const setPrevIndex = (next) => {
   renderChips();
 };
 
-if (prevPrev) prevPrev.addEventListener("click", () => setPrevIndex(prevIdx - 1));
-if (prevNext) prevNext.addEventListener("click", () => setPrevIndex(prevIdx + 1));
+const startPrevTimer = () => {
+  if (prevTimer) window.clearInterval(prevTimer);
+  prevTimer = window.setInterval(() => setPrevIndex(prevIdx + 1), PREVIEW_INTERVAL_MS);
+};
+
+const stopPrevTimer = () => {
+  if (!prevTimer) return;
+  window.clearInterval(prevTimer);
+  prevTimer = null;
+};
+
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden) {
+    stopWhyTimer();
+    stopPrevTimer();
+    return;
+  }
+  startWhyTimer();
+  startPrevTimer();
+});
+
+if (prevPrev)
+  prevPrev.addEventListener("click", () => {
+    setPrevIndex(prevIdx - 1);
+    startPrevTimer();
+  });
+if (prevNext)
+  prevNext.addEventListener("click", () => {
+    setPrevIndex(prevIdx + 1);
+    startPrevTimer();
+  });
 renderChips();
 setPrevIndex(0);
+startPrevTimer();
+
+if (previewCard) {
+  previewCard.addEventListener("pointerenter", stopPrevTimer);
+  previewCard.addEventListener("pointerleave", startPrevTimer);
+}
 
 function escapeHtml(str) {
   return String(str)
