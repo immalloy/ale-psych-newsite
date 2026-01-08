@@ -1,4 +1,11 @@
-export const NAV_SECTIONS = ["Home", "Downloads", "Mods", "Scripts", "Wiki", "API (Lua)"];
+export const NAV_SECTIONS = [
+  { label: "Home", href: "./index.html" },
+  { label: "Downloads", href: "./downloads.html" },
+  { label: "Mods", href: "./mods.html", placeholder: true },
+  { label: "Scripts", href: "./scripts.html", placeholder: true },
+  { label: "Wiki", href: "./wiki.html", placeholder: true },
+  { label: "API (Lua)", href: "./api-lua.html", placeholder: true },
+];
 
 export const WHY_SLIDES = [
   {

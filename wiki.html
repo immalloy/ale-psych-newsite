@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Wiki | ALE PSYCH</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/icons/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/icons/favicon-16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/icons/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="./assets/icons/favicon-192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="./assets/icons/favicon-512.png" />
+    <link rel="manifest" href="./assets/icons/site.webmanifest" />
+    <link rel="stylesheet" href="./assets/css/base.css" />
+    <link rel="stylesheet" href="./assets/css/components.css" />
+  </head>
+  <body>
+    <!-- Background -->
+    <div class="bg-glow" aria-hidden="true">
+      <div class="bg-base"></div>
+
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+      <div class="blob blob-3"></div>
+      <div class="blob blob-4"></div>
+      <div class="blob blob-5"></div>
+
+      <div class="vignette"></div>
+      <div class="grid-overlay"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="topbar">
+      <div class="container topbar-inner">
+        <div class="topbar-left">
+          <button class="icon-btn" id="openSidebarBtn" aria-label="Toggle menu" type="button">
+            <img src="./assets/svgs/hamburger-menu.svg" alt="" aria-hidden="true" />
+          </button>
+
+          <div class="brand">
+            <div class="brand-icon">
+              <img
+                src="./assets/images/engine-branding/icon.png"
+                alt="ALE PSYCH icon"
+                draggable="false"
+              />
+            </div>
+            <div class="brand-text">
+              <div class="brand-title">ALE PSYCH</div>
+              <div class="brand-subtitle">FNF modding engine</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main -->
+    <main class="container main">
+      <section class="hero">
+        <div class="hero-inner">
+          <h1 class="hero-title">
+            Wiki
+            <span class="grad-text">coming soon</span>
+          </h1>
+          <p class="hero-desc">
+            A central knowledge base for guides, troubleshooting, and best practices is on the way.
+          </p>
+          <div class="hero-actions">
+            <a class="btn-primary" href="./downloads.html">
+              Download ALE PSYCH
+              <span class="btn-icon" aria-hidden="true">
+                <img src="./assets/svgs/download.svg" alt="" aria-hidden="true" />
+              </span>
+            </a>
+            <a class="btn-ghost" href="./index.html">
+              Back to home
+              <span class="btn-icon" aria-hidden="true">
+                <img src="./assets/svgs/arrow-right.svg" alt="" aria-hidden="true" />
+              </span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <h2 class="section-title">What to expect</h2>
+          <p class="section-subtitle">
+            We’ll be adding searchable docs, onboarding tips, and community troubleshooting.
+          </p>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <div class="footer-inner">
+          <div class="footer-title">
+            <span class="underline-wrap">
+              <span class="underline-text">ALE Psych Crew</span>
+              <span class="underline-bar" aria-hidden="true"></span>
+            </span>
+          </div>
+
+          <div class="footer-meta">
+            <div>© <span id="yearSpan"></span> ALE PSYCH</div>
+            <div class="muted">Website by Malloy</div>
+          </div>
+        </div>
+      </footer>
+    </main>
+
+    <!-- Sidebar -->
+    <div class="overlay" id="overlay" hidden></div>
+
+    <aside class="sidebar" id="sidebar" aria-label="Sidebar" aria-modal="true" role="dialog" hidden>
+      <div class="sidebar-top">
+        <div class="sidebar-brand">
+          <div class="brand-icon">
+            <img
+              src="./assets/images/engine-branding/icon.png"
+              alt="ALE PSYCH icon"
+              draggable="false"
+            />
+          </div>
+          <div>
+            <div class="brand-subtitle">ALE PSYCH</div>
+            <div class="sidebar-title">navigation</div>
+          </div>
+        </div>
+
+        <button class="icon-btn" id="closeSidebarBtn" aria-label="Close" type="button">
+          <img src="./assets/svgs/arrow-circle-left.svg" alt="" aria-hidden="true" />
+        </button>
+      </div>
+
+      <div class="sidebar-body">
+        <div class="sidebar-kicker">sections</div>
+        <nav class="sidebar-nav" id="sidebarNav"></nav>
+      </div>
+    </aside>
+
+    <script type="module" src="./assets/js/main.js"></script>
+  </body>
+</html>
