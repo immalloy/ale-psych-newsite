@@ -68,7 +68,7 @@
 }
 .icon-btn:hover{ background: rgba(255,255,255,.10); }
 .icon-btn:active{ transform: scale(.98); }
-.icon-btn svg{ width:20px; height:20px; }
+.icon-btn img{ width:20px; height:20px; display:block; filter: brightness(0) invert(1); }
 
 .btn-primary, .btn-ghost{
   border-radius: 18px;
@@ -104,7 +104,7 @@
   height:16px;
   display:inline-flex;
 }
-.btn-icon svg{ width:16px; height:16px; }
+.btn-icon img{ width:16px; height:16px; display:block; filter: brightness(0) invert(1); }
 
 /* Hero */
 .hero{ display:flex; flex-direction:column; gap: 24px; }
@@ -488,4 +488,4 @@
 }
 .nav-item:hover{ background: rgba(255,255,255,.10); }
 .nav-item:active{ transform: scale(.99); }
-.nav-item svg{ width:16px; height:16px; color: var(--muted); }
+.nav-item img{ width:16px; height:16px; display:block; filter: brightness(0) invert(0.7); }
