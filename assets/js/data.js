@@ -48,21 +48,21 @@ export const SHOWCASE = [
   {
     title: "Ingame console",
     desc: "Debug faster with an in-game console overlay.",
-    src: "https://ale-psych-crew.github.io/ALE-Psych-Website/assets/images/features/feature4.png",
+    src: "./assets/images/features/feature4.png",
   },
   {
     title: "Scripted menus and submenus",
     desc: "Flexible UI flow: script your menus without pain.",
-    src: "https://ale-psych-crew.github.io/ALE-Psych-Website/assets/images/features/feature1.png",
+    src: "./assets/images/features/feature1.png",
   },
   {
     title: "Unique Mod Support and Ease of Use",
     desc: "Better structure so projects stay organized as they grow.",
-    src: "https://ale-psych-crew.github.io/ALE-Psych-Website/assets/images/features/feature3.png",
+    src: "./assets/images/features/feature3.png",
   },
   {
     title: "Community Driven",
     desc: "Built with feedback and room to evolve.",
-    src: "https://ale-psych-crew.github.io/ALE-Psych-Website/assets/images/features/feature6.png",
+    src: "./assets/images/features/feature6.png",
   },
 ];
