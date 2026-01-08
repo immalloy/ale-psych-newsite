@@ -17,5 +17,100 @@
         "url": "https://example.com/psychrush/linux"
       }
     ]
+  },
+  {
+    "id": "trap-4-silly-kids",
+    "title": "Trap 4 Silly Kids",
+    "author": "ThatKicke! and The T4SK Team",
+    "tags": ["Featured", "Original"],
+    "thumbnail": "./thumbnails/trap-4-silly-kids.png",
+    "markdown": "./descriptions/trap-4-silly-kids.md",
+    "comingSoon": false,
+    "downloads": [
+      {
+        "label": "GameBanana",
+        "url": "https://gamebanana.com/mods/627753"
+      }
+    ]
+  },
+  {
+    "id": "vs-guy-named-laumber-mobile",
+    "title": "FNF: Vs A Guy Named Laumber",
+    "author": "CaneCrazyy",
+    "tags": ["Featured", "Original"],
+    "thumbnail": "./thumbnails/vs-guy-named-laumber-mobile.jpg",
+    "markdown": "./descriptions/vs-guy-named-laumber-mobile.md",
+    "comingSoon": false,
+    "downloads": [
+      {
+        "label": "GameBanana",
+        "url": "https://gamebanana.com/mods/574054"
+      }
+    ]
+  },
+  {
+    "id": "ale-modidregistry",
+    "title": "ALE ModID Registry",
+    "author": "ImMalloy and Alejo GD Official",
+    "tags": ["Tool"],
+    "thumbnail": "./thumbnails/ale-modidregistry.png",
+    "markdown": "./descriptions/ale-modidregistry.md",
+    "comingSoon": false,
+    "downloads": [
+      {
+        "label": "GitHub",
+        "url": "https://github.com/immalloy/ALE-ModIDRegistry"
+      }
+    ]
+  },
+  {
+    "id": "vs-memstar",
+    "title": "Vs Memstar!",
+    "author": "ImMalloy, Nezumieepy and Crew Awesome!",
+    "tags": ["Featured", "Original"],
+    "thumbnail": "./thumbnails/vs-memstar.png",
+    "markdown": "./descriptions/vs-memstar.md",
+    "comingSoon": true,
+    "downloads": []
+  },
+  {
+    "id": "friday-night-calvin",
+    "title": "Friday Night Calvin’",
+    "author": "The Calvin Team",
+    "tags": ["Featured", "Original"],
+    "thumbnail": "./thumbnails/friday-night-calvin.png",
+    "markdown": "./descriptions/friday-night-calvin.md",
+    "comingSoon": true,
+    "downloads": []
+  },
+  {
+    "id": "vs-roaring-knight",
+    "title": "Friday Night Funkin' Vs The Roaring Knight",
+    "author": "Speg",
+    "tags": ["Original"],
+    "thumbnail": "./thumbnails/vs-roaring-knight.png",
+    "markdown": "./descriptions/vs-roaring-knight.md",
+    "comingSoon": true,
+    "downloads": []
+  },
+  {
+    "id": "rappin-every-friday",
+    "title": "Rappin’ Every Friday!",
+    "author": "ThatKicke! and the Rappin Team",
+    "tags": ["Original"],
+    "thumbnail": "./thumbnails/rappin-every-friday.png",
+    "markdown": "./descriptions/rappin-every-friday.md",
+    "comingSoon": true,
+    "downloads": []
+  },
+  {
+    "id": "secret-exit-the-lost-levels",
+    "title": "Secret Exit: The Lost Levels",
+    "author": "Slaimy and The S.E.T.L.L. Team",
+    "tags": ["Original"],
+    "thumbnail": "./thumbnails/secret-exit-the-lost-levels.png",
+    "markdown": "./descriptions/secret-exit-the-lost-levels.md",
+    "comingSoon": true,
+    "downloads": []
   }
 ]
