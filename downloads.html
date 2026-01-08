@@ -61,10 +61,33 @@
             Download
             <span class="grad-text">ALE PSYCH</span>
           </h1>
+          <p class="hero-desc">
+            Fresh nightly builds, sorted by platform. Pick the exact installer you need and jump
+            straight in.
+          </p>
+          <div class="hero-actions">
+            <a
+              class="btn-ghost"
+              href="https://github.com/ALE-Psych-Crew/ALE-Psych/releases"
+              rel="noopener"
+              target="_blank"
+            >
+              Browse GitHub releases
+              <span class="btn-icon" aria-hidden="true">
+                <img src="./assets/svgs/github.svg" alt="" aria-hidden="true" />
+              </span>
+            </a>
+          </div>
+        </div>
+      </section>
 
       <section class="section" id="downloads">
         <div class="section-head">
           <h2 class="section-title">Choose your platform</h2>
+          <p class="section-subtitle">
+            All downloads open in a new tab. Nightlies update often, so check releases for stable
+            builds.
+          </p>
         </div>
 
         <div class="download-grid">
@@ -74,13 +97,19 @@
                 <img src="./assets/svgs/os-windows.svg" alt="" aria-hidden="true" />
               </div>
               <div>
-                <div class="download-title">Windows</div>
-                <div class="download-version">64-bit</div>
+                <div class="download-title">Windows 64-bit</div>
+                <div class="download-version">ZIP · Win x64</div>
               </div>
             </div>
+            <p class="download-desc">For modern Windows installs. Recommended for most users.</p>
             <div class="download-actions">
-              <a class="btn-primary" href="./assets/downloads/ale-psych-windows.zip" download>
-                Download for Windows
+              <a
+                class="btn-primary"
+                href="https://nightly.link/ALE-Psych-Crew/ALE-Psych/workflows/builds.yaml/main/Windows%20Build.zip"
+                rel="noopener"
+                target="_blank"
+              >
+                Download Windows 64-bit
                 <span class="btn-icon" aria-hidden="true">
                   <img src="./assets/svgs/download.svg" alt="" aria-hidden="true" />
                 </span>
@@ -91,36 +120,22 @@
           <article class="download-card">
             <div class="download-card-header">
               <div class="download-icon">
-                <img src="./assets/svgs/os-apple.svg" alt="" aria-hidden="true" />
+                <img src="./assets/svgs/os-windows.svg" alt="" aria-hidden="true" />
               </div>
               <div>
-                <div class="download-title">macOS</div>
-                <div class="download-version">Universal</div>
+                <div class="download-title">Windows 32-bit</div>
+                <div class="download-version">ZIP · Win x86</div>
               </div>
             </div>
+            <p class="download-desc">Legacy Windows support for older 32-bit machines.</p>
             <div class="download-actions">
-              <a class="btn-primary" href="./assets/downloads/ale-psych-macos.dmg" download>
-                Download for macOS
-                <span class="btn-icon" aria-hidden="true">
-                  <img src="./assets/svgs/download.svg" alt="" aria-hidden="true" />
-                </span>
-              </a>
-            </div>
-          </article>
-
-          <article class="download-card">
-            <div class="download-card-header">
-              <div class="download-icon">
-                <img src="./assets/svgs/os-linux.svg" alt="" aria-hidden="true" />
-              </div>
-              <div>
-                <div class="download-title">Linux</div>
-                <div class="download-version">AppImage</div>
-              </div>
-            </div>
-            <div class="download-actions">
-              <a class="btn-primary" href="./assets/downloads/ale-psych-linux.AppImage" download>
-                Download for Linux
+              <a
+                class="btn-primary"
+                href="https://nightly.link/ALE-Psych-Crew/ALE-Psych/workflows/builds.yaml/main/Windows%20x32%20Build.zip"
+                rel="noopener"
+                target="_blank"
+              >
+                Download Windows 32-bit
                 <span class="btn-icon" aria-hidden="true">
                   <img src="./assets/svgs/download.svg" alt="" aria-hidden="true" />
                 </span>
@@ -135,12 +150,122 @@
               </div>
               <div>
                 <div class="download-title">Android</div>
-                <div class="download-version">APK</div>
+                <div class="download-version">APK/ZIP · Android</div>
               </div>
             </div>
+            <p class="download-desc">Grab the APK build for mobile devices and testing.</p>
             <div class="download-actions">
-              <a class="btn-primary" href="./assets/downloads/ale-psych-android.apk" download>
-                Download for Android
+              <a
+                class="btn-primary"
+                href="https://nightly.link/ALE-Psych-Crew/ALE-Psych/workflows/builds.yaml/main/Android%20Build.zip"
+                rel="noopener"
+                target="_blank"
+              >
+                Download Android build
+                <span class="btn-icon" aria-hidden="true">
+                  <img src="./assets/svgs/download.svg" alt="" aria-hidden="true" />
+                </span>
+              </a>
+            </div>
+          </article>
+
+          <article class="download-card">
+            <div class="download-card-header">
+              <div class="download-icon">
+                <img src="./assets/svgs/os-apple.svg" alt="" aria-hidden="true" />
+              </div>
+              <div>
+                <div class="download-title">iOS</div>
+                <div class="download-version">IPA/ZIP · iPhone/iPad</div>
+              </div>
+            </div>
+            <p class="download-desc">Nightly iOS builds packaged for testing devices.</p>
+            <div class="download-actions">
+              <a
+                class="btn-primary"
+                href="https://nightly.link/ALE-Psych-Crew/ALE-Psych/workflows/builds.yaml/main/iOS%20Build.zip"
+                rel="noopener"
+                target="_blank"
+              >
+                Download iOS build
+                <span class="btn-icon" aria-hidden="true">
+                  <img src="./assets/svgs/download.svg" alt="" aria-hidden="true" />
+                </span>
+              </a>
+            </div>
+          </article>
+
+          <article class="download-card">
+            <div class="download-card-header">
+              <div class="download-icon">
+                <img src="./assets/svgs/os-apple.svg" alt="" aria-hidden="true" />
+              </div>
+              <div>
+                <div class="download-title">macOS 32-bit</div>
+                <div class="download-version">ZIP · Apple Silicon/Universal</div>
+              </div>
+            </div>
+            <p class="download-desc">Universal macOS bundle for modern Apple hardware.</p>
+            <div class="download-actions">
+              <a
+                class="btn-primary"
+                href="https://nightly.link/ALE-Psych-Crew/ALE-Psych/workflows/builds.yaml/main/MacOS%20Build.zip"
+                rel="noopener"
+                target="_blank"
+              >
+                Download macOS 32-bit
+                <span class="btn-icon" aria-hidden="true">
+                  <img src="./assets/svgs/download.svg" alt="" aria-hidden="true" />
+                </span>
+              </a>
+            </div>
+          </article>
+
+          <article class="download-card">
+            <div class="download-card-header">
+              <div class="download-icon">
+                <img src="./assets/svgs/os-apple.svg" alt="" aria-hidden="true" />
+              </div>
+              <div>
+                <div class="download-title">macOS 64-bit</div>
+                <div class="download-version">ZIP · Intel x64</div>
+              </div>
+            </div>
+            <p class="download-desc">Intel macOS build for x64 Macs.</p>
+            <div class="download-actions">
+              <a
+                class="btn-primary"
+                href="https://nightly.link/ALE-Psych-Crew/ALE-Psych/workflows/builds.yaml/main/MacOS%20x64%20Build.zip"
+                rel="noopener"
+                target="_blank"
+              >
+                Download macOS 64-bit
+                <span class="btn-icon" aria-hidden="true">
+                  <img src="./assets/svgs/download.svg" alt="" aria-hidden="true" />
+                </span>
+              </a>
+            </div>
+          </article>
+
+          <article class="download-card">
+            <div class="download-card-header">
+              <div class="download-icon">
+                <img src="./assets/svgs/os-linux.svg" alt="" aria-hidden="true" />
+              </div>
+              <div>
+                <div class="download-title">Linux</div>
+                <div class="download-version">ZIP · Linux</div>
+              </div>
+            </div>
+            <p class="download-desc">Nightly Linux archive for desktop installs.</p>
+            <div class="download-actions">
+              <a
+                class="btn-primary"
+                href="https://nightly.link/ALE-Psych-Crew/ALE-Psych/workflows/builds.yaml/main/Linux%20Build.zip"
+                rel="noopener"
+                target="_blank"
+              >
+                Download Linux build
                 <span class="btn-icon" aria-hidden="true">
                   <img src="./assets/svgs/download.svg" alt="" aria-hidden="true" />
                 </span>
