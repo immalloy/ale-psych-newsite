@@ -41,15 +41,15 @@ const setSidebarOpen = (open) => {
 
 if (sidebarNav) {
   sidebarNav.innerHTML = NAV_SECTIONS.map(
-    (label) => `
-        <button class="nav-item" type="button">
+    ({ label, href }) => `
+        <a class="nav-item" href="${encodeURI(href)}">
           <span>${escapeHtml(label)}</span>
           <img src="./assets/svgs/arrow-right.svg" alt="" aria-hidden="true" />
-        </button>
+        </a>
       `
   ).join("");
-  [...sidebarNav.querySelectorAll("button")].forEach((button) => {
-    button.addEventListener("click", () => setSidebarOpen(false));
+  [...sidebarNav.querySelectorAll("a")].forEach((link) => {
+    link.addEventListener("click", () => setSidebarOpen(false));
   });
 }
 
