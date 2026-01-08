@@ -63,8 +63,8 @@
             <span class="grad-text">ALE PSYCH</span>
           </h1>
           <p class="hero-desc">
-            Browse featured projects, community picks, and upcoming releases. Filter by tags and platforms to find the
-            mods that match your vibe.
+            Browse featured projects, community picks, and upcoming releases. Filter by tags to find the mods that match
+            your vibe.
           </p>
           <div class="hero-actions">
             <a class="btn-primary" href="../downloads.html">
@@ -86,9 +86,7 @@
       <section class="section">
         <div class="section-head">
           <h2 class="section-title">Find your next mod</h2>
-          <p class="section-subtitle">
-            Search the library, filter by tag, or jump to the platform you care about most.
-          </p>
+          <p class="section-subtitle">Search the library and filter by tag.</p>
         </div>
 
         <div class="mods-panel">
@@ -108,10 +106,6 @@
               <div class="filter-grid" data-filter-list="tags"></div>
             </fieldset>
 
-            <fieldset class="filter-card" id="platform-filters">
-              <legend>Platforms</legend>
-              <div class="filter-grid" data-filter-list="platforms"></div>
-            </fieldset>
           </div>
         </div>
       </section>
@@ -182,7 +176,6 @@
       const emptyState = document.getElementById('empty-state');
       const searchInput = document.getElementById('search');
       const tagFilterContainer = document.querySelector('[data-filter-list="tags"]');
-      const platformFilterContainer = document.querySelector('[data-filter-list="platforms"]');
       const sentinel = document.getElementById('scroll-sentinel');
 
       let allMods = [];
@@ -233,17 +226,11 @@
       // Build the filter options based on available data
       function buildFilters(mods) {
         const tagSet = new Set();
-        const platformSet = new Set();
-
         mods.forEach((mod) => {
           mod.tags.forEach((tag) => tagSet.add(tag));
-          mod.platforms.forEach((platform) => platformSet.add(platform));
         });
 
         tagSet.forEach((tag) => tagFilterContainer.appendChild(createFilterItem(tag, 'tag')));
-        platformSet.forEach((platform) =>
-          platformFilterContainer.appendChild(createFilterItem(platform, 'platform'))
-        );
       }
 
       // Apply search text and checkbox filters to the mods list
@@ -252,10 +239,6 @@
         const selectedTags = Array.from(tagFilterContainer.querySelectorAll('input:checked')).map(
           (input) => input.value
         );
-        const selectedPlatforms = Array.from(
-          platformFilterContainer.querySelectorAll('input:checked')
-        ).map((input) => input.value);
-
         filteredMods = allMods.filter((mod) => {
           const statusText = mod.comingSoon ? 'coming soon' : 'available';
           const combinedText = [
@@ -271,11 +254,8 @@
           const matchesSearch = searchValue === '' || combinedText.includes(searchValue);
           const matchesTags =
             selectedTags.length === 0 || selectedTags.every((tag) => mod.tags.includes(tag));
-          const matchesPlatforms =
-            selectedPlatforms.length === 0 ||
-            selectedPlatforms.every((platform) => mod.platforms.includes(platform));
 
-          return matchesSearch && matchesTags && matchesPlatforms;
+          return matchesSearch && matchesTags;
         });
 
         visibleCount = 0;
@@ -340,7 +320,6 @@
         // Events for search and filters
         searchInput.addEventListener('input', applyFilters);
         tagFilterContainer.addEventListener('change', applyFilters);
-        platformFilterContainer.addEventListener('change', applyFilters);
 
         // Infinite scroll using IntersectionObserver
         const observer = new IntersectionObserver((entries) => {
