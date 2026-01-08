@@ -5,8 +5,8 @@
     "author": "ALE Psych Team",
     "tags": ["Featured", "Original"],
     "platforms": ["Windows", "Linux"],
-    "thumbnail": "/mods/thumbnails/psychrush.jpg",
-    "markdown": "/mods/descriptions/psychrush.md",
+    "thumbnail": "./thumbnails/psychrush.jpg",
+    "markdown": "./descriptions/psychrush.md",
     "comingSoon": false,
     "downloads": [
       {

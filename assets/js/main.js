@@ -3,6 +3,11 @@ import { NAV_SECTIONS, WHY_SLIDES, SHOWCASE } from "./data.js";
 const AUTO_INTERVAL_MS = 5200;
 const PREVIEW_INTERVAL_MS = 6200;
 
+const siteRoot = window.location.pathname.includes("/mods/") ? ".." : ".";
+const assetRoot = siteRoot === "." ? "./assets" : `${siteRoot}/assets`;
+const resolveHref = (href) => (siteRoot === "." ? `./${href}` : `${siteRoot}/${href}`);
+const resolveAsset = (path) => `${assetRoot}/${path}`;
+
 const yearSpan = document.getElementById("yearSpan");
 if (yearSpan) yearSpan.textContent = String(new Date().getFullYear());
 
@@ -42,9 +47,9 @@ const setSidebarOpen = (open) => {
 if (sidebarNav) {
   sidebarNav.innerHTML = NAV_SECTIONS.map(
     ({ label, href }) => `
-        <a class="nav-item" href="${encodeURI(href)}">
+        <a class="nav-item" href="${encodeURI(resolveHref(href))}">
           <span>${escapeHtml(label)}</span>
-          <img src="/assets/svgs/arrow-right.svg" alt="" aria-hidden="true" />
+          <img src="${resolveAsset("svgs/arrow-right.svg")}" alt="" aria-hidden="true" />
         </a>
       `
   ).join("");
@@ -168,7 +173,7 @@ const setPrevIndex = (next) => {
     prevImg.classList.add("swap");
     if (prevSwapTimeout) window.clearTimeout(prevSwapTimeout);
     prevSwapTimeout = window.setTimeout(() => {
-      prevImg.src = slide.src;
+      prevImg.src = resolveAsset(slide.src);
       prevImg.alt = slide.title;
       prevImg.classList.remove("swap");
     }, 120);
