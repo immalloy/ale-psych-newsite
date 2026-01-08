@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ALE Psych Engine Cookbook</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b0d12;
+      --panel: #151822;
+      --panel-alt: #11141c;
+      --text: #e7e9ef;
+      --muted: #a4a9b6;
+      --border: #2a2f3a;
+      --accent: #7aa2ff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 280px 1fr;
+    }
+
+    header {
+      grid-column: 1 / -1;
+      padding: 20px 28px;
+      background: var(--panel);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    #layout {
+      display: contents;
+    }
+
+    aside {
+      padding: 20px;
+      background: var(--panel-alt);
+      border-right: 1px solid var(--border);
+      overflow-y: auto;
+    }
+
+    main {
+      padding: 28px 36px 40px;
+      overflow-y: auto;
+    }
+
+    .search {
+      margin-bottom: 18px;
+    }
+
+    .search input {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: #0f121a;
+      color: var(--text);
+    }
+
+    .category {
+      margin-bottom: 12px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: #0f121a;
+    }
+
+    .category summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 10px 12px;
+      font-weight: 600;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+    }
+
+    .category summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .category ul {
+      list-style: none;
+      margin: 0;
+      padding: 6px 0;
+    }
+
+    .category li {
+      margin: 0;
+    }
+
+    .doc-link {
+      display: block;
+      padding: 8px 12px;
+      color: var(--muted);
+      text-decoration: none;
+      border-left: 2px solid transparent;
+    }
+
+    .doc-link:hover,
+    .doc-link:focus {
+      color: var(--text);
+      background: rgba(122, 162, 255, 0.1);
+    }
+
+    .doc-link.active {
+      color: var(--text);
+      border-left-color: var(--accent);
+      background: rgba(122, 162, 255, 0.16);
+    }
+
+    .content h1 {
+      margin-top: 0;
+      font-size: 28px;
+    }
+
+    .content h2 {
+      margin-top: 24px;
+      font-size: 20px;
+    }
+
+    .content p,
+    .content li {
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .content ul {
+      padding-left: 20px;
+    }
+
+    .content pre {
+      background: #0f121a;
+      padding: 14px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      overflow-x: auto;
+    }
+
+    .content code {
+      font-family: "Consolas", "SFMono-Regular", monospace;
+      color: var(--text);
+    }
+
+    @media (max-width: 900px) {
+      body {
+        grid-template-columns: 1fr;
+      }
+
+      aside {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>ALE Psych Engine Cookbook</h1>
+  </header>
+  <div id="layout">
+    <aside>
+      <div class="search">
+        <input id="search" type="text" placeholder="Search pages" aria-label="Search pages" />
+      </div>
+      <nav id="sidebar"></nav>
+    </aside>
+    <main>
+      <div id="content" class="content">
+        <h1>Loading</h1>
+        <p>Fetching documentation data.</p>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    const dataUrl = 'cookbook-data.json';
+    const sidebar = document.getElementById('sidebar');
+    const content = document.getElementById('content');
+    const searchInput = document.getElementById('search');
+
+    let docs = [];
+    let linkElements = new Map();
+
+    function escapeHtml(text) {
+      return text
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+    }
+
+    function renderMarkdown(markdown) {
+      const stripped = markdown.replace(/^---[\s\S]*?---\s*/, '');
+      const lines = stripped.split(/\r?\n/);
+      let html = '';
+      let inList = false;
+      let inCode = false;
+
+      const closeList = () => {
+        if (inList) {
+          html += '</ul>';
+          inList = false;
+        }
+      };
+
+      for (const line of lines) {
+        if (line.startsWith('```')) {
+          if (!inCode) {
+            closeList();
+            inCode = true;
+            html += '<pre><code>';
+          } else {
+            inCode = false;
+            html += '</code></pre>';
+          }
+          continue;
+        }
+
+        if (inCode) {
+          html += `${escapeHtml(line)}\n`;
+          continue;
+        }
+
+        if (!line.trim()) {
+          closeList();
+          continue;
+        }
+
+        if (line.startsWith('# ')) {
+          closeList();
+          html += `<h1>${escapeHtml(line.slice(2).trim())}</h1>`;
+          continue;
+        }
+
+        if (line.startsWith('## ')) {
+          closeList();
+          html += `<h2>${escapeHtml(line.slice(3).trim())}</h2>`;
+          continue;
+        }
+
+        if (line.startsWith('### ')) {
+          closeList();
+          html += `<h3>${escapeHtml(line.slice(4).trim())}</h3>`;
+          continue;
+        }
+
+        if (line.startsWith('- ')) {
+          if (!inList) {
+            html += '<ul>';
+            inList = true;
+          }
+          html += `<li>${escapeHtml(line.slice(2).trim())}</li>`;
+          continue;
+        }
+
+        closeList();
+        html += `<p>${escapeHtml(line.trim())}</p>`;
+      }
+
+      if (inCode) {
+        html += '</code></pre>';
+      }
+
+      closeList();
+      return html || '<p>No content available.</p>';
+    }
+
+    function setActiveLink(slug) {
+      linkElements.forEach((link, key) => {
+        link.classList.toggle('active', key === slug);
+      });
+    }
+
+    function loadDoc(doc) {
+      if (!doc) {
+        content.innerHTML = '<h1>Document not found</h1><p>Please select a page from the sidebar.</p>';
+        return;
+      }
+      setActiveLink(doc.slug);
+      fetch(doc.path)
+        .then((res) => res.text())
+        .then((text) => {
+          content.innerHTML = renderMarkdown(text);
+        })
+        .catch(() => {
+          content.innerHTML = '<h1>Unable to load document</h1><p>Please try again later.</p>';
+        });
+    }
+
+    function buildSidebar(items) {
+      sidebar.innerHTML = '';
+      linkElements = new Map();
+      const categories = new Map();
+
+      items.forEach((item) => {
+        if (!categories.has(item.category)) {
+          categories.set(item.category, []);
+        }
+        categories.get(item.category).push(item);
+      });
+
+      categories.forEach((docsInCategory, categoryName) => {
+        const details = document.createElement('details');
+        details.className = 'category';
+        details.open = true;
+
+        const summary = document.createElement('summary');
+        summary.textContent = categoryName;
+        details.appendChild(summary);
+
+        const list = document.createElement('ul');
+        docsInCategory.forEach((doc) => {
+          const listItem = document.createElement('li');
+          const link = document.createElement('a');
+          link.href = `#${doc.slug}`;
+          link.textContent = doc.title;
+          link.className = 'doc-link';
+          link.addEventListener('click', (event) => {
+            event.preventDefault();
+            history.replaceState(null, '', `#${doc.slug}`);
+            loadDoc(doc);
+          });
+          linkElements.set(doc.slug, link);
+          listItem.appendChild(link);
+          list.appendChild(listItem);
+        });
+
+        details.appendChild(list);
+        sidebar.appendChild(details);
+      });
+    }
+
+    function filterSidebar(query) {
+      const normalized = query.trim().toLowerCase();
+      const matchingDocs = normalized
+        ? docs.filter((doc) => doc.title.toLowerCase().includes(normalized))
+        : docs;
+
+      buildSidebar(matchingDocs);
+
+      if (matchingDocs.length) {
+        matchingDocs.forEach((doc) => {
+          if (doc.slug === location.hash.replace('#', '')) {
+            setActiveLink(doc.slug);
+          }
+        });
+      }
+    }
+
+    function findDocBySlug(slug) {
+      return docs.find((doc) => doc.slug === slug) || docs[0];
+    }
+
+    fetch(dataUrl)
+      .then((res) => res.json())
+      .then((data) => {
+        docs = data;
+        buildSidebar(docs);
+        const initialSlug = location.hash.replace('#', '');
+        const initialDoc = findDocBySlug(initialSlug);
+        loadDoc(initialDoc);
+      })
+      .catch(() => {
+        content.innerHTML = '<h1>Unable to load cookbook data</h1><p>Please check the data file.</p>';
+      });
+
+    window.addEventListener('hashchange', () => {
+      const slug = location.hash.replace('#', '');
+      loadDoc(findDocBySlug(slug));
+    });
+
+    searchInput.addEventListener('input', (event) => {
+      filterSidebar(event.target.value);
+    });
+  </script>
+</body>
+</html>
