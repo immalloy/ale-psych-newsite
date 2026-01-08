@@ -1,370 +1,360 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mods Browser</title>
-  <style>
-    /* Basic layout styling for readability */
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #0f1115;
-      color: #f5f5f5;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mods | ALE PSYCH</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/icons/favicon-192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/assets/icons/favicon-512.png" />
+    <link rel="manifest" href="/assets/icons/site.webmanifest" />
+    <link rel="stylesheet" href="/assets/css/base.css" />
+    <link rel="stylesheet" href="/assets/css/components.css" />
+    <link rel="stylesheet" href="/assets/css/mods.css" />
+  </head>
+  <body>
+    <!-- Background -->
+    <div class="bg-glow" aria-hidden="true">
+      <div class="bg-base"></div>
 
-    header {
-      padding: 24px;
-      background: #171a21;
-      border-bottom: 1px solid #2b2f3a;
-    }
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+      <div class="blob blob-3"></div>
+      <div class="blob blob-4"></div>
+      <div class="blob blob-5"></div>
 
-    h1 {
-      margin: 0 0 12px;
-      font-size: 28px;
-    }
+      <div class="vignette"></div>
+      <div class="grid-overlay"></div>
+    </div>
 
-    .controls {
-      display: grid;
-      gap: 16px;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    }
+    <!-- Header -->
+    <header class="topbar">
+      <div class="container topbar-inner">
+        <div class="topbar-left">
+          <button class="icon-btn" id="openSidebarBtn" aria-label="Toggle menu" type="button">
+            <img src="/assets/svgs/hamburger-menu.svg" alt="" aria-hidden="true" />
+          </button>
 
-    .control-group {
-      background: #1c2029;
-      padding: 12px;
-      border-radius: 8px;
-      border: 1px solid #2b2f3a;
-    }
+          <div class="brand">
+            <div class="brand-icon">
+              <img
+                src="/assets/images/engine-branding/icon.png"
+                alt="ALE PSYCH icon"
+                draggable="false"
+              />
+            </div>
+            <div class="brand-text">
+              <div class="brand-title">ALE PSYCH</div>
+              <div class="brand-subtitle">FNF modding engine</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
 
-    .control-group label,
-    .control-group legend {
-      font-weight: bold;
-      display: block;
-      margin-bottom: 8px;
-    }
+    <!-- Main -->
+    <main class="container main">
+      <section class="hero">
+        <div class="hero-inner">
+          <h1 class="hero-title">
+            Mods built with
+            <span class="grad-text">ALE PSYCH</span>
+          </h1>
+          <p class="hero-desc">
+            Browse featured projects, community picks, and upcoming releases. Filter by tags and platforms to find the
+            mods that match your vibe.
+          </p>
+          <div class="hero-actions">
+            <a class="btn-primary" href="/downloads.html">
+              Download ALE PSYCH
+              <span class="btn-icon" aria-hidden="true">
+                <img src="/assets/svgs/download.svg" alt="" aria-hidden="true" />
+              </span>
+            </a>
+            <a class="btn-ghost" href="/index.html">
+              Back to home
+              <span class="btn-icon" aria-hidden="true">
+                <img src="/assets/svgs/arrow-right.svg" alt="" aria-hidden="true" />
+              </span>
+            </a>
+          </div>
+        </div>
+      </section>
 
-    .search-input {
-      width: 100%;
-      padding: 8px 10px;
-      border-radius: 6px;
-      border: 1px solid #3d4452;
-      background: #111318;
-      color: #f5f5f5;
-    }
+      <section class="section">
+        <div class="section-head">
+          <h2 class="section-title">Find your next mod</h2>
+          <p class="section-subtitle">
+            Search the library, filter by tag, or jump to the platform you care about most.
+          </p>
+        </div>
 
-    .filter-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 6px 12px;
-    }
+        <div class="mods-panel">
+          <div class="mods-panel-grid">
+            <div class="filter-card">
+              <label for="search">Search mods</label>
+              <input
+                id="search"
+                class="mods-input"
+                type="search"
+                placeholder="Search by title, author, tags, or status..."
+              />
+            </div>
 
-    main {
-      padding: 24px;
-    }
+            <fieldset class="filter-card" id="tag-filters">
+              <legend>Tags</legend>
+              <div class="filter-grid" data-filter-list="tags"></div>
+            </fieldset>
 
-    .mods-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 16px;
-    }
+            <fieldset class="filter-card" id="platform-filters">
+              <legend>Platforms</legend>
+              <div class="filter-grid" data-filter-list="platforms"></div>
+            </fieldset>
+          </div>
+        </div>
+      </section>
 
-    .mod-card {
-      background: #1b1f27;
-      border: 1px solid #2b2f3a;
-      border-radius: 12px;
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
+      <section class="section">
+        <div class="mods-grid" id="mods-grid"></div>
+        <div class="empty-state" id="empty-state" hidden>
+          No mods match the current filters.
+        </div>
+        <div id="scroll-sentinel"></div>
+      </section>
 
-    .mod-card img {
-      width: 100%;
-      border-radius: 8px;
-      background: #0d0f14;
-      border: 1px solid #2b2f3a;
-      aspect-ratio: 16 / 9;
-      object-fit: cover;
-    }
+      <!-- Footer -->
+      <footer class="footer">
+        <div class="footer-inner">
+          <div class="footer-title">
+            <span class="underline-wrap">
+              <span class="underline-text">ALE Psych Crew</span>
+              <span class="underline-bar" aria-hidden="true"></span>
+            </span>
+          </div>
 
-    .mod-card h2 {
-      margin: 0;
-      font-size: 20px;
-    }
+          <div class="footer-meta">
+            <div>© <span id="yearSpan"></span> ALE PSYCH</div>
+            <div class="muted">Website by Malloy</div>
+          </div>
+        </div>
+      </footer>
+    </main>
 
-    .meta {
-      font-size: 14px;
-      color: #c9ced6;
-    }
+    <!-- Sidebar -->
+    <div class="overlay" id="overlay" hidden></div>
 
-    .badge {
-      display: inline-block;
-      padding: 2px 8px;
-      border-radius: 999px;
-      background: #2b2f3a;
-      font-size: 12px;
-      margin: 2px 4px 0 0;
-    }
+    <aside class="sidebar" id="sidebar" aria-label="Sidebar" aria-modal="true" role="dialog" hidden>
+      <div class="sidebar-top">
+        <div class="sidebar-brand">
+          <div class="brand-icon">
+            <img
+              src="/assets/images/engine-branding/icon.png"
+              alt="ALE PSYCH icon"
+              draggable="false"
+            />
+          </div>
+          <div>
+            <div class="brand-subtitle">ALE PSYCH</div>
+            <div class="sidebar-title">navigation</div>
+          </div>
+        </div>
 
-    .status {
-      font-weight: bold;
-      color: #79c0ff;
-    }
-
-    .status.coming {
-      color: #f2c94c;
-    }
-
-    .mod-card button,
-    .mod-card a {
-      text-align: center;
-      background: #2b78ff;
-      color: #fff;
-      border: none;
-      border-radius: 6px;
-      padding: 10px 12px;
-      text-decoration: none;
-      cursor: pointer;
-    }
-
-    .mod-card button:hover,
-    .mod-card a:hover {
-      background: #1f5fd1;
-    }
-
-    .empty-state {
-      text-align: center;
-      padding: 40px 0;
-      color: #c9ced6;
-    }
-
-    footer {
-      padding: 24px;
-      text-align: center;
-      color: #8f96a3;
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <h1>Mods Browser</h1>
-    <div class="controls">
-      <!-- Search input for title, author, tags, or status -->
-      <div class="control-group">
-        <label for="search">Search mods</label>
-        <input
-          id="search"
-          class="search-input"
-          type="search"
-          placeholder="Search by title, author, tags, or status..."
-        />
+        <button class="icon-btn" id="closeSidebarBtn" aria-label="Close" type="button">
+          <img src="/assets/svgs/arrow-circle-left.svg" alt="" aria-hidden="true" />
+        </button>
       </div>
 
-      <!-- Tag filters built dynamically from mods-data.json -->
-      <fieldset class="control-group" id="tag-filters">
-        <legend>Tags</legend>
-        <div class="filter-grid" data-filter-list="tags"></div>
-      </fieldset>
+      <div class="sidebar-body">
+        <div class="sidebar-kicker">sections</div>
+        <nav class="sidebar-nav" id="sidebarNav"></nav>
+      </div>
+    </aside>
 
-      <!-- Platform filters built dynamically from mods-data.json -->
-      <fieldset class="control-group" id="platform-filters">
-        <legend>Platforms</legend>
-        <div class="filter-grid" data-filter-list="platforms"></div>
-      </fieldset>
-    </div>
-  </header>
+    <script type="module" src="/assets/js/main.js"></script>
+    <script>
+      // Path references so the system remains easy to relocate
+      const DATA_PATH = './mods-data.json';
+      const PAGE_SIZE = 10;
 
-  <main>
-    <div class="mods-grid" id="mods-grid"></div>
-    <div class="empty-state" id="empty-state" hidden>
-      No mods match the current filters.
-    </div>
-    <!-- Sentinel used for infinite scroll -->
-    <div id="scroll-sentinel"></div>
-  </main>
+      const modsGrid = document.getElementById('mods-grid');
+      const emptyState = document.getElementById('empty-state');
+      const searchInput = document.getElementById('search');
+      const tagFilterContainer = document.querySelector('[data-filter-list="tags"]');
+      const platformFilterContainer = document.querySelector('[data-filter-list="platforms"]');
+      const sentinel = document.getElementById('scroll-sentinel');
 
-  <footer>
-    <p>Mod browser system. Add more entries to <code>mods-data.json</code> to expand the list.</p>
-  </footer>
+      let allMods = [];
+      let filteredMods = [];
+      let visibleCount = 0;
+      const summaryCache = new Map();
 
-  <script>
-    // Path references so the system remains easy to relocate
-    const DATA_PATH = './mods-data.json';
-    const PAGE_SIZE = 10;
-
-    const modsGrid = document.getElementById('mods-grid');
-    const emptyState = document.getElementById('empty-state');
-    const searchInput = document.getElementById('search');
-    const tagFilterContainer = document.querySelector('[data-filter-list="tags"]');
-    const platformFilterContainer = document.querySelector('[data-filter-list="platforms"]');
-    const sentinel = document.getElementById('scroll-sentinel');
-
-    let allMods = [];
-    let filteredMods = [];
-    let visibleCount = 0;
-    const summaryCache = new Map();
-
-    // Helper: basic markdown-to-text for preview snippets
-    function stripMarkdown(markdown) {
-      return markdown
-        .replace(/\r/g, '')
-        .replace(/^#+\s+/gm, '')
-        .replace(/\*\*(.*?)\*\*/g, '$1')
-        .replace(/\[(.*?)\]\(.*?\)/g, '$1')
-        .replace(/`([^`]*)`/g, '$1')
-        .replace(/\n+/g, ' ')
-        .trim();
-    }
-
-    // Helper: fetch markdown and cache the first paragraph as a summary
-    async function getSummary(mod) {
-      if (summaryCache.has(mod.id)) {
-        return summaryCache.get(mod.id);
-      }
-      try {
-        const response = await fetch(mod.markdown);
-        const markdown = await response.text();
-        const summary = stripMarkdown(markdown).slice(0, 160);
-        summaryCache.set(mod.id, summary);
-        return summary;
-      } catch (error) {
-        return 'No description available.';
-      }
-    }
-
-    // Helper: create a checkbox filter item
-    function createFilterItem(value, group) {
-      const id = `${group}-${value}`.replace(/\s+/g, '-').toLowerCase();
-      const wrapper = document.createElement('label');
-      wrapper.innerHTML = `
-        <input type="checkbox" value="${value}" id="${id}" />
-        ${value}
-      `;
-      return wrapper;
-    }
-
-    // Build the filter options based on available data
-    function buildFilters(mods) {
-      const tagSet = new Set();
-      const platformSet = new Set();
-
-      mods.forEach((mod) => {
-        mod.tags.forEach((tag) => tagSet.add(tag));
-        mod.platforms.forEach((platform) => platformSet.add(platform));
-      });
-
-      tagSet.forEach((tag) => tagFilterContainer.appendChild(createFilterItem(tag, 'tag')));
-      platformSet.forEach((platform) =>
-        platformFilterContainer.appendChild(createFilterItem(platform, 'platform'))
-      );
-    }
-
-    // Apply search text and checkbox filters to the mods list
-    function applyFilters() {
-      const searchValue = searchInput.value.trim().toLowerCase();
-      const selectedTags = Array.from(tagFilterContainer.querySelectorAll('input:checked')).map(
-        (input) => input.value
-      );
-      const selectedPlatforms = Array.from(
-        platformFilterContainer.querySelectorAll('input:checked')
-      ).map((input) => input.value);
-
-      filteredMods = allMods.filter((mod) => {
-        const statusText = mod.comingSoon ? 'coming soon' : 'available';
-        const combinedText = [
-          mod.title,
-          mod.author,
-          statusText,
-          mod.tags.join(' '),
-          mod.platforms.join(' ')
-        ]
-          .join(' ')
-          .toLowerCase();
-
-        const matchesSearch = searchValue === '' || combinedText.includes(searchValue);
-        const matchesTags =
-          selectedTags.length === 0 || selectedTags.every((tag) => mod.tags.includes(tag));
-        const matchesPlatforms =
-          selectedPlatforms.length === 0 ||
-          selectedPlatforms.every((platform) => mod.platforms.includes(platform));
-
-        return matchesSearch && matchesTags && matchesPlatforms;
-      });
-
-      visibleCount = 0;
-      modsGrid.innerHTML = '';
-      renderNextPage();
-    }
-
-    // Render the next batch of mods for infinite scroll
-    async function renderNextPage() {
-      const nextMods = filteredMods.slice(visibleCount, visibleCount + PAGE_SIZE);
-      visibleCount += nextMods.length;
-
-      if (filteredMods.length === 0) {
-        emptyState.hidden = false;
-        return;
+      // Helper: basic markdown-to-text for preview snippets
+      function stripMarkdown(markdown) {
+        return markdown
+          .replace(/\r/g, '')
+          .replace(/^#+\s+/gm, '')
+          .replace(/\*\*(.*?)\*\*/g, '$1')
+          .replace(/\[(.*?)\]\(.*?\)/g, '$1')
+          .replace(/`([^`]*)`/g, '$1')
+          .replace(/\n+/g, ' ')
+          .trim();
       }
 
-      emptyState.hidden = true;
-
-      for (const mod of nextMods) {
-        const card = document.createElement('article');
-        card.className = 'mod-card';
-
-        // Create a description preview from markdown
-        const summary = await getSummary(mod);
-
-        card.innerHTML = `
-          <img src="${mod.thumbnail}" alt="${mod.title} thumbnail" loading="lazy" />
-          <h2>${mod.title}</h2>
-          <div class="meta">By ${mod.author}</div>
-          <div>${summary}...</div>
-          <div>
-            ${mod.tags.map((tag) => `<span class="badge">${tag}</span>`).join('')}
-          </div>
-          <div>
-            ${mod.platforms.map((platform) => `<span class="badge">${platform}</span>`).join('')}
-          </div>
-          <div class="status ${mod.comingSoon ? 'coming' : ''}">
-            ${mod.comingSoon ? 'Coming Soon' : 'Available'}
-          </div>
-          <a href="./mod-details.html?id=${encodeURIComponent(mod.id)}">View Details</a>
-        `;
-
-        modsGrid.appendChild(card);
-      }
-    }
-
-    // Initialize the mod list and events
-    async function init() {
-      const response = await fetch(DATA_PATH);
-      allMods = await response.json();
-
-      buildFilters(allMods);
-      filteredMods = [...allMods];
-
-      applyFilters();
-
-      // Events for search and filters
-      searchInput.addEventListener('input', applyFilters);
-      tagFilterContainer.addEventListener('change', applyFilters);
-      platformFilterContainer.addEventListener('change', applyFilters);
-
-      // Infinite scroll using IntersectionObserver
-      const observer = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting) {
-          if (visibleCount < filteredMods.length) {
-            renderNextPage();
-          }
+      // Helper: fetch markdown and cache the first paragraph as a summary
+      async function getSummary(mod) {
+        if (summaryCache.has(mod.id)) {
+          return summaryCache.get(mod.id);
         }
-      });
+        try {
+          const response = await fetch(mod.markdown);
+          const markdown = await response.text();
+          const summary = stripMarkdown(markdown).slice(0, 160);
+          summaryCache.set(mod.id, summary);
+          return summary;
+        } catch (error) {
+          return 'No description available.';
+        }
+      }
 
-      observer.observe(sentinel);
-    }
+      // Helper: create a checkbox filter item
+      function createFilterItem(value, group) {
+        const id = `${group}-${value}`.replace(/\s+/g, '-').toLowerCase();
+        const wrapper = document.createElement('label');
+        wrapper.className = 'filter-item';
+        wrapper.innerHTML = `
+          <input type="checkbox" value="${value}" id="${id}" />
+          <span>${value}</span>
+        `;
+        return wrapper;
+      }
 
-    init();
-  </script>
-</body>
+      // Build the filter options based on available data
+      function buildFilters(mods) {
+        const tagSet = new Set();
+        const platformSet = new Set();
+
+        mods.forEach((mod) => {
+          mod.tags.forEach((tag) => tagSet.add(tag));
+          mod.platforms.forEach((platform) => platformSet.add(platform));
+        });
+
+        tagSet.forEach((tag) => tagFilterContainer.appendChild(createFilterItem(tag, 'tag')));
+        platformSet.forEach((platform) =>
+          platformFilterContainer.appendChild(createFilterItem(platform, 'platform'))
+        );
+      }
+
+      // Apply search text and checkbox filters to the mods list
+      function applyFilters() {
+        const searchValue = searchInput.value.trim().toLowerCase();
+        const selectedTags = Array.from(tagFilterContainer.querySelectorAll('input:checked')).map(
+          (input) => input.value
+        );
+        const selectedPlatforms = Array.from(
+          platformFilterContainer.querySelectorAll('input:checked')
+        ).map((input) => input.value);
+
+        filteredMods = allMods.filter((mod) => {
+          const statusText = mod.comingSoon ? 'coming soon' : 'available';
+          const combinedText = [
+            mod.title,
+            mod.author,
+            statusText,
+            mod.tags.join(' '),
+            mod.platforms.join(' ')
+          ]
+            .join(' ')
+            .toLowerCase();
+
+          const matchesSearch = searchValue === '' || combinedText.includes(searchValue);
+          const matchesTags =
+            selectedTags.length === 0 || selectedTags.every((tag) => mod.tags.includes(tag));
+          const matchesPlatforms =
+            selectedPlatforms.length === 0 ||
+            selectedPlatforms.every((platform) => mod.platforms.includes(platform));
+
+          return matchesSearch && matchesTags && matchesPlatforms;
+        });
+
+        visibleCount = 0;
+        modsGrid.innerHTML = '';
+        renderNextPage();
+      }
+
+      // Render the next batch of mods for infinite scroll
+      async function renderNextPage() {
+        const nextMods = filteredMods.slice(visibleCount, visibleCount + PAGE_SIZE);
+        visibleCount += nextMods.length;
+
+        if (filteredMods.length === 0) {
+          emptyState.hidden = false;
+          return;
+        }
+
+        emptyState.hidden = true;
+
+        for (const mod of nextMods) {
+          const card = document.createElement('article');
+          card.className = 'mod-card';
+
+          // Create a description preview from markdown
+          const summary = await getSummary(mod);
+
+          card.innerHTML = `
+            <div class="mod-thumb">
+              <img src="${mod.thumbnail}" alt="${mod.title} thumbnail" loading="lazy" />
+            </div>
+            <div class="mod-title">${mod.title}</div>
+            <div class="mod-meta">By ${mod.author}</div>
+            <div class="mod-summary">${summary}...</div>
+            <div class="mod-tags">
+              ${mod.tags.map((tag) => `<span class="badge">${tag}</span>`).join('')}
+            </div>
+            <div class="mod-tags">
+              ${mod.platforms.map((platform) => `<span class="badge">${platform}</span>`).join('')}
+            </div>
+            <div class="status ${mod.comingSoon ? 'coming' : ''}">
+              ${mod.comingSoon ? 'Coming Soon' : 'Available'}
+            </div>
+            <a class="btn-primary mods-link" href="./mod-details.html?id=${encodeURIComponent(
+              mod.id
+            )}">View Details</a>
+          `;
+
+          modsGrid.appendChild(card);
+        }
+      }
+
+      // Initialize the mod list and events
+      async function init() {
+        const response = await fetch(DATA_PATH);
+        allMods = await response.json();
+
+        buildFilters(allMods);
+        filteredMods = [...allMods];
+
+        applyFilters();
+
+        // Events for search and filters
+        searchInput.addEventListener('input', applyFilters);
+        tagFilterContainer.addEventListener('change', applyFilters);
+        platformFilterContainer.addEventListener('change', applyFilters);
+
+        // Infinite scroll using IntersectionObserver
+        const observer = new IntersectionObserver((entries) => {
+          if (entries[0].isIntersecting) {
+            if (visibleCount < filteredMods.length) {
+              renderNextPage();
+            }
+          }
+        });
+
+        observer.observe(sentinel);
+      }
+
+      init();
+    </script>
+  </body>
 </html>
