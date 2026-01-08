@@ -1,24 +1,5 @@
 [
   {
-    "id": "psychrush",
-    "title": "Psych Rush",
-    "author": "ALE Psych Team",
-    "tags": ["Featured", "Original"],
-    "thumbnail": "./thumbnails/psychrush.jpg",
-    "markdown": "./descriptions/psychrush.md",
-    "comingSoon": false,
-    "downloads": [
-      {
-        "label": "Download (Windows)",
-        "url": "https://example.com/psychrush/windows"
-      },
-      {
-        "label": "Download (Linux)",
-        "url": "https://example.com/psychrush/linux"
-      }
-    ]
-  },
-  {
     "id": "trap-4-silly-kids",
     "title": "Trap 4 Silly Kids",
     "author": "ThatKicke! and The T4SK Team",
