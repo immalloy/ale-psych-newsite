@@ -1,0 +1,104 @@
+[
+  {
+    "title": "Using ALE ModID Registry",
+    "slug": "using-ale-modid-registry",
+    "category": "Community",
+    "path": "community/using-ale-modid-registry.md"
+  },
+  {
+    "title": "Building the Engine from Source",
+    "slug": "building-the-engine-from-source",
+    "category": "Engine Development",
+    "path": "engine-dev/building-the-engine-from-source.md"
+  },
+  {
+    "title": "ALE Psych Engine Overview",
+    "slug": "ale-psych-engine-overview",
+    "category": "Getting Started",
+    "path": "getting-started/ale-psych-engine-overview.md"
+  },
+  {
+    "title": "FAQ: Common Install Issues",
+    "slug": "faq-common-install-issues",
+    "category": "Getting Started",
+    "path": "getting-started/faq-common-install-issues.md"
+  },
+  {
+    "title": "How to Install Mods",
+    "slug": "how-to-install-mods",
+    "category": "Getting Started",
+    "path": "getting-started/how-to-install-mods.md"
+  },
+  {
+    "title": "Installing the Engine",
+    "slug": "installing-the-engine",
+    "category": "Getting Started",
+    "path": "getting-started/installing-the-engine.md"
+  },
+  {
+    "title": "Running Your First Build",
+    "slug": "running-your-first-build",
+    "category": "Getting Started",
+    "path": "getting-started/running-your-first-build.md"
+  },
+  {
+    "title": "Adding Characters",
+    "slug": "adding-characters",
+    "category": "Making Mods",
+    "path": "making-mods/adding-characters.md"
+  },
+  {
+    "title": "Adding Songs",
+    "slug": "adding-songs",
+    "category": "Making Mods",
+    "path": "making-mods/adding-songs.md"
+  },
+  {
+    "title": "Adding Weeks",
+    "slug": "adding-weeks",
+    "category": "Making Mods",
+    "path": "making-mods/adding-weeks.md"
+  },
+  {
+    "title": "Data.json Configuration",
+    "slug": "data-json-configuration",
+    "category": "Making Mods",
+    "path": "making-mods/data-json-configuration.md"
+  },
+  {
+    "title": "Making Your First Mod",
+    "slug": "making-your-first-mod",
+    "category": "Making Mods",
+    "path": "making-mods/making-your-first-mod.md"
+  },
+  {
+    "title": "Modding Overview",
+    "slug": "modding-overview",
+    "category": "Making Mods",
+    "path": "making-mods/modding-overview.md"
+  },
+  {
+    "title": "Creating Scripted Songs",
+    "slug": "creating-scripted-songs",
+    "category": "Scripting",
+    "path": "scripting/creating-scripted-songs.md"
+  },
+  {
+    "title": "Custom Classes",
+    "slug": "custom-classes",
+    "category": "Scripting",
+    "path": "scripting/custom-classes.md"
+  },
+  {
+    "title": "Menu Scripting",
+    "slug": "menu-scripting",
+    "category": "Scripting",
+    "path": "scripting/menu-scripting.md"
+  },
+  {
+    "title": "Scripted Cutscenes",
+    "slug": "scripted-cutscenes",
+    "category": "Scripting",
+    "path": "scripting/scripted-cutscenes.md"
+  }
+]
