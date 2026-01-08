@@ -90,3 +90,12 @@ img{ display:block; max-width:100%; }
   -webkit-mask-image: linear-gradient(to bottom, black, transparent 92%);
   mask-image: linear-gradient(to bottom, black, transparent 92%);
 }
+
+@media (max-width: 768px){
+  .blob{
+    filter: blur(36px);
+    mix-blend-mode: normal;
+    opacity: .75;
+  }
+  .grid-overlay{ opacity: .12; }
+}

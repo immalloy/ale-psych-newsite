@@ -1,10 +1,10 @@
 export const NAV_SECTIONS = [
-  { label: "Home", href: "/index.html" },
-  { label: "Downloads", href: "/downloads.html" },
-  { label: "Mods", href: "/mods/mods.html" },
-  { label: "Scripts", href: "/scripts.html", placeholder: true },
-  { label: "Wiki", href: "/wiki.html", placeholder: true },
-  { label: "API (Lua)", href: "/api-lua.html", placeholder: true },
+  { label: "Home", href: "index.html" },
+  { label: "Downloads", href: "downloads.html" },
+  { label: "Mods", href: "mods/mods.html" },
+  { label: "Scripts", href: "scripts.html", placeholder: true },
+  { label: "Wiki", href: "wiki.html", placeholder: true },
+  { label: "API (Lua)", href: "api-lua.html", placeholder: true },
 ];
 
 export const WHY_SLIDES = [
@@ -55,21 +55,21 @@ export const SHOWCASE = [
   {
     title: "Ingame console",
     desc: "Debug faster with an in-game console overlay.",
-    src: "/assets/images/features/feature4.png",
+    src: "images/features/feature4.png",
   },
   {
     title: "Scripted menus and submenus",
     desc: "Flexible UI flow: script your menus without pain.",
-    src: "/assets/images/features/feature1.png",
+    src: "images/features/feature1.png",
   },
   {
     title: "Unique Mod Support and Ease of Use",
     desc: "Better structure so projects stay organized as they grow.",
-    src: "/assets/images/features/feature3.png",
+    src: "images/features/feature3.png",
   },
   {
     title: "Community Driven",
     desc: "Built with feedback and room to evolve.",
-    src: "/assets/images/features/feature6.png",
+    src: "images/features/feature6.png",
   },
 ];
