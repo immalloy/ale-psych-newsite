@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mod Details</title>
+  <style>
+    /* Basic styling for the details page */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0f1115;
+      color: #f5f5f5;
+    }
+
+    header {
+      padding: 24px;
+      background: #171a21;
+      border-bottom: 1px solid #2b2f3a;
+    }
+
+    header a {
+      color: #79c0ff;
+      text-decoration: none;
+    }
+
+    main {
+      padding: 24px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(220px, 1fr) 2fr;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    .hero img {
+      width: 100%;
+      border-radius: 12px;
+      background: #0d0f14;
+      border: 1px solid #2b2f3a;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+    }
+
+    .meta-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 8px 0 16px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #2b2f3a;
+      font-size: 12px;
+    }
+
+    .downloads {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 16px 0;
+    }
+
+    .downloads a {
+      background: #2b78ff;
+      color: #fff;
+      text-decoration: none;
+      padding: 10px 14px;
+      border-radius: 6px;
+    }
+
+    .downloads a:hover {
+      background: #1f5fd1;
+    }
+
+    .status {
+      font-weight: bold;
+      color: #79c0ff;
+    }
+
+    .status.coming {
+      color: #f2c94c;
+    }
+
+    .markdown-content h1,
+    .markdown-content h2,
+    .markdown-content h3 {
+      margin-top: 24px;
+    }
+
+    .markdown-content ul {
+      padding-left: 20px;
+    }
+
+    .markdown-content a {
+      color: #79c0ff;
+    }
+
+    .error {
+      padding: 24px;
+      background: #1b1f27;
+      border-radius: 8px;
+      border: 1px solid #2b2f3a;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="./mods.html">&larr; Back to Mods</a>
+  </header>
+
+  <main id="details-root">
+    <!-- Dynamic content will be rendered here -->
+  </main>
+
+  <script>
+    // Inline markdown parser (simple, self-contained)
+    function parseMarkdown(markdown) {
+      // Escape HTML to keep content safe
+      const escapeHtml = (text) =>
+        text
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;');
+
+      let html = escapeHtml(markdown);
+
+      // Headings
+      html = html.replace(/^###\s+(.*)$/gm, '<h3>$1</h3>');
+      html = html.replace(/^##\s+(.*)$/gm, '<h2>$1</h2>');
+      html = html.replace(/^#\s+(.*)$/gm, '<h1>$1</h1>');
+
+      // Bold
+      html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+
+      // Links
+      html = html.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2">$1</a>');
+
+      // Lists
+      html = html.replace(/\n-\s+(.*)/g, '\n<li>$1</li>');
+      html = html.replace(/(<li>.*<\/li>)/g, '<ul>$1</ul>');
+
+      // Paragraphs
+      html = html
+        .split(/\n\n+/)
+        .map((block) => {
+          if (block.startsWith('<h') || block.startsWith('<ul>')) {
+            return block;
+          }
+          return `<p>${block.replace(/\n/g, '<br />')}</p>`;
+        })
+        .join('');
+
+      return html;
+    }
+
+    const DATA_PATH = './mods-data.json';
+    const detailsRoot = document.getElementById('details-root');
+
+    function getModId() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get('id');
+    }
+
+    function renderError(message) {
+      detailsRoot.innerHTML = `<div class="error">${message}</div>`;
+    }
+
+    async function initDetails() {
+      const modId = getModId();
+
+      if (!modId) {
+        renderError('No mod id found in the URL.');
+        return;
+      }
+
+      const response = await fetch(DATA_PATH);
+      const mods = await response.json();
+      const mod = mods.find((entry) => entry.id === modId);
+
+      if (!mod) {
+        renderError('Mod not found.');
+        return;
+      }
+
+      const markdownResponse = await fetch(mod.markdown);
+      const markdownText = await markdownResponse.text();
+      const descriptionHtml = parseMarkdown(markdownText);
+
+      const downloadsHtml = mod.comingSoon
+        ? '<p class="status coming">Coming Soon — downloads will appear here once available.</p>'
+        : `
+          <div class="downloads">
+            ${mod.downloads
+              .map(
+                (download) =>
+                  `<a href="${download.url}" target="_blank" rel="noopener">${download.label}</a>`
+              )
+              .join('')}
+          </div>
+        `;
+
+      detailsRoot.innerHTML = `
+        <section class="hero">
+          <img src="${mod.thumbnail}" alt="${mod.title} thumbnail" loading="lazy" />
+          <div>
+            <h1>${mod.title}</h1>
+            <p>By ${mod.author}</p>
+            <div class="meta-list">
+              ${mod.tags.map((tag) => `<span class="badge">${tag}</span>`).join('')}
+            </div>
+            <div class="meta-list">
+              ${mod.platforms.map((platform) => `<span class="badge">${platform}</span>`).join('')}
+            </div>
+            <p class="status ${mod.comingSoon ? 'coming' : ''}">
+              ${mod.comingSoon ? 'Coming Soon' : 'Available'}
+            </p>
+            ${downloadsHtml}
+          </div>
+        </section>
+        <section class="markdown-content">${descriptionHtml}</section>
+      `;
+    }
+
+    initDetails();
+  </script>
+</body>
+</html>

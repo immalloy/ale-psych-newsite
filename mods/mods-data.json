@@ -1,0 +1,22 @@
+[
+  {
+    "id": "psychrush",
+    "title": "Psych Rush",
+    "author": "ALE Psych Team",
+    "tags": ["Featured", "Original"],
+    "platforms": ["Windows", "Linux"],
+    "thumbnail": "./mods/thumbnails/psychrush.jpg",
+    "markdown": "./mods/descriptions/psychrush.md",
+    "comingSoon": false,
+    "downloads": [
+      {
+        "label": "Download (Windows)",
+        "url": "https://example.com/psychrush/windows"
+      },
+      {
+        "label": "Download (Linux)",
+        "url": "https://example.com/psychrush/linux"
+      }
+    ]
+  }
+]
