@@ -63,7 +63,7 @@
             <span class="grad-text">details</span>
           </h1>
           <p class="hero-desc">
-            Everything you need to know before downloading, from platforms to changelog highlights.
+            Everything you need to know before downloading, from status to changelog highlights.
           </p>
           <div class="hero-actions">
             <a class="btn-ghost" href="./mods.html">
@@ -229,9 +229,6 @@
                 <p class="mod-meta">By ${mod.author}</p>
                 <div class="mod-meta-list">
                   ${mod.tags.map((tag) => `<span class="badge">${tag}</span>`).join('')}
-                </div>
-                <div class="mod-meta-list">
-                  ${mod.platforms.map((platform) => `<span class="badge">${platform}</span>`).join('')}
                 </div>
                 <p class="status ${mod.comingSoon ? 'coming' : ''}">
                   ${mod.comingSoon ? 'Coming Soon' : 'Available'}

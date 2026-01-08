@@ -4,7 +4,6 @@
     "title": "Psych Rush",
     "author": "ALE Psych Team",
     "tags": ["Featured", "Original"],
-    "platforms": ["Windows", "Linux"],
     "thumbnail": "./thumbnails/psychrush.jpg",
     "markdown": "./descriptions/psychrush.md",
     "comingSoon": false,

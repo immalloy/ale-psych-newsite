@@ -181,36 +181,6 @@
       let allMods = [];
       let filteredMods = [];
       let visibleCount = 0;
-      const summaryCache = new Map();
-
-      // Helper: basic markdown-to-text for preview snippets
-      function stripMarkdown(markdown) {
-        return markdown
-          .replace(/\r/g, '')
-          .replace(/^#+\s+/gm, '')
-          .replace(/\*\*(.*?)\*\*/g, '$1')
-          .replace(/\[(.*?)\]\(.*?\)/g, '$1')
-          .replace(/`([^`]*)`/g, '$1')
-          .replace(/\n+/g, ' ')
-          .trim();
-      }
-
-      // Helper: fetch markdown and cache the first paragraph as a summary
-      async function getSummary(mod) {
-        if (summaryCache.has(mod.id)) {
-          return summaryCache.get(mod.id);
-        }
-        try {
-          const response = await fetch(mod.markdown);
-          const markdown = await response.text();
-          const summary = stripMarkdown(markdown).slice(0, 160);
-          summaryCache.set(mod.id, summary);
-          return summary;
-        } catch (error) {
-          return 'No description available.';
-        }
-      }
-
       // Helper: create a checkbox filter item
       function createFilterItem(value, group) {
         const id = `${group}-${value}`.replace(/\s+/g, '-').toLowerCase();
@@ -245,8 +215,7 @@
             mod.title,
             mod.author,
             statusText,
-            mod.tags.join(' '),
-            mod.platforms.join(' ')
+            mod.tags.join(' ')
           ]
             .join(' ')
             .toLowerCase();
@@ -276,14 +245,9 @@
         emptyState.hidden = true;
 
         const fragment = document.createDocumentFragment();
-        const summaries = await Promise.all(nextMods.map((mod) => getSummary(mod)));
-
-        for (const [index, mod] of nextMods.entries()) {
+        for (const mod of nextMods) {
           const card = document.createElement('article');
           card.className = 'mod-card';
-
-          // Create a description preview from markdown
-          const summary = summaries[index];
 
           card.innerHTML = `
             <div class="mod-thumb">
@@ -291,12 +255,8 @@
             </div>
             <div class="mod-title">${mod.title}</div>
             <div class="mod-meta">By ${mod.author}</div>
-            <div class="mod-summary">${summary}...</div>
             <div class="mod-tags">
               ${mod.tags.map((tag) => `<span class="badge">${tag}</span>`).join('')}
-            </div>
-            <div class="mod-tags">
-              ${mod.platforms.map((platform) => `<span class="badge">${platform}</span>`).join('')}
             </div>
             <div class="status ${mod.comingSoon ? 'coming' : ''}">
               ${mod.comingSoon ? 'Coming Soon' : 'Available'}
