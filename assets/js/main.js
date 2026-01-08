@@ -44,7 +44,7 @@ if (sidebarNav) {
     ({ label, href }) => `
         <a class="nav-item" href="${encodeURI(href)}">
           <span>${escapeHtml(label)}</span>
-          <img src="./assets/svgs/arrow-right.svg" alt="" aria-hidden="true" />
+          <img src="/assets/svgs/arrow-right.svg" alt="" aria-hidden="true" />
         </a>
       `
   ).join("");

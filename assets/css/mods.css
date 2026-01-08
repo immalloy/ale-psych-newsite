@@ -1,0 +1,242 @@
+.mods-panel {
+  position: relative;
+  padding: 20px;
+  border-radius: var(--radius-28);
+  border: 1px solid var(--white10);
+  background: var(--white05);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.mods-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.9;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(168, 85, 247, 0.18), transparent 60%),
+    radial-gradient(circle at 80% 70%, rgba(99, 102, 241, 0.12), transparent 55%);
+}
+
+.mods-panel-grid {
+  position: relative;
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.filter-card {
+  border-radius: var(--radius-22);
+  border: 1px solid var(--white10);
+  background: rgba(0, 0, 0, 0.28);
+  padding: 16px;
+  display: grid;
+  gap: 10px;
+}
+
+.filter-card label,
+.filter-card legend {
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+}
+
+.filter-card legend {
+  padding: 0;
+}
+
+.mods-input {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--white10);
+  background: rgba(0, 0, 0, 0.35);
+  color: var(--fg);
+  font-size: 14px;
+}
+
+.filter-grid {
+  display: grid;
+  gap: 8px 12px;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+}
+
+.filter-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: rgba(244, 244, 245, 0.82);
+}
+
+.filter-item input {
+  accent-color: #c084fc;
+}
+
+.mods-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.mod-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  border-radius: var(--radius-22);
+  border: 1px solid var(--white10);
+  background: var(--white05);
+  box-shadow: var(--shadow);
+}
+
+.mod-thumb {
+  border-radius: var(--radius-18);
+  border: 1px solid var(--white10);
+  background: rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+}
+
+.mod-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.mod-title {
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.mod-meta {
+  font-size: 13px;
+  color: rgba(244, 244, 245, 0.7);
+}
+
+.mod-summary {
+  font-size: 13px;
+  line-height: 1.5;
+  color: rgba(244, 244, 245, 0.8);
+}
+
+.mod-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--white10);
+  background: rgba(0, 0, 0, 0.35);
+  font-size: 11px;
+  font-weight: 700;
+  color: rgba(244, 244, 245, 0.8);
+}
+
+.status {
+  font-weight: 700;
+  font-size: 13px;
+  color: #a5b4fc;
+}
+
+.status.coming {
+  color: #f2c94c;
+}
+
+.mods-link {
+  justify-content: center;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 32px 0 12px;
+  color: rgba(244, 244, 245, 0.72);
+}
+
+.mod-details {
+  display: grid;
+  gap: 24px;
+}
+
+.mod-details-hero {
+  display: grid;
+  gap: 24px;
+}
+
+@media (min-width: 900px) {
+  .mod-details-hero {
+    grid-template-columns: minmax(280px, 1fr) 2fr;
+    align-items: start;
+  }
+}
+
+.mod-details-title {
+  margin: 0 0 8px;
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.mod-details-info {
+  display: grid;
+  gap: 12px;
+}
+
+.mod-meta-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.download-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.btn-small {
+  padding: 8px 14px;
+  font-size: 13px;
+}
+
+.markdown-content {
+  padding: 20px;
+  border-radius: var(--radius-22);
+  border: 1px solid var(--white10);
+  background: rgba(0, 0, 0, 0.3);
+  box-shadow: var(--shadow);
+}
+
+.markdown-content h1,
+.markdown-content h2,
+.markdown-content h3 {
+  margin-top: 20px;
+}
+
+.markdown-content p {
+  margin: 12px 0 0;
+  line-height: 1.6;
+  color: rgba(244, 244, 245, 0.82);
+}
+
+.markdown-content ul {
+  padding-left: 20px;
+  margin: 12px 0 0;
+}
+
+.markdown-content a {
+  color: #a5b4fc;
+}
+
+.mod-error {
+  padding: 24px;
+  border-radius: var(--radius-22);
+  border: 1px solid var(--white10);
+  background: rgba(0, 0, 0, 0.35);
+  text-align: center;
+  color: rgba(244, 244, 245, 0.8);
+}
