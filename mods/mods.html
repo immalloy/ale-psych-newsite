@@ -275,12 +275,15 @@
 
         emptyState.hidden = true;
 
-        for (const mod of nextMods) {
+        const fragment = document.createDocumentFragment();
+        const summaries = await Promise.all(nextMods.map((mod) => getSummary(mod)));
+
+        for (const [index, mod] of nextMods.entries()) {
           const card = document.createElement('article');
           card.className = 'mod-card';
 
           // Create a description preview from markdown
-          const summary = await getSummary(mod);
+          const summary = summaries[index];
 
           card.innerHTML = `
             <div class="mod-thumb">
@@ -303,8 +306,10 @@
             )}">View Details</a>
           `;
 
-          modsGrid.appendChild(card);
+          fragment.appendChild(card);
         }
+
+        modsGrid.appendChild(fragment);
       }
 
       // Initialize the mod list and events
