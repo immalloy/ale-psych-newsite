@@ -1,11 +1,5 @@
 [
   {
-    "title": "Using ALE ModID Registry",
-    "slug": "using-ale-modid-registry",
-    "category": "Community",
-    "path": "community/using-ale-modid-registry.md"
-  },
-  {
     "title": "Building the Engine from Source",
     "slug": "building-the-engine-from-source",
     "category": "Engine Development",
