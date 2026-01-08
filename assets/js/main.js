@@ -63,7 +63,6 @@ window.addEventListener("keydown", (event) => {
 let whyIdx = 0;
 let whyTimer = null;
 
-const whyKicker = document.getElementById("whyKicker");
 const whyTitle = document.getElementById("whyTitle");
 const whyText = document.getElementById("whyText");
 const whyContent = document.getElementById("whyContent");
@@ -88,7 +87,7 @@ const renderWhyDots = () => {
 };
 
 const setWhyIndex = (next) => {
-  if (!whyKicker || !whyTitle || !whyText) return;
+  if (!whyTitle || !whyText) return;
   whyIdx = ((next % WHY_SLIDES.length) + WHY_SLIDES.length) % WHY_SLIDES.length;
   const slide = WHY_SLIDES[whyIdx];
 
@@ -98,7 +97,6 @@ const setWhyIndex = (next) => {
     whyContent.classList.add("fade");
   }
 
-  whyKicker.textContent = slide.kicker;
   whyTitle.textContent = slide.title;
   whyText.textContent = slide.blurb;
   renderWhyDots();
