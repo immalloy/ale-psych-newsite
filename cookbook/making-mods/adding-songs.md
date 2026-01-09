@@ -3,18 +3,35 @@ title: Adding Songs
 category: Making Mods
 ---
 
-# Adding Songs
+ Adding Songs
 
-This page describes how to add song assets and metadata for a mod.
+ALE Psych stores song content only in the songs folder. Keep charts, audio, and scripts together inside your mod so the engine can load them without extra data directories.
+Folder Structure
 
-## Step 1: Prepare audio
+Place each song inside your mod at mods/<mod-name>/songs/<SongName>/ with this layout:
 
-(Placeholder content…)
+mods/
+        └─ modName/
+        └─ songs/
+        └─ SongName/
+        ├─ charts/
+        │  ├─ easy.json
+        │  ├─ normal.json
+        │  └─ hard.json
+        ├─ song/
+        │  ├─ Inst.ogg
+        │  └─ Voices.ogg
+        └─ scripts/
+        ├─ haxeScript0.hx
+        ├─ haxeScript1.hx
+        ├─ luaScript0.lua
+        └─ luaScript1.lua
+    
 
-## Step 2: Configure song data
+TEXT
+Notes
 
-(Placeholder content…)
-
-## Step 3: Verify playback
-
-(Placeholder content…)
+    Keep all difficulty charts inside charts .
+    Put instrumental and vocal audio in song .
+    Place Lua or HScript files in scripts .
+    Folder names are case sensitive, so match chart references exactly.
