@@ -9,6 +9,7 @@
   <link rel="icon" type="image/png" sizes="16x16" href="../assets/icons/cookbook/favicon-16.png" />
   <link rel="icon" type="image/png" sizes="192x192" href="../assets/icons/cookbook/favicon-192.png" />
   <link rel="icon" type="image/png" sizes="512x512" href="../assets/icons/cookbook/favicon-512.png" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github-dark.min.css" />
   <style>
     :root {
       color-scheme: dark;
@@ -207,6 +208,24 @@
       padding-left: 20px;
     }
 
+    .content ol {
+      padding-left: 24px;
+    }
+
+    .content hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 24px 0;
+    }
+
+    .content blockquote {
+      margin: 16px 0;
+      padding: 12px 16px;
+      border-left: 3px solid var(--accent);
+      background: rgba(255, 159, 67, 0.08);
+      color: var(--muted);
+    }
+
     .content pre {
       background: #1a0f09;
       padding: 14px;
@@ -218,6 +237,32 @@
 
     .content code {
       font-family: "Consolas", "SFMono-Regular", monospace;
+      color: var(--text);
+    }
+
+    .content :not(pre) > code {
+      background: rgba(255, 159, 67, 0.12);
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 1px solid rgba(255, 159, 67, 0.18);
+    }
+
+    .content table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 18px 0;
+      color: var(--muted);
+    }
+
+    .content th,
+    .content td {
+      border: 1px solid var(--border);
+      padding: 8px 10px;
+      text-align: left;
+    }
+
+    .content thead th {
+      background: rgba(255, 159, 67, 0.12);
       color: var(--text);
     }
 
@@ -260,6 +305,9 @@
     </main>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dompurify@3.0.6/dist/purify.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/lib/common.min.js"></script>
   <script>
     const dataUrl = 'cookbook-data.json';
     const sidebar = document.getElementById('sidebar');
@@ -269,87 +317,30 @@
     let docs = [];
     let linkElements = new Map();
 
-    function escapeHtml(text) {
-      return text
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;');
-    }
-
     function renderMarkdown(markdown) {
       const stripped = markdown.replace(/^---[\s\S]*?---\s*/, '');
-      const lines = stripped.split(/\r?\n/);
-      let html = '';
-      let inList = false;
-      let inCode = false;
+      const rendered = marked.parse(stripped);
+      const sanitized = DOMPurify.sanitize(rendered, { USE_PROFILES: { html: true } });
+      return sanitized || '<p>No content available.</p>';
+    }
 
-      const closeList = () => {
-        if (inList) {
-          html += '</ul>';
-          inList = false;
-        }
-      };
-
-      for (const line of lines) {
-        if (line.startsWith('```')) {
-          if (!inCode) {
-            closeList();
-            inCode = true;
-            html += '<pre><code>';
-          } else {
-            inCode = false;
-            html += '</code></pre>';
+    if (window.marked) {
+      marked.setOptions({
+        gfm: true,
+        breaks: false,
+        headerIds: false,
+        mangle: false,
+        langPrefix: 'language-',
+        highlight(code, language) {
+          if (window.hljs) {
+            if (language && hljs.getLanguage(language)) {
+              return hljs.highlight(code, { language }).value;
+            }
+            return hljs.highlightAuto(code).value;
           }
-          continue;
-        }
-
-        if (inCode) {
-          html += `${escapeHtml(line)}\n`;
-          continue;
-        }
-
-        if (!line.trim()) {
-          closeList();
-          continue;
-        }
-
-        if (line.startsWith('# ')) {
-          closeList();
-          html += `<h1>${escapeHtml(line.slice(2).trim())}</h1>`;
-          continue;
-        }
-
-        if (line.startsWith('## ')) {
-          closeList();
-          html += `<h2>${escapeHtml(line.slice(3).trim())}</h2>`;
-          continue;
-        }
-
-        if (line.startsWith('### ')) {
-          closeList();
-          html += `<h3>${escapeHtml(line.slice(4).trim())}</h3>`;
-          continue;
-        }
-
-        if (line.startsWith('- ')) {
-          if (!inList) {
-            html += '<ul>';
-            inList = true;
-          }
-          html += `<li>${escapeHtml(line.slice(2).trim())}</li>`;
-          continue;
-        }
-
-        closeList();
-        html += `<p>${escapeHtml(line.trim())}</p>`;
-      }
-
-      if (inCode) {
-        html += '</code></pre>';
-      }
-
-      closeList();
-      return html || '<p>No content available.</p>';
+          return code;
+        },
+      });
     }
 
     function setActiveLink(slug) {
