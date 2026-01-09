@@ -5,16 +5,28 @@ category: Getting Started
 
 # Installing the Engine
 
-This page explains how to install ALE Psych Engine on Windows, Linux, and macOS.
+Use this guide to set up ALE Psych Engine on desktop platforms. The steps below focus on getting a playable build running so you can validate your environment before you start modding.
 
-## Step 1: Download the Engine
+## What you need
 
-(Placeholder content…)
+- A compatible OS (Windows, macOS, or Linux).
+- Git to download the repository.
+- Haxe and the required Haxe libraries.
+- Platform build tools (Visual Studio on Windows, Xcode tools on macOS, or GCC/Clang on Linux).
 
-## Step 2: Run the Setup
+## Quick install checklist
 
-(More placeholder content…)
+1. Clone the ALE Psych repository.
+2. Install Haxe and required Haxe libraries.
+3. Run the engine setup scripts from the repo.
+4. Verify you can launch the game or build a desktop target.
 
-## Step 3: Verify the install
+## Verify the installation
 
-(Placeholder content…)
+- Launch the engine and confirm you reach the title screen.
+- Open the debug overlay with `F3` to confirm inputs are working.
+- Check the console or terminal for missing dependency warnings.
+
+## TODO
+
+TODO: This page is unfinished - complete this section.

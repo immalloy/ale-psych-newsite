@@ -1,27 +1,9 @@
 [
   {
-    "title": "Building the Engine from Source",
-    "slug": "building-the-engine-from-source",
-    "category": "Engine Development",
-    "path": "engine-dev/building-the-engine-from-source.md"
-  },
-  {
     "title": "ALE Psych Engine Overview",
     "slug": "ale-psych-engine-overview",
     "category": "Getting Started",
-    "path": "getting-started/ale-psych-engine-overview.md"
-  },
-  {
-    "title": "FAQ: Common Install Issues",
-    "slug": "faq-common-install-issues",
-    "category": "Getting Started",
-    "path": "getting-started/faq-common-install-issues.md"
-  },
-  {
-    "title": "How to Install Mods",
-    "slug": "how-to-install-mods",
-    "category": "Getting Started",
-    "path": "getting-started/how-to-install-mods.md"
+    "path": "getting-started/engine-overview.md"
   },
   {
     "title": "Installing the Engine",
@@ -30,52 +12,82 @@
     "path": "getting-started/installing-the-engine.md"
   },
   {
-    "title": "Running Your First Build",
-    "slug": "running-your-first-build",
+    "title": "Installing Mods",
+    "slug": "installing-mods",
     "category": "Getting Started",
-    "path": "getting-started/running-your-first-build.md"
+    "path": "getting-started/installing-mods.md"
   },
   {
-    "title": "Adding Characters",
-    "slug": "adding-characters",
-    "category": "Making Mods",
-    "path": "making-mods/adding-characters.md"
+    "title": "First Launch and Shortcuts",
+    "slug": "first-launch-and-shortcuts",
+    "category": "Getting Started",
+    "path": "getting-started/first-launch-and-shortcuts.md"
   },
   {
-    "title": "Adding Songs",
-    "slug": "adding-songs",
-    "category": "Making Mods",
-    "path": "making-mods/adding-songs.md"
-  },
-  {
-    "title": "Adding Weeks",
-    "slug": "adding-weeks",
-    "category": "Making Mods",
-    "path": "making-mods/adding-weeks.md"
-  },
-  {
-    "title": "Data.json Configuration",
-    "slug": "data-json-configuration",
-    "category": "Making Mods",
-    "path": "making-mods/data-json-configuration.md"
-  },
-  {
-    "title": "Making Your First Mod",
-    "slug": "making-your-first-mod",
-    "category": "Making Mods",
-    "path": "making-mods/making-your-first-mod.md"
+    "title": "Troubleshooting Install Issues",
+    "slug": "troubleshooting-install-issues",
+    "category": "Getting Started",
+    "path": "getting-started/troubleshooting.md"
   },
   {
     "title": "Modding Overview",
     "slug": "modding-overview",
-    "category": "Making Mods",
-    "path": "making-mods/modding-overview.md"
+    "category": "Modding",
+    "path": "modding/modding-overview.md"
   },
   {
-    "title": "Creating Scripted Songs",
-    "slug": "creating-scripted-songs",
+    "title": "Your First Mod",
+    "slug": "your-first-mod",
+    "category": "Modding",
+    "path": "modding/first-mod.md"
+  },
+  {
+    "title": "Adding Characters",
+    "slug": "adding-characters",
+    "category": "Modding",
+    "path": "modding/adding-characters.md"
+  },
+  {
+    "title": "Adding Songs and Charts",
+    "slug": "adding-songs-and-charts",
+    "category": "Modding",
+    "path": "modding/adding-songs-and-charts.md"
+  },
+  {
+    "title": "Adding Weeks",
+    "slug": "adding-weeks",
+    "category": "Modding",
+    "path": "modding/adding-weeks.md"
+  },
+  {
+    "title": "data.json Configuration",
+    "slug": "data-json-configuration",
+    "category": "Configuration",
+    "path": "configuration/data-json.md"
+  },
+  {
+    "title": "options.json Configuration",
+    "slug": "options-json-configuration",
+    "category": "Configuration",
+    "path": "configuration/options-json.md"
+  },
+  {
+    "title": "debug.json Overlay Configuration",
+    "slug": "debug-json-overlay-configuration",
+    "category": "Configuration",
+    "path": "configuration/debug-overlay.md"
+  },
+  {
+    "title": "Scripted Songs",
+    "slug": "scripted-songs",
     "category": "Scripting",
-    "path": "scripting/creating-scripted-songs.md"
+    "path": "scripting/scripted-songs.md"
+  },
+  {
+    "title": "Custom Events",
+    "slug": "custom-events",
+    "category": "Scripting",
+    "path": "scripting/custom-events.md"
   },
   {
     "title": "Custom Classes",
@@ -90,9 +102,21 @@
     "path": "scripting/menu-scripting.md"
   },
   {
+    "title": "Substate Scripting",
+    "slug": "substate-scripting",
+    "category": "Scripting",
+    "path": "scripting/substate-scripting.md"
+  },
+  {
     "title": "Scripted Cutscenes",
     "slug": "scripted-cutscenes",
     "category": "Scripting",
     "path": "scripting/scripted-cutscenes.md"
+  },
+  {
+    "title": "Building the Engine from Source",
+    "slug": "building-the-engine-from-source",
+    "category": "Engine Development",
+    "path": "engine-development/building-the-engine-from-source.md"
   }
 ]
