@@ -1,52 +1,65 @@
 ---
-title: Building the Engine from Source
+title: Compiling the Engine
 category: Engine Development
+
 ---
 
-# Building the Engine from Source
+# Compiling the Engine
 
-Use this guide to compile ALE Psych from source. You do not need to hardcode features to get started.
+This page explains how to compile **ALE Psych** from scratch, including its dependencies and some possible errors along with their solutions, using its [Source Code](https://github.com/ALE-Engine-Crew/ALE-Psych).
+
+> [!NOTE]
+> It is not necessary to use the Source Code, as ALE Psych includes tools that make this unnecessary. This is more oriented toward those who are interested in [Contributing to the Project]()
+
+---
 
 ## Requirements
 
-- Haxe (latest stable release).
-- Git.
-- Platform build tools:
-  - Windows: Visual Studio 2022 with the C++ desktop workload.
-  - macOS: Xcode Command Line Tools.
-  - Linux: GCC/Clang and build essentials.
+Before compiling, you must install the following programs:
 
-## Install Haxe libraries
+- [Haxe](https://haxe.org/download/)
+- [Git](https://git-scm.com/install/)
+- [Visual Studio](https://visualstudio.microsoft.com/downloads/)
+    - Make sure to select the “Game development with C++” workload
 
-From the project root, run the setup script:
+---
 
-```bat
-setup\install-haxelibs.bat
-```
+## Setup
 
-## Build the engine
+From the source code folder, run the file
 
-Use Lime from the project root:
+- `setup/install-haxelibs.bat`
 
-```bash
-lime test <platform>
-```
+> [!NOTE]
+> This may take more or less time depending on your Internet connection
 
-Examples:
+If this is your first time, run the following commands:
 
-```bash
-lime test windows
-lime test android
-lime test linux
-```
+- `lime setup`
+- `lime setup <platform>`
 
-Replace `<platform>` with the target you want to build.
+---
+
+## Compilation
+
+After completing the previous steps, all that remains is to run the command
+
+- `lime test <platform>`
+
+> [!NOTE]
+> The first time you run this command it may take several minutes, ranging from 15 minutes up to 1 hour, depending on the platform and the power of your computer
+
+---
 
 ## Troubleshooting
 
-- Missing Haxe libs: re-run `setup\install-haxelibs.bat`.
-- Odd build errors after updates: run a clean build and verify your Haxe version.
+Compilation may fail for one reason or another, but you have several options to troubleshoot issues if something goes wrong
 
-## TODO
+1. Reinstall the libraries
+    - Simply re-run `setups/install-haxelibs.bat`
 
-TODO: This page is unfinished - complete this section.
+2. Reinstall the dependencies
+    - Go back to [Requirements](#requirements)
+
+3. Compile from scratch
+    - Run the command `lime test <platform> -clean`
