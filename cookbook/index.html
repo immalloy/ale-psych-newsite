@@ -13,15 +13,18 @@
   <style>
     :root {
       color-scheme: dark;
-      --bg: #140c08;
-      --panel: #22130b;
-      --panel-alt: #1b100a;
-      --text: #f5efe8;
-      --muted: #d0b9a5;
-      --border: #3b2417;
-      --accent: #ff9f43;
-      --accent-strong: #ffb665;
-      --glow: rgba(255, 159, 67, 0.18);
+      --bg: #140617;
+      --panel: #211125;
+      --panel-alt: #1a0c22;
+      --text: #f8f2ff;
+      --muted: #d8c8e6;
+      --border: #3a1f4d;
+      --accent: #ff9a3d;
+      --accent-strong: #ffc16b;
+      --accent-secondary: #8f5bff;
+      --accent-secondary-strong: #b795ff;
+      --glow: rgba(255, 154, 61, 0.18);
+      --glow-secondary: rgba(143, 91, 255, 0.22);
     }
 
     * {
@@ -41,12 +44,12 @@
     header {
       grid-column: 1 / -1;
       padding: 20px 28px;
-      background: linear-gradient(120deg, #25150d 0%, #2d1a10 60%, #2a1408 100%);
+      background: linear-gradient(120deg, #2a1234 0%, #3a1c42 55%, #3b1c2a 100%);
       border-bottom: 1px solid var(--border);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      box-shadow: 0 12px 24px rgba(7, 3, 1, 0.4);
+      box-shadow: 0 16px 30px rgba(10, 4, 18, 0.45);
     }
 
     .header-brand {
@@ -67,28 +70,28 @@
       gap: 8px;
       padding: 8px 14px;
       border-radius: 999px;
-      border: 1px solid rgba(255, 159, 67, 0.4);
+      border: 1px solid rgba(143, 91, 255, 0.45);
       color: var(--text);
       text-decoration: none;
-      background: rgba(255, 159, 67, 0.12);
-      box-shadow: 0 8px 16px rgba(10, 4, 1, 0.35);
+      background: rgba(143, 91, 255, 0.18);
+      box-shadow: 0 8px 16px rgba(12, 4, 20, 0.35);
       font-size: 14px;
       font-weight: 600;
     }
 
     .header-home:hover,
     .header-home:focus-visible {
-      background: rgba(255, 159, 67, 0.22);
-      border-color: rgba(255, 159, 67, 0.7);
+      background: rgba(143, 91, 255, 0.3);
+      border-color: rgba(255, 154, 61, 0.65);
     }
 
     .header-icon {
       width: 52px;
       height: 52px;
       border-radius: 16px;
-      background: radial-gradient(circle at top, #ffcb87 0%, #ff9f43 45%, #c5691c 100%);
+      background: radial-gradient(circle at top, #ffc37f 0%, #ff9a3d 45%, #b358d8 100%);
       padding: 8px;
-      box-shadow: 0 8px 20px rgba(255, 159, 67, 0.25);
+      box-shadow: 0 10px 22px rgba(143, 91, 255, 0.3);
     }
 
     .header-icon img {
@@ -113,11 +116,13 @@
       background: var(--panel-alt);
       border-right: 1px solid var(--border);
       overflow-y: auto;
+      box-shadow: inset -20px 0 40px rgba(12, 4, 22, 0.35);
     }
 
     main {
-      padding: 28px 36px 40px;
+      padding: 32px 40px 48px;
       overflow-y: auto;
+      background: radial-gradient(circle at top left, rgba(143, 91, 255, 0.08), transparent 45%);
     }
 
     .search {
@@ -129,17 +134,17 @@
       padding: 10px 12px;
       border-radius: 6px;
       border: 1px solid var(--border);
-      background: #1a0f09;
+      background: #1b0f24;
       color: var(--text);
-      box-shadow: inset 0 0 0 1px rgba(255, 159, 67, 0.04);
+      box-shadow: inset 0 0 0 1px rgba(143, 91, 255, 0.12);
     }
 
     .category {
       margin-bottom: 12px;
       border: 1px solid var(--border);
       border-radius: 6px;
-      background: #1a0f09;
-      box-shadow: 0 10px 18px rgba(10, 4, 1, 0.3);
+      background: #1b0f24;
+      box-shadow: 0 10px 18px rgba(13, 4, 22, 0.35);
     }
 
     .category summary {
@@ -177,25 +182,36 @@
     .doc-link:hover,
     .doc-link:focus {
       color: var(--text);
-      background: var(--glow);
+      background: var(--glow-secondary);
     }
 
     .doc-link.active {
       color: var(--text);
-      border-left-color: var(--accent);
-      background: rgba(255, 159, 67, 0.2);
+      border-left-color: var(--accent-secondary);
+      background: linear-gradient(90deg, rgba(143, 91, 255, 0.2), rgba(255, 154, 61, 0.08));
+    }
+
+    .content {
+      max-width: 960px;
+      margin: 0 auto;
     }
 
     .content h1 {
       margin-top: 0;
-      font-size: 28px;
-      color: var(--accent-strong);
+      font-size: 30px;
+      color: var(--accent-secondary-strong);
     }
 
     .content h2 {
       margin-top: 24px;
-      font-size: 20px;
+      font-size: 21px;
       color: var(--accent);
+    }
+
+    .content h3 {
+      margin-top: 20px;
+      font-size: 18px;
+      color: var(--accent-secondary);
     }
 
     .content p,
@@ -218,21 +234,44 @@
       margin: 24px 0;
     }
 
+    .content a {
+      color: var(--accent-secondary-strong);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(143, 91, 255, 0.4);
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .content a:hover,
+    .content a:focus-visible {
+      color: var(--accent);
+      border-bottom-color: rgba(255, 154, 61, 0.7);
+    }
+
+    .content img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 18px auto;
+      border-radius: 12px;
+      border: 1px solid rgba(143, 91, 255, 0.25);
+      box-shadow: 0 12px 24px rgba(12, 4, 20, 0.35);
+    }
+
     .content blockquote {
       margin: 16px 0;
       padding: 12px 16px;
-      border-left: 3px solid var(--accent);
-      background: rgba(255, 159, 67, 0.08);
+      border-left: 3px solid var(--accent-secondary);
+      background: rgba(143, 91, 255, 0.12);
       color: var(--muted);
     }
 
     .content pre {
-      background: #1a0f09;
+      background: #1b0f24;
       padding: 14px;
       border-radius: 6px;
       border: 1px solid var(--border);
       overflow-x: auto;
-      box-shadow: inset 0 0 0 1px rgba(255, 159, 67, 0.05);
+      box-shadow: inset 0 0 0 1px rgba(143, 91, 255, 0.08);
     }
 
     .content code {
@@ -241,10 +280,10 @@
     }
 
     .content :not(pre) > code {
-      background: rgba(255, 159, 67, 0.12);
+      background: rgba(143, 91, 255, 0.15);
       padding: 2px 6px;
       border-radius: 4px;
-      border: 1px solid rgba(255, 159, 67, 0.18);
+      border: 1px solid rgba(143, 91, 255, 0.25);
     }
 
     .content table {
@@ -262,7 +301,7 @@
     }
 
     .content thead th {
-      background: rgba(255, 159, 67, 0.12);
+      background: rgba(255, 154, 61, 0.16);
       color: var(--text);
     }
 
