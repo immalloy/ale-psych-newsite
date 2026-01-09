@@ -18,7 +18,7 @@ Before you build, install the following:
 
 * **Haxe** (latest stable release)
 * **Git** (default install options are fine)
-* **Visual Studio 2022** (Windows builds — install the **latest available** version)
+* **Visual Studio 2022** (Windows builds - install the **latest available** version)
 
 Then install the required Haxe libraries:
 
