@@ -3,53 +3,61 @@ title: Menu Scripting
 category: Scripting
 ---
 
- Menu Scripting
+# Menu Scripting
 
-Create new menus or replace existing ones without touching engine source. ALE Psych supports HScript for full control and Lua for creating scripted menus.
-HScript
-Creating a Menu
+Create new menus or replace existing ones without touching engine source. ALE Psych supports HScript for full control and Lua for scripted menus.
 
-Add a .hx script to scripts/states/ . The filename becomes the menu identifier.
+## HScript menus
 
-mods/modName/scripts/states/MyMenu.hx
-    
+### Create a menu
 
-TEXT
-Modifying a Menu
+Add a `.hx` script to `scripts/states/`. The filename becomes the menu identifier.
 
-    Copy the desired menu from assets/scripts/states into your mod’s scripts/states/ .
-    Edit the copy; the engine prefers your version.
-    Enable the FPS counter to see the current state name while testing.
+```
+mods/<mod-name>/scripts/states/MyMenu.hx
+```
 
-Accessing a Menu
+### Modify a menu
 
-Use CoolUtil.switchState to load a scripted state:
+- Copy the desired menu from `assets/scripts/states` into your mod's `scripts/states/` folder.
+- Edit the copy; the engine prefers your version.
+- Enable the FPS counter to see the current state name while testing.
 
+### Load a menu
+
+Use `CoolUtil.switchState` to load a scripted state:
+
+```haxe
 CoolUtil.switchState(new CustomState('ScriptName'));
-    
+```
 
-HAXE
-Lua
-Creating a Menu
+## Lua menus
 
-Place a .lua script in scripts/states/ to register a new menu:
+### Create a menu
 
-mods/modName/scripts/states/MyMenu.lua
-    
+Place a `.lua` script in `scripts/states/`:
 
-TEXT
-Modifying a Menu
+```
+mods/<mod-name>/scripts/states/MyMenu.lua
+```
 
-Base menus are HScript-only. To override them with Lua, create an empty .hx file with the same name and add your Lua script; both will execute together.
-Accessing a Menu
+### Modify a menu
+
+Base menus are HScript-only. To override them with Lua, create an empty `.hx` file with the same name and add your Lua script; both will execute together.
+
+### Load a menu
 
 Use the Lua helper to switch states:
 
+```lua
 switchState('funkin.states.CustomState', {'ScriptName'})
-    
+```
 
-LUA
-Notes
+## Notes
 
-    HScript can create and modify menus; Lua creates menus and can piggyback on the empty .hx override trick.
-    Keep filenames consistent; the engine resolves states by script name.
+- HScript can create and modify menus; Lua can create menus and piggyback on the empty `.hx` override trick.
+- Keep filenames consistent; the engine resolves states by script name.
+
+## TODO
+
+TODO: This page is unfinished - complete this section.
