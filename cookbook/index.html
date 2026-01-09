@@ -19,12 +19,12 @@
       --text: #f8f2ff;
       --muted: #d8c8e6;
       --border: #3a1f4d;
-      --accent: #ff9a3d;
-      --accent-strong: #ffc16b;
-      --accent-secondary: #8f5bff;
-      --accent-secondary-strong: #b795ff;
-      --glow: rgba(255, 154, 61, 0.18);
-      --glow-secondary: rgba(143, 91, 255, 0.22);
+      --accent: #9b6bff;
+      --accent-strong: #c9a9ff;
+      --accent-secondary: #6f3dff;
+      --accent-secondary-strong: #b48aff;
+      --glow: rgba(155, 107, 255, 0.2);
+      --glow-secondary: rgba(111, 61, 255, 0.24);
     }
 
     * {
@@ -44,7 +44,7 @@
     header {
       grid-column: 1 / -1;
       padding: 20px 28px;
-      background: linear-gradient(120deg, #2a1234 0%, #3a1c42 55%, #3b1c2a 100%);
+      background: linear-gradient(120deg, #23112f 0%, #311642 55%, #281236 100%);
       border-bottom: 1px solid var(--border);
       display: flex;
       align-items: center;
@@ -82,14 +82,14 @@
     .header-home:hover,
     .header-home:focus-visible {
       background: rgba(143, 91, 255, 0.3);
-      border-color: rgba(255, 154, 61, 0.65);
+      border-color: rgba(155, 107, 255, 0.65);
     }
 
     .header-icon {
       width: 52px;
       height: 52px;
       border-radius: 16px;
-      background: radial-gradient(circle at top, #ffc37f 0%, #ff9a3d 45%, #b358d8 100%);
+      background: radial-gradient(circle at top, #c9a9ff 0%, #9b6bff 45%, #6f3dff 100%);
       padding: 8px;
       box-shadow: 0 10px 22px rgba(143, 91, 255, 0.3);
     }
@@ -188,7 +188,7 @@
     .doc-link.active {
       color: var(--text);
       border-left-color: var(--accent-secondary);
-      background: linear-gradient(90deg, rgba(143, 91, 255, 0.2), rgba(255, 154, 61, 0.08));
+      background: linear-gradient(90deg, rgba(111, 61, 255, 0.25), rgba(155, 107, 255, 0.1));
     }
 
     .content {
@@ -244,7 +244,7 @@
     .content a:hover,
     .content a:focus-visible {
       color: var(--accent);
-      border-bottom-color: rgba(255, 154, 61, 0.7);
+      border-bottom-color: rgba(155, 107, 255, 0.7);
     }
 
     .content img {
@@ -301,7 +301,7 @@
     }
 
     .content thead th {
-      background: rgba(255, 154, 61, 0.16);
+      background: rgba(155, 107, 255, 0.2);
       color: var(--text);
     }
 
