@@ -17,6 +17,7 @@ const openSidebarBtn = document.getElementById("openSidebarBtn");
 const closeSidebarBtn = document.getElementById("closeSidebarBtn");
 const sidebarNav = document.getElementById("sidebarNav");
 let sidebarCloseTimer = null;
+const getScrollbarWidth = () => window.innerWidth - document.documentElement.clientWidth;
 
 const setSidebarOpen = (open) => {
   if (!sidebar || !overlay) return;
@@ -32,12 +33,15 @@ const setSidebarOpen = (open) => {
       overlay.classList.add("visible");
     });
     document.body.style.overflow = "hidden";
+    const scrollbarWidth = getScrollbarWidth();
+    document.body.style.paddingRight = scrollbarWidth ? `${scrollbarWidth}px` : "";
     return;
   }
 
   sidebar.classList.remove("open");
   overlay.classList.remove("visible");
   document.body.style.overflow = "";
+  document.body.style.paddingRight = "";
   sidebarCloseTimer = window.setTimeout(() => {
     sidebar.hidden = true;
     overlay.hidden = true;
