@@ -4,16 +4,23 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ALE Psych Engine Cookbook</title>
+  <link rel="apple-touch-icon" sizes="180x180" href="../assets/icons/cookbook/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/icons/cookbook/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="../assets/icons/cookbook/favicon-16.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="../assets/icons/cookbook/favicon-192.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="../assets/icons/cookbook/favicon-512.png" />
   <style>
     :root {
       color-scheme: dark;
-      --bg: #0b0d12;
-      --panel: #151822;
-      --panel-alt: #11141c;
-      --text: #e7e9ef;
-      --muted: #a4a9b6;
-      --border: #2a2f3a;
-      --accent: #7aa2ff;
+      --bg: #140c08;
+      --panel: #22130b;
+      --panel-alt: #1b100a;
+      --text: #f5efe8;
+      --muted: #d0b9a5;
+      --border: #3b2417;
+      --accent: #ff9f43;
+      --accent-strong: #ffb665;
+      --glow: rgba(255, 159, 67, 0.18);
     }
 
     * {
@@ -33,11 +40,61 @@
     header {
       grid-column: 1 / -1;
       padding: 20px 28px;
-      background: var(--panel);
+      background: linear-gradient(120deg, #25150d 0%, #2d1a10 60%, #2a1408 100%);
       border-bottom: 1px solid var(--border);
       display: flex;
       align-items: center;
       justify-content: space-between;
+      box-shadow: 0 12px 24px rgba(7, 3, 1, 0.4);
+    }
+
+    .header-brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .header-home {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 159, 67, 0.4);
+      color: var(--text);
+      text-decoration: none;
+      background: rgba(255, 159, 67, 0.12);
+      box-shadow: 0 8px 16px rgba(10, 4, 1, 0.35);
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .header-home:hover,
+    .header-home:focus-visible {
+      background: rgba(255, 159, 67, 0.22);
+      border-color: rgba(255, 159, 67, 0.7);
+    }
+
+    .header-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      background: radial-gradient(circle at top, #ffcb87 0%, #ff9f43 45%, #c5691c 100%);
+      padding: 8px;
+      box-shadow: 0 8px 20px rgba(255, 159, 67, 0.25);
+    }
+
+    .header-icon img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: contain;
     }
 
     header h1 {
@@ -71,15 +128,17 @@
       padding: 10px 12px;
       border-radius: 6px;
       border: 1px solid var(--border);
-      background: #0f121a;
+      background: #1a0f09;
       color: var(--text);
+      box-shadow: inset 0 0 0 1px rgba(255, 159, 67, 0.04);
     }
 
     .category {
       margin-bottom: 12px;
       border: 1px solid var(--border);
       border-radius: 6px;
-      background: #0f121a;
+      background: #1a0f09;
+      box-shadow: 0 10px 18px rgba(10, 4, 1, 0.3);
     }
 
     .category summary {
@@ -89,6 +148,7 @@
       font-weight: 600;
       border-bottom: 1px solid var(--border);
       color: var(--text);
+      letter-spacing: 0.2px;
     }
 
     .category summary::-webkit-details-marker {
@@ -116,23 +176,25 @@
     .doc-link:hover,
     .doc-link:focus {
       color: var(--text);
-      background: rgba(122, 162, 255, 0.1);
+      background: var(--glow);
     }
 
     .doc-link.active {
       color: var(--text);
       border-left-color: var(--accent);
-      background: rgba(122, 162, 255, 0.16);
+      background: rgba(255, 159, 67, 0.2);
     }
 
     .content h1 {
       margin-top: 0;
       font-size: 28px;
+      color: var(--accent-strong);
     }
 
     .content h2 {
       margin-top: 24px;
       font-size: 20px;
+      color: var(--accent);
     }
 
     .content p,
@@ -146,11 +208,12 @@
     }
 
     .content pre {
-      background: #0f121a;
+      background: #1a0f09;
       padding: 14px;
       border-radius: 6px;
       border: 1px solid var(--border);
       overflow-x: auto;
+      box-shadow: inset 0 0 0 1px rgba(255, 159, 67, 0.05);
     }
 
     .content code {
@@ -172,7 +235,15 @@
 </head>
 <body>
   <header>
-    <h1>ALE Psych Engine Cookbook</h1>
+    <div class="header-brand">
+      <div class="header-icon">
+        <img src="../assets/icons/cookbook/favicon-512.png" alt="Cookbook icon" />
+      </div>
+      <h1>ALE Psych Engine Cookbook</h1>
+    </div>
+    <div class="header-actions">
+      <a class="header-home" href="../index.html">Back to homepage</a>
+    </div>
   </header>
   <div id="layout">
     <aside>

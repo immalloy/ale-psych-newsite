@@ -2,9 +2,7 @@ export const NAV_SECTIONS = [
   { label: "Home", href: "index.html" },
   { label: "Downloads", href: "downloads.html" },
   { label: "Mods", href: "mods/mods.html" },
-  { label: "Scripts", href: "scripts.html", placeholder: true },
-  { label: "Wiki", href: "wiki.html", placeholder: true },
-  { label: "API (Lua)", href: "api-lua.html", placeholder: true },
+  { label: "Cookbook", href: "cookbook/index.html" },
 ];
 
 export const WHY_SLIDES = [
