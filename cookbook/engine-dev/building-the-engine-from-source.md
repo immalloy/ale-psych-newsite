@@ -30,9 +30,9 @@ Then install the required Haxe libraries:
 3. Install **Visual Studio 2022**.
 4. From the project root, install Haxe dependencies:
 
-   ```bat
-   setup\install-haxelibs.bat
-````
+```bat
+setup\install-haxelibs.bat
+```
 
 ---
 
@@ -64,15 +64,13 @@ lime test linux
 
 ## Troubleshooting
 
-* If the build complains about missing Haxe libraries, re-run:
+- If the build complains about missing Haxe libraries, re-run:
 
-  ```bat
-  setup\install-haxelibs.bat
-  ```
-
-* If you recently updated Haxe or dependencies, try a clean rebuild:
-
-  * Close and reopen your terminal
-  * Re-run the build command
-
+```bat
+setup\install-haxelibs.bat
 ```
+
+- If you recently updated Haxe or dependencies, try a clean rebuild:
+
+  - Close and reopen your terminal
+  - Re-run the build command

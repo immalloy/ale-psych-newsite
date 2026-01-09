@@ -207,6 +207,24 @@
       padding-left: 20px;
     }
 
+    .content ol {
+      padding-left: 24px;
+    }
+
+    .content hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 24px 0;
+    }
+
+    .content blockquote {
+      margin: 16px 0;
+      padding: 12px 16px;
+      border-left: 3px solid var(--accent);
+      background: rgba(255, 159, 67, 0.08);
+      color: var(--muted);
+    }
+
     .content pre {
       background: #1a0f09;
       padding: 14px;
@@ -281,12 +299,23 @@
       const lines = stripped.split(/\r?\n/);
       let html = '';
       let inList = false;
+      let listType = null;
       let inCode = false;
 
       const closeList = () => {
-        if (inList) {
-          html += '</ul>';
-          inList = false;
+        if (inList && listType) {
+          html += `</${listType}>`;
+        }
+        inList = false;
+        listType = null;
+      };
+
+      const openList = (type) => {
+        if (!inList || listType !== type) {
+          closeList();
+          html += `<${type}>`;
+          inList = true;
+          listType = type;
         }
       };
 
@@ -308,40 +337,57 @@
           continue;
         }
 
-        if (!line.trim()) {
+        const trimmedLine = line.trim();
+
+        if (!trimmedLine) {
           closeList();
           continue;
         }
 
-        if (line.startsWith('# ')) {
+        if (trimmedLine === '---') {
           closeList();
-          html += `<h1>${escapeHtml(line.slice(2).trim())}</h1>`;
+          html += '<hr />';
           continue;
         }
 
-        if (line.startsWith('## ')) {
+        if (trimmedLine.startsWith('# ')) {
           closeList();
-          html += `<h2>${escapeHtml(line.slice(3).trim())}</h2>`;
+          html += `<h1>${escapeHtml(trimmedLine.slice(2).trim())}</h1>`;
           continue;
         }
 
-        if (line.startsWith('### ')) {
+        if (trimmedLine.startsWith('## ')) {
           closeList();
-          html += `<h3>${escapeHtml(line.slice(4).trim())}</h3>`;
+          html += `<h2>${escapeHtml(trimmedLine.slice(3).trim())}</h2>`;
           continue;
         }
 
-        if (line.startsWith('- ')) {
-          if (!inList) {
-            html += '<ul>';
-            inList = true;
-          }
-          html += `<li>${escapeHtml(line.slice(2).trim())}</li>`;
+        if (trimmedLine.startsWith('### ')) {
+          closeList();
+          html += `<h3>${escapeHtml(trimmedLine.slice(4).trim())}</h3>`;
+          continue;
+        }
+
+        if (trimmedLine.startsWith('> ')) {
+          closeList();
+          html += `<blockquote>${escapeHtml(trimmedLine.slice(2).trim())}</blockquote>`;
+          continue;
+        }
+
+        if (trimmedLine.startsWith('- ')) {
+          openList('ul');
+          html += `<li>${escapeHtml(trimmedLine.slice(2).trim())}</li>`;
+          continue;
+        }
+
+        if (/^\d+\.\s+/.test(trimmedLine)) {
+          openList('ol');
+          html += `<li>${escapeHtml(trimmedLine.replace(/^\d+\.\s+/, '').trim())}</li>`;
           continue;
         }
 
         closeList();
-        html += `<p>${escapeHtml(line.trim())}</p>`;
+        html += `<p>${escapeHtml(trimmedLine)}</p>`;
       }
 
       if (inCode) {
