@@ -1,47 +1,47 @@
-# Resumen
+# Overview
 
-ALE Psych es un Fork de [Psych Engine](https://gamebanana.com/mods/309789) (0.7.3) enfocado en Permitir a los Modders hacer *Mods Increíbles* sin tocar el Código Fuente.
+ALE Psych is a fork of [Psych Engine](https://gamebanana.com/mods/309789) (0.7.3) focused on letting modders create *amazing mods* without touching the source code.
 
-Está centrado en el uso de Scripts y JSON para modificar varios aspectos del Juego.
+It centers on using scripts and JSON to customize different parts of the game.
 
-## ¿Qué hace diferente a ALE Psych?
+## What makes ALE Psych different?
 
-- Soporte para **Menús Personalizados** haciendo uso de **Scripts**
-- Soporte para **Clases Haxe personalizadas**
-    - Gracias a [RuleScript](https://github.com/Kriptel/RuleScript/tree/dev), un **INCREÍBLE** Addon para HScript
-- Soporte para **Módulos Lua**
-- Configuración con **JSON** de Algunos Aspectos Importantes del Juego
-    - Como Opciones, Parámetros, Créditos y Debug
-- Mejoras en los Editores para agilizar la creación de cosas básicas
-    - Como Personajes, Charts, Stages, Weeks, etc. [WIP]
-- Optimizaciones para Dispositivos de Gama Baja
-
----
-
-## ¿Para qué es esta guía?
-
-- Orientar a los Nuevos Modders a la hora de Usar el Engine por Primera vez
-- Explicar la Migración de Usuarios de Psych Engine a ALE Psych
-    - También puede ayudar a Usuarios de Otros Engines
-- Presentar las nuevas caracterísitcas con las que No Todos están Familiarizados
+- Support for **custom menus** using **scripts**
+- Support for **custom Haxe classes**
+    - Powered by [RuleScript](https://github.com/Kriptel/RuleScript/tree/dev), an **amazing** addon for HScript
+- Support for **Lua modules**
+- **JSON** configuration for important engine settings
+    - Options, parameters, credits, and debug tools
+- Editor improvements to speed up common workflows
+    - Characters, charts, stages, weeks, etc. [WIP]
+- Optimizations for low-end devices
 
 ---
 
-## Comunidad y Soporte
+## What is this guide for?
 
-¿No has entendido algún paso? ¿Tienes un problema específico? ¡No te preocupes!
-- Contáctanos desde nuestro [Servidor de Discord](https://discord.gg/NP4U9CUrsH)
+- Helping new modders use the engine for the first time
+- Explaining how to migrate from Psych Engine to ALE Psych
+    - It can also help users coming from other engines
+- Introducing new features that not everyone is familiar with
 
-## Créditos
+---
 
-- [AlejoGDOfficial](https://www.youtube.com/@alejogdofficial) - Director, Programador de ALE Psych
-- [THE VOID](https://www.youtube.com/@THEE_VOIDDD) - Co-Fundadora de ALE Psych
-- [Malloy](https://x.com/ArtByHenry2010) - Mantenedor de la Página Web y Traductor de la Documentación de ALE Psych
-- [ManuArtz](https://www.youtube.com/@MArtz_06) - Creador del Logo de ALE Psych
-- [Kriptel](https://www.youtube.com/@kriptel_pro) - Creador de Macros y Responsable del Potente HScript de ALE Psych
-- [Slushi](https://github.com/Slushi-Github) - Ayudó al Soporte en Dispositivos de Apple de ALE Psych
-- [Ina the Cat](https://www.youtube.com/@InaTheCat) - Mejoró el Soporte de Video de ALE Psych
+## Community and support
 
-## Licencia
+Didn’t understand a step? Have a specific issue? Don’t worry!
+- Contact us on our [Discord server](https://discord.gg/NP4U9CUrsH)
 
-ALE Psych se encuentra bajó la [Licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0)
+## Credits
+
+- [AlejoGDOfficial](https://www.youtube.com/@alejogdofficial) - Director, ALE Psych programmer
+- [THE VOID](https://www.youtube.com/@THEE_VOIDDD) - Co-founder of ALE Psych
+- [Malloy](https://x.com/ArtByHenry2010) - Website maintainer and ALE Psych documentation translator
+- [ManuArtz](https://www.youtube.com/@MArtz_06) - ALE Psych logo creator
+- [Kriptel](https://www.youtube.com/@kriptel_pro) - Macro creator and responsible for ALE Psych's powerful HScript
+- [Slushi](https://github.com/Slushi-Github) - Helped ALE Psych Apple device support
+- [Ina the Cat](https://www.youtube.com/@InaTheCat) - Improved ALE Psych video support
+
+## License
+
+ALE Psych is released under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0)
