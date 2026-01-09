@@ -1,11 +1,14 @@
 ---
+
 title: Building the Engine from Source
 category: Engine Development
----
+----------------------------
 
 # Compiling the Engine
 
 This page explains how to build **ALE Psych** from source.
+
+> **Note:** You do **not** need any hardcoding to get started—just follow the steps below.
 
 ---
 
@@ -13,13 +16,13 @@ This page explains how to build **ALE Psych** from source.
 
 Before you build, install the following:
 
-- **Haxe** (latest stable release)
-- **Git** (default install options are fine)
-- **Visual Studio 2022** (Windows builds)
+* **Haxe** (latest stable release)
+* **Git** (default install options are fine)
+* **Visual Studio 2022** (Windows builds — install the **latest available** version)
 
 Then install the required Haxe libraries:
 
-- Run: `setup/install-haxelibs.bat`
+* Run: `setup/install-haxelibs.bat`
 
 ---
 
@@ -27,12 +30,14 @@ Then install the required Haxe libraries:
 
 1. Install **Haxe** (latest stable).
 2. Install **Git** (default options).
-3. Install **Visual Studio 2022**.
+3. Install **Visual Studio 2022** (**latest available version**) and make sure to include:
+
+   * **Desktop development with C++** (C++ build tools)
 4. From the project root, install Haxe dependencies:
 
    ```bat
    setup\install-haxelibs.bat
-````
+   ```
 
 ---
 
@@ -51,7 +56,7 @@ lime test windows
 ```
 
 ```bash
-lime test html5
+lime test android
 ```
 
 ```bash
@@ -72,7 +77,4 @@ lime test linux
 
 * If you recently updated Haxe or dependencies, try a clean rebuild:
 
-  * Close and reopen your terminal
   * Re-run the build command
-
-```
