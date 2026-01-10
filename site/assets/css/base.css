@@ -92,6 +92,9 @@ img{ display:block; max-width:100%; }
 }
 
 @media (max-width: 768px){
+  body.performance-lite .bg-glow{
+    display:none;
+  }
   .blob{
     filter: blur(36px);
     mix-blend-mode: normal;

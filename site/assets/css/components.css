@@ -430,6 +430,17 @@
     transition: none;
   }
 }
+
+@media (max-width: 768px){
+  body.performance-lite .topbar{
+    background: rgba(9,9,11,.9);
+    backdrop-filter: none;
+  }
+  body.performance-lite .sidebar{
+    background: rgba(9,9,11,.95);
+    backdrop-filter: none;
+  }
+}
 .download-card > *{ position:relative; }
 .download-card:hover{
   border-color: var(--white15);
