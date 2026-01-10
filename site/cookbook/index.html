@@ -13,18 +13,18 @@
   <style>
     :root {
       color-scheme: dark;
-      --bg: #140617;
-      --panel: #211125;
-      --panel-alt: #1a0c22;
-      --text: #f8f2ff;
-      --muted: #d8c8e6;
-      --border: #3a1f4d;
-      --accent: #9b6bff;
-      --accent-strong: #c9a9ff;
-      --accent-secondary: #6f3dff;
-      --accent-secondary-strong: #b48aff;
-      --glow: rgba(155, 107, 255, 0.2);
-      --glow-secondary: rgba(111, 61, 255, 0.24);
+      --bg: #1a0f0a;
+      --panel: #27160e;
+      --panel-alt: #21120a;
+      --text: #fff6ef;
+      --muted: #f1d7c6;
+      --border: #5a2a12;
+      --accent: #ff8a3d;
+      --accent-strong: #ffc28f;
+      --accent-secondary: #ff6a1f;
+      --accent-secondary-strong: #ffb070;
+      --glow: rgba(255, 138, 61, 0.22);
+      --glow-secondary: rgba(255, 106, 31, 0.26);
     }
 
     * {
@@ -44,12 +44,12 @@
     header {
       grid-column: 1 / -1;
       padding: 20px 28px;
-      background: linear-gradient(120deg, #23112f 0%, #311642 55%, #281236 100%);
+      background: linear-gradient(120deg, #2c1408 0%, #3a1a0b 55%, #2a1308 100%);
       border-bottom: 1px solid var(--border);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      box-shadow: 0 16px 30px rgba(10, 4, 18, 0.45);
+      box-shadow: 0 16px 30px rgba(16, 8, 4, 0.45);
       gap: 20px;
     }
 
@@ -75,19 +75,19 @@
       gap: 8px;
       padding: 8px 14px;
       border-radius: 999px;
-      border: 1px solid rgba(143, 91, 255, 0.45);
+      border: 1px solid rgba(255, 160, 90, 0.5);
       color: var(--text);
       text-decoration: none;
-      background: rgba(143, 91, 255, 0.18);
-      box-shadow: 0 8px 16px rgba(12, 4, 20, 0.35);
+      background: rgba(255, 160, 90, 0.16);
+      box-shadow: 0 8px 16px rgba(24, 10, 4, 0.35);
       font-size: 14px;
       font-weight: 600;
     }
 
     .header-home:hover,
     .header-home:focus-visible {
-      background: rgba(143, 91, 255, 0.3);
-      border-color: rgba(155, 107, 255, 0.65);
+      background: rgba(255, 160, 90, 0.28);
+      border-color: rgba(255, 181, 120, 0.7);
     }
 
     .language-switch {
@@ -96,8 +96,8 @@
       gap: 8px;
       padding: 6px 10px;
       border-radius: 999px;
-      border: 1px solid rgba(143, 91, 255, 0.45);
-      background: rgba(143, 91, 255, 0.12);
+      border: 1px solid rgba(255, 160, 90, 0.45);
+      background: rgba(255, 160, 90, 0.12);
       color: var(--text);
       font-size: 13px;
       font-weight: 600;
@@ -114,7 +114,7 @@
     }
 
     .language-switch option {
-      color: #1b0f24;
+      color: #1c120a;
     }
 
     .visually-hidden {
@@ -133,9 +133,9 @@
       width: 52px;
       height: 52px;
       border-radius: 16px;
-      background: radial-gradient(circle at top, #c9a9ff 0%, #9b6bff 45%, #6f3dff 100%);
+      background: radial-gradient(circle at top, #ffd0a6 0%, #ff9c57 45%, #ff6a1f 100%);
       padding: 8px;
-      box-shadow: 0 10px 22px rgba(143, 91, 255, 0.3);
+      box-shadow: 0 10px 22px rgba(255, 138, 61, 0.3);
     }
 
     .header-icon img {
@@ -163,13 +163,13 @@
       background: var(--panel-alt);
       border-right: 1px solid var(--border);
       overflow-y: auto;
-      box-shadow: inset -20px 0 40px rgba(12, 4, 22, 0.35);
+      box-shadow: inset -20px 0 40px rgba(18, 10, 4, 0.35);
     }
 
     main {
       padding: 32px 40px 48px;
       overflow-y: auto;
-      background: radial-gradient(circle at top left, rgba(143, 91, 255, 0.08), transparent 45%);
+      background: radial-gradient(circle at top left, rgba(255, 160, 90, 0.1), transparent 45%);
     }
 
     .search {
@@ -181,17 +181,17 @@
       padding: 10px 12px;
       border-radius: 6px;
       border: 1px solid var(--border);
-      background: #1b0f24;
+      background: #1c120a;
       color: var(--text);
-      box-shadow: inset 0 0 0 1px rgba(143, 91, 255, 0.12);
+      box-shadow: inset 0 0 0 1px rgba(255, 160, 90, 0.12);
     }
 
     .category {
       margin-bottom: 12px;
       border: 1px solid var(--border);
       border-radius: 6px;
-      background: #1b0f24;
-      box-shadow: 0 10px 18px rgba(13, 4, 22, 0.35);
+      background: #1c120a;
+      box-shadow: 0 10px 18px rgba(18, 10, 4, 0.35);
     }
 
     .category summary {
@@ -235,7 +235,7 @@
     .doc-link.active {
       color: var(--text);
       border-left-color: var(--accent-secondary);
-      background: linear-gradient(90deg, rgba(111, 61, 255, 0.25), rgba(155, 107, 255, 0.1));
+      background: linear-gradient(90deg, rgba(255, 106, 31, 0.25), rgba(255, 138, 61, 0.12));
     }
 
     .content {
@@ -284,14 +284,14 @@
     .content a {
       color: var(--accent-secondary-strong);
       text-decoration: none;
-      border-bottom: 1px solid rgba(143, 91, 255, 0.4);
+      border-bottom: 1px solid rgba(255, 160, 90, 0.4);
       transition: color 0.2s ease, border-color 0.2s ease;
     }
 
     .content a:hover,
     .content a:focus-visible {
       color: var(--accent);
-      border-bottom-color: rgba(155, 107, 255, 0.7);
+      border-bottom-color: rgba(255, 181, 120, 0.75);
     }
 
     .content img {
@@ -300,25 +300,25 @@
       display: block;
       margin: 18px auto;
       border-radius: 12px;
-      border: 1px solid rgba(143, 91, 255, 0.25);
-      box-shadow: 0 12px 24px rgba(12, 4, 20, 0.35);
+      border: 1px solid rgba(255, 160, 90, 0.25);
+      box-shadow: 0 12px 24px rgba(24, 10, 4, 0.35);
     }
 
     .content blockquote {
       margin: 16px 0;
       padding: 12px 16px;
       border-left: 3px solid var(--accent-secondary);
-      background: rgba(143, 91, 255, 0.12);
+      background: rgba(255, 160, 90, 0.12);
       color: var(--muted);
     }
 
     .content pre {
-      background: #1b0f24;
+      background: #1c120a;
       padding: 14px;
       border-radius: 6px;
       border: 1px solid var(--border);
       overflow-x: auto;
-      box-shadow: inset 0 0 0 1px rgba(143, 91, 255, 0.08);
+      box-shadow: inset 0 0 0 1px rgba(255, 160, 90, 0.08);
     }
 
     .content code {
@@ -327,10 +327,10 @@
     }
 
     .content :not(pre) > code {
-      background: rgba(143, 91, 255, 0.15);
+      background: rgba(255, 160, 90, 0.15);
       padding: 2px 6px;
       border-radius: 4px;
-      border: 1px solid rgba(143, 91, 255, 0.25);
+      border: 1px solid rgba(255, 160, 90, 0.25);
     }
 
     .content table {
@@ -348,7 +348,7 @@
     }
 
     .content thead th {
-      background: rgba(155, 107, 255, 0.2);
+      background: rgba(255, 160, 90, 0.2);
       color: var(--text);
     }
 
