@@ -26,6 +26,25 @@ const I18N_COPY = {
       sidebarSections: "sections",
       footerCredit: "Website by Malloy",
     },
+    meta: {
+      home: {
+        title: "Home",
+        description:
+          "ALE Psych is a Friday Night Funkin' modding engine that lets you build mods fast without wrestling the source code.",
+      },
+      downloads: {
+        title: "Downloads",
+        description: "Get the latest ALE Psych builds for Windows, macOS, Linux, Android, and iOS.",
+      },
+      mods: {
+        title: "Mods",
+        description: "Browse mods built with ALE Psych and filter by tags or status.",
+      },
+      modDetails: {
+        title: "Mod Details",
+        description: "Explore details, downloads, and status for ALE Psych community mods.",
+      },
+    },
     home: {
       heroTitle: "Make FNF mods with",
       heroHighlight: "style and ease",
@@ -121,6 +140,25 @@ const I18N_COPY = {
       sidebarTitle: "navegación",
       sidebarSections: "secciones",
       footerCredit: "Sitio web por Malloy",
+    },
+    meta: {
+      home: {
+        title: "Inicio",
+        description:
+          "ALE Psych es un motor de modding de Friday Night Funkin' que te permite crear mods rápido sin pelear con el código fuente.",
+      },
+      downloads: {
+        title: "Descargas",
+        description: "Obtén las últimas builds de ALE Psych para Windows, macOS, Linux, Android e iOS.",
+      },
+      mods: {
+        title: "Mods",
+        description: "Explora mods creados con ALE Psych y filtra por etiquetas o estado.",
+      },
+      modDetails: {
+        title: "Detalles del Mod",
+        description: "Revisa detalles, descargas y estado de los mods de la comunidad ALE Psych.",
+      },
     },
     home: {
       heroTitle: "Haz Mods para FNF con",
@@ -263,6 +301,7 @@ const setLanguage = (lang, { persist = true, updateUrl = true } = {}) => {
   if (languageLabel) languageLabel.textContent = getTranslation("common.languageLabel", lang);
   applyTranslations(lang);
   updateSidebarNav(lang);
+  window.ALEPsychMeta?.refresh();
   if (persist) localStorage.setItem(LANGUAGE_KEY, lang);
   if (updateUrl) {
     const url = new URL(window.location.href);
