@@ -25,6 +25,7 @@
       --accent-2-soft: rgba(138, 108, 255, 0.16);
       --shadow: rgba(9, 7, 14, 0.35);
       --radius: 12px;
+      --header-offset: 64px;
     }
 
     * {
@@ -282,10 +283,14 @@
     .category summary {
       cursor: pointer;
       list-style: none;
-      padding: 10px 12px;
-      font-weight: 600;
+      padding: 12px 12px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: rgba(19, 17, 25, 0.6);
       border-bottom: 1px solid var(--border);
-      color: var(--text);
+      color: var(--muted);
     }
 
     .category summary::-webkit-details-marker {
@@ -295,7 +300,11 @@
     .category ul {
       list-style: none;
       margin: 0;
-      padding: 6px 0;
+      padding: 10px 0 6px;
+    }
+
+    .category summary + ul {
+      padding-top: 12px;
     }
 
     .category li {
@@ -606,7 +615,7 @@
 
       #nav-drawer {
         position: fixed;
-        top: 64px;
+        top: var(--header-offset);
         bottom: 0;
         left: 0;
         width: min(80vw, 320px);
@@ -718,6 +727,16 @@
     const searchInputMobile = document.getElementById('search-mobile');
     const siteTitle = document.getElementById('site-title');
     const pageTitle = document.getElementById('page-title');
+    const header = document.querySelector('header');
+
+    const updateHeaderOffset = () => {
+      const headerHeight = header ? header.getBoundingClientRect().height : 0;
+      document.documentElement.style.setProperty('--header-offset', `${headerHeight}px`);
+    };
+
+    window.addEventListener('resize', updateHeaderOffset);
+    window.addEventListener('load', updateHeaderOffset);
+    updateHeaderOffset();
     const pageSubtitle = document.getElementById('page-subtitle');
     const homeLink = document.querySelector('.header-home');
     const languageSelect = document.getElementById('language-select');
