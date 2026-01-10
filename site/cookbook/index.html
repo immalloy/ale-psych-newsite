@@ -3,12 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ALE Psych | Cookbook</title>
+  <title>ALE Psych</title>
   <link rel="apple-touch-icon" sizes="180x180" href="../assets/icons/cookbook/apple-touch-icon.png" />
   <link rel="icon" type="image/png" sizes="32x32" href="../assets/icons/cookbook/favicon-32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="../assets/icons/cookbook/favicon-16.png" />
   <link rel="icon" type="image/png" sizes="192x192" href="../assets/icons/cookbook/favicon-192.png" />
   <link rel="icon" type="image/png" sizes="512x512" href="../assets/icons/cookbook/favicon-512.png" />
+  <script type="module" src="../assets/js/meta.js"></script>
   <style>
     :root {
       color-scheme: dark;
@@ -646,7 +647,7 @@
     }
   </style>
 </head>
-<body>
+<body data-meta-section="cookbook" data-meta-title="ALE Psych Engine Cookbook" data-meta-description="Documentation for ALE Psych Engine.">
   <header>
     <div class="topbar">
       <div class="brand">
@@ -756,6 +757,7 @@
       en: {
         pageTitle: 'ALE Psych Engine Cookbook',
         headerTitle: 'ALE Psych Engine Cookbook',
+        pageDescription: 'Guides and documentation for building with ALE Psych Engine.',
         backHome: 'Back to homepage',
         searchPlaceholder: 'Search pages',
         loadingTitle: 'Loading',
@@ -778,6 +780,7 @@
       es: {
         pageTitle: 'Libro de cocina de ALE Psych Engine',
         headerTitle: 'Libro de cocina de ALE Psych Engine',
+        pageDescription: 'Guías y documentación para construir con ALE Psych Engine.',
         backHome: 'Volver al inicio',
         searchPlaceholder: 'Buscar páginas',
         loadingTitle: 'Cargando',
@@ -804,12 +807,19 @@
       es: 'es/cookbook-data.json',
     };
 
+    const COOKBOOK_META = {
+      siteBaseUrl: 'https://ale-psych-crew.github.io',
+      defaultImage: 'https://ale-psych-crew.github.io/site/assets/images/engine-branding/cookbookmetaimage.png',
+      themeColor: '#f28b3c',
+    };
+
     let docs = [];
     let linkElements = new Map();
     let activeLanguage = 'en';
     let docsBySlug = new Map();
     let slugByPath = new Map();
     let currentDoc = null;
+    let currentMarkdown = '';
     let categoryState = {};
     const cookbookRootPath = new URL('.', window.location.href).pathname;
     const categoryStorageKey = 'cookbookCategoryState';
@@ -922,6 +932,69 @@
       const rendered = marked.parse(stripped);
       const sanitized = DOMPurify.sanitize(rendered, { USE_PROFILES: { html: true } });
       return sanitized || '<p>No content available.</p>';
+    }
+
+    function parseFrontMatter(markdown) {
+      const match = markdown.match(/^---\s*[\s\S]*?\s*---/);
+      if (!match) {
+        return {};
+      }
+      const lines = match[0].split('\n').slice(1, -1);
+      return lines.reduce((acc, line) => {
+        const [key, ...rest] = line.split(':');
+        if (!key || rest.length === 0) {
+          return acc;
+        }
+        acc[key.trim()] = rest.join(':').trim();
+        return acc;
+      }, {});
+    }
+
+    function extractDescriptionFromContent(container) {
+      if (!container) {
+        return '';
+      }
+      const paragraph = container.querySelector('p');
+      if (paragraph?.textContent) {
+        return paragraph.textContent.trim();
+      }
+      return container.textContent?.trim() || '';
+    }
+
+    function buildCookbookTitle(doc) {
+      const ui = getUiCopy();
+      if (!doc) {
+        return ui.pageTitle;
+      }
+      return `${doc.title} | ${ui.pageTitle}`;
+    }
+
+    function updateCookbookMeta({ doc, markdownText, descriptionOverride } = {}) {
+      const ui = getUiCopy();
+      const frontMatter = markdownText ? parseFrontMatter(markdownText) : {};
+      const description =
+        descriptionOverride ||
+        frontMatter.description ||
+        extractDescriptionFromContent(content) ||
+        ui.pageDescription;
+      const title = frontMatter.title || buildCookbookTitle(doc);
+      const canonicalRelative = buildCookbookUrl(doc?.slug || '', activeLanguage);
+      const canonicalUrl = new URL(canonicalRelative, COOKBOOK_META.siteBaseUrl).toString();
+      const image = frontMatter.image
+        ? new URL(frontMatter.image, COOKBOOK_META.siteBaseUrl).toString()
+        : COOKBOOK_META.defaultImage;
+      const themeColor = frontMatter.themeColor || COOKBOOK_META.themeColor;
+
+      window.ALEPsychMeta?.setOverrides({
+        title,
+        description,
+        canonicalUrl,
+        image,
+        themeColor,
+        ogType: doc ? 'article' : 'website',
+        jsonLdType: doc ? 'WebPage' : 'WebPage',
+      });
+      document.title = title;
     }
 
     function slugify(text) {
@@ -1101,11 +1174,14 @@
       const ui = getUiCopy();
       if (!doc) {
         updateHeaderForDoc(null);
+        currentMarkdown = '';
         content.innerHTML = `<h1>${ui.docNotFoundTitle}</h1><p>${ui.docNotFoundText}</p>`;
+        updateCookbookMeta({ doc: null, descriptionOverride: ui.pageDescription });
         loadGiscusThread(null);
         return;
       }
       currentDoc = doc;
+      currentMarkdown = '';
       updateHeaderForDoc(doc);
       updateEditLink(doc);
       setActiveLink(doc.slug);
@@ -1114,12 +1190,15 @@
         .then((res) => res.text())
         .then((text) => {
           content.innerHTML = renderMarkdown(text);
+          currentMarkdown = text;
           markRelatedPages(content);
           buildTableOfContents(content);
           warnOnMarkdownLinks(content);
+          updateCookbookMeta({ doc, markdownText: text });
         })
         .catch(() => {
           content.innerHTML = `<h1>${ui.docLoadErrorTitle}</h1><p>${ui.docLoadErrorText}</p>`;
+          updateCookbookMeta({ doc: null, descriptionOverride: ui.pageDescription });
         });
     }
 
@@ -1208,7 +1287,6 @@
       activeLanguage = lang;
       const ui = getUiCopy();
       document.documentElement.lang = lang;
-      document.title = ui.pageTitle;
       siteTitle.textContent = ui.headerTitle;
       homeLink.textContent = ui.backHome;
       searchInput.placeholder = ui.searchPlaceholder;
@@ -1221,6 +1299,7 @@
       updateHeaderForDoc(currentDoc);
       updateWipBanner();
       updateEditLink(currentDoc);
+      updateCookbookMeta({ doc: currentDoc, markdownText: currentMarkdown });
 
       if (persist) {
         localStorage.setItem('cookbookLanguage', lang);
@@ -1266,6 +1345,7 @@
         })
         .catch(() => {
           content.innerHTML = `<h1>${ui.dataLoadErrorTitle}</h1><p>${ui.dataLoadErrorText}</p>`;
+          updateCookbookMeta({ doc: null, descriptionOverride: ui.pageDescription });
         });
     }
 

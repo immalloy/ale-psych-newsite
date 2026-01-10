@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>ALE Psych | Mod Details</title>
+    <title>ALE Psych</title>
     <link rel="apple-touch-icon" sizes="180x180" href="../assets/icons/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/icons/favicon-16.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="../assets/icons/favicon-32.png" />
@@ -13,8 +13,13 @@
     <link rel="stylesheet" href="../assets/css/base.css" />
     <link rel="stylesheet" href="../assets/css/components.css" />
     <link rel="stylesheet" href="../assets/css/mods.css" />
+    <script type="module" src="../assets/js/meta.js"></script>
   </head>
-  <body>
+  <body
+    data-meta-section="main"
+    data-meta-title-key="meta.modDetails.title"
+    data-meta-description-key="meta.modDetails.description"
+  >
     <!-- Background -->
     <div class="bg-glow" aria-hidden="true">
       <div class="bg-base"></div>
@@ -173,12 +178,47 @@
         return html;
       }
 
+      const SITE_BASE_URL = 'https://ale-psych-crew.github.io';
       const DATA_PATH = './mods-data.json';
       const detailsRoot = document.getElementById('details-root');
       const getText = (key) => window.ALEPsychI18n?.getText(key) ?? key;
       const getTagLabel = (tag) => window.ALEPsychI18n?.getTagLabel(tag) ?? tag;
       let cachedMod = null;
       let cachedDescriptionHtml = '';
+
+      function extractDescription(markdown) {
+        if (!markdown) return '';
+        const withoutFrontMatter = markdown.replace(/^---[\s\S]*?---\s*/, '');
+        const withoutHeadings = withoutFrontMatter.replace(/^#{1,6}\s+/gm, '');
+        const withoutLinks = withoutHeadings.replace(/\[(.*?)\]\((.*?)\)/g, '$1');
+        const withoutFormatting = withoutLinks.replace(/[*_`>]/g, '');
+        return withoutFormatting.replace(/\s+/g, ' ').trim();
+      }
+
+      function buildModDescription(mod, markdown) {
+        const summary = extractDescription(markdown);
+        const prefix = mod?.author ? `${mod.title} by ${mod.author}.` : `${mod.title}.`;
+        if (!summary) return prefix;
+        return `${prefix} ${summary}`;
+      }
+
+      function updateModMetadata(mod, markdownText) {
+        if (!mod) return;
+        const canonicalUrl = new URL(
+          `${window.location.pathname}${window.location.search}`,
+          SITE_BASE_URL
+        ).toString();
+        const imageUrl = new URL(mod.thumbnail, window.location.href).toString();
+        const description = buildModDescription(mod, markdownText);
+        window.ALEPsychMeta?.setOverrides({
+          title: `${mod.title} | ALE Psych Mods`,
+          description,
+          canonicalUrl,
+          image: imageUrl,
+          ogType: 'article',
+          jsonLdType: 'WebPage',
+        });
+      }
 
       function getModId() {
         const params = new URLSearchParams(window.location.search);
@@ -252,6 +292,7 @@
         cachedMod = mod;
         cachedDescriptionHtml = descriptionHtml;
         renderDetails(mod, descriptionHtml);
+        updateModMetadata(mod, markdownText);
       }
 
       window.ALEPsychI18n?.onChange(() => {
