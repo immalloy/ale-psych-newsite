@@ -4,10 +4,16 @@ const DEFAULTS = {
   main: {
     themeColor: "#a78bfa",
     image: `${SITE_BASE_URL}/site/assets/images/engine-branding/mainsitemetaimage.png`,
+    imageWidth: 1200,
+    imageHeight: 630,
+    imageType: "image/png",
   },
   cookbook: {
     themeColor: "#f28b3c",
     image: `${SITE_BASE_URL}/site/assets/images/engine-branding/cookbookmetaimage.png`,
+    imageWidth: 1920,
+    imageHeight: 1080,
+    imageType: "image/png",
   },
 };
 
@@ -78,6 +84,13 @@ const getBodyMeta = () => {
     title,
     description,
     image: body.dataset.metaImage,
+    imageWidth: body.dataset.metaImageWidth
+      ? Number.parseInt(body.dataset.metaImageWidth, 10)
+      : undefined,
+    imageHeight: body.dataset.metaImageHeight
+      ? Number.parseInt(body.dataset.metaImageHeight, 10)
+      : undefined,
+    imageType: body.dataset.metaImageType,
     robots: body.dataset.metaRobots,
     includeHash: body.dataset.metaIncludeHash === "true",
   };
@@ -150,6 +163,9 @@ const applyMeta = ({
   description,
   canonicalUrl,
   image,
+  imageWidth,
+  imageHeight,
+  imageType,
   themeColor,
   ogType,
   jsonLdType,
@@ -159,6 +175,16 @@ const applyMeta = ({
   const finalDescription = truncate(description);
   const finalUrl = canonicalUrl || buildCanonicalUrl();
   const finalImage = toAbsoluteUrl(image);
+  const finalImageType = imageType || "image/png";
+  const finalImageWidth = Number.isFinite(imageWidth) ? imageWidth : undefined;
+  const finalImageHeight = Number.isFinite(imageHeight) ? imageHeight : undefined;
+  const pageHostname = (() => {
+    try {
+      return new URL(finalUrl).hostname;
+    } catch (error) {
+      return "";
+    }
+  })();
   document.title = finalTitle;
 
   ensureMetaTag({ name: "description", content: finalDescription });
@@ -168,14 +194,30 @@ const applyMeta = ({
   ensureMetaTag({ property: "og:type", content: ogType || "website" });
   ensureMetaTag({ property: "og:url", content: finalUrl });
   ensureMetaTag({ property: "og:image", content: finalImage });
+  ensureMetaTag({ property: "og:image:secure_url", content: finalImage });
+  ensureMetaTag({ property: "og:image:type", content: finalImageType });
+  if (finalImageWidth) {
+    ensureMetaTag({ property: "og:image:width", content: String(finalImageWidth) });
+  }
+  if (finalImageHeight) {
+    ensureMetaTag({ property: "og:image:height", content: String(finalImageHeight) });
+  }
   ensureMetaTag({ property: "og:image:alt", content: finalTitle });
   ensureMetaTag({ property: "og:site_name", content: SITE_NAME });
+  const locale = document.documentElement?.lang;
+  if (locale) {
+    ensureMetaTag({ property: "og:locale", content: locale });
+  }
 
   ensureMetaTag({ name: "twitter:card", content: "summary_large_image" });
   ensureMetaTag({ name: "twitter:title", content: finalTitle });
   ensureMetaTag({ name: "twitter:description", content: finalDescription });
   ensureMetaTag({ name: "twitter:image", content: finalImage });
   ensureMetaTag({ name: "twitter:image:alt", content: finalTitle });
+  if (pageHostname) {
+    ensureMetaTag({ name: "twitter:domain", content: pageHostname });
+  }
+  ensureMetaTag({ name: "twitter:url", content: finalUrl });
 
   ensureMetaTag({ name: "theme-color", content: themeColor });
 
@@ -211,6 +253,9 @@ const getPageMeta = () => {
     description: bodyMeta.description,
     canonicalUrl: buildCanonicalUrl({ includeHash: bodyMeta.includeHash }),
     image: bodyMeta.image || defaults.image,
+    imageWidth: bodyMeta.imageWidth ?? defaults.imageWidth,
+    imageHeight: bodyMeta.imageHeight ?? defaults.imageHeight,
+    imageType: bodyMeta.imageType ?? defaults.imageType,
     themeColor: defaults.themeColor,
     ogType: "website",
     jsonLdType,
