@@ -43,13 +43,13 @@ export const WHY_SLIDES = {
       title: "More Freedom",
       kicker: "Do it your way",
       blurb:
-        "Why get tangled in the source code? What if you don't know Haxe? The engine is script-driven—you can use HScript or Lua almost everywhere!",
+        "Why get tangled in the source code? What if you don't know Haxe? The engine is script-driven - you can use HScript or Lua almost everywhere!",
     },
     {
       title: "More Support",
       kicker: "Not a dead end",
       blurb:
-        "Easy-to-understand documentation, cleaner code, and a community that—even if small—helps you avoid getting stuck in modding.",
+        "Easy-to-understand documentation, cleaner code, and a community that - even if small - helps you avoid getting stuck in modding.",
     },
     {
       title: "Originality",
