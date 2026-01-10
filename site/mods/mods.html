@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -47,8 +47,18 @@
             </div>
             <div class="brand-text">
               <div class="brand-title">ALE Psych</div>
-              <div class="brand-subtitle">FNF modding engine</div>
+              <div class="brand-subtitle" data-i18n="common.brandSubtitle">Motor de modding de FNF</div>
             </div>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <div class="language-switch">
+            <span class="language-label" data-i18n="common.languageLabel" data-language-label>Idioma</span>
+            <label class="visually-hidden" for="language-select">Language</label>
+            <select id="language-select" data-i18n-attr="aria-label:common.languageLabel">
+              <option value="es">Español</option>
+              <option value="en">English</option>
+            </select>
           </div>
         </div>
       </div>
@@ -59,18 +69,18 @@
       <section class="hero">
         <div class="hero-inner">
           <h1 class="hero-title">
-            Mods built with
-            <span class="grad-text">ALE Psych</span>
+            <span data-i18n="mods.heroTitle">Mods Construidos con</span>
+            <span class="grad-text" data-i18n="mods.heroHighlight">ALE Psych</span>
           </h1>
           <div class="hero-actions">
             <a class="btn-primary" href="../downloads.html">
-              Download ALE Psych
+              <span data-i18n="mods.primaryCta">Descarga ALE Psych</span>
               <span class="btn-icon" aria-hidden="true">
                 <img src="../assets/svgs/download.svg" alt="" aria-hidden="true" />
               </span>
             </a>
             <a class="btn-ghost" href="../../index.html">
-              Back to home
+              <span data-i18n="mods.secondaryCta">Página Principal</span>
               <span class="btn-icon" aria-hidden="true">
                 <img src="../assets/svgs/arrow-right.svg" alt="" aria-hidden="true" />
               </span>
@@ -81,24 +91,25 @@
 
       <section class="section">
         <div class="section-head">
-          <h2 class="section-title">Find your next mod</h2>
-          <p class="section-subtitle">Search the library and filter by tag.</p>
+          <h2 class="section-title" data-i18n="mods.sectionTitle">Encuentra tu Próximo Mod</h2>
+          <p class="section-subtitle" data-i18n="mods.sectionSubtitle">Busca por Nombre y Etiquetas</p>
         </div>
 
         <div class="mods-panel">
           <div class="mods-panel-grid">
             <div class="filter-card">
-              <label for="search">Search mods</label>
+              <label for="search" data-i18n="mods.searchLabel">Buscar Mods</label>
               <input
                 id="search"
                 class="mods-input"
                 type="search"
-                placeholder="Search by title, author, tags, or status..."
+                placeholder="Buscar por título, autor, etiquetas o estado..."
+                data-i18n-attr="placeholder:mods.searchPlaceholder"
               />
             </div>
 
             <fieldset class="filter-card" id="tag-filters">
-              <legend>Tags</legend>
+              <legend data-i18n="mods.tagsLegend">Etiquetas</legend>
               <div class="filter-grid" data-filter-list="tags"></div>
             </fieldset>
 
@@ -108,8 +119,8 @@
 
       <section class="section">
         <div class="mods-grid" id="mods-grid"></div>
-        <div class="empty-state" id="empty-state" hidden>
-          No mods match the current filters.
+        <div class="empty-state" id="empty-state" data-i18n="mods.emptyState" hidden>
+          No hay mods que coincidan con los filtros actuales.
         </div>
         <div id="scroll-sentinel"></div>
       </section>
@@ -126,7 +137,7 @@
 
           <div class="footer-meta">
             <div>© <span id="yearSpan"></span> ALE Psych</div>
-            <div class="muted">Website by Malloy</div>
+            <div class="muted" data-i18n="common.footerCredit">Sitio web por Malloy</div>
           </div>
         </div>
       </footer>
@@ -147,7 +158,7 @@
           </div>
           <div>
             <div class="brand-subtitle">ALE Psych</div>
-            <div class="sidebar-title">navigation</div>
+            <div class="sidebar-title" data-i18n="common.sidebarTitle">navegación</div>
           </div>
         </div>
 
@@ -157,13 +168,13 @@
       </div>
 
       <div class="sidebar-body">
-        <div class="sidebar-kicker">sections</div>
+        <div class="sidebar-kicker" data-i18n="common.sidebarSections">secciones</div>
         <nav class="sidebar-nav" id="sidebarNav"></nav>
       </div>
     </aside>
 
     <script type="module" src="../assets/js/main.js"></script>
-    <script>
+    <script type="module">
       // Path references so the system remains easy to relocate
       const DATA_PATH = './mods-data.json';
       const PAGE_SIZE = 10;
@@ -177,6 +188,9 @@
       let allMods = [];
       let filteredMods = [];
       let visibleCount = 0;
+      const getText = (key) => window.ALEPsychI18n?.getText(key) ?? key;
+      const getTagLabel = (tag) => window.ALEPsychI18n?.getTagLabel(tag) ?? tag;
+
       // Helper: create a checkbox filter item
       function createFilterItem(value, group) {
         const id = `${group}-${value}`.replace(/\s+/g, '-').toLowerCase();
@@ -184,19 +198,25 @@
         wrapper.className = 'filter-item';
         wrapper.innerHTML = `
           <input type="checkbox" value="${value}" id="${id}" />
-          <span>${value}</span>
+          <span>${getTagLabel(value)}</span>
         `;
         return wrapper;
       }
 
       // Build the filter options based on available data
-      function buildFilters(mods) {
+      function buildFilters(mods, selectedTags = []) {
+        tagFilterContainer.innerHTML = '';
         const tagSet = new Set();
         mods.forEach((mod) => {
           mod.tags.forEach((tag) => tagSet.add(tag));
         });
 
-        tagSet.forEach((tag) => tagFilterContainer.appendChild(createFilterItem(tag, 'tag')));
+        tagSet.forEach((tag) => {
+          const filterItem = createFilterItem(tag, 'tag');
+          const checkbox = filterItem.querySelector('input');
+          if (checkbox && selectedTags.includes(tag)) checkbox.checked = true;
+          tagFilterContainer.appendChild(filterItem);
+        });
       }
 
       // Apply search text and checkbox filters to the mods list
@@ -206,12 +226,12 @@
           (input) => input.value
         );
         filteredMods = allMods.filter((mod) => {
-          const statusText = mod.comingSoon ? 'coming soon' : 'available';
+          const statusText = mod.comingSoon ? getText('mods.statusComing') : getText('mods.statusAvailable');
           const combinedText = [
             mod.title,
             mod.author,
             statusText,
-            mod.tags.join(' ')
+            mod.tags.map((tag) => getTagLabel(tag)).join(' ')
           ]
             .join(' ')
             .toLowerCase();
@@ -250,16 +270,16 @@
               <img src="${mod.thumbnail}" alt="${mod.title} thumbnail" loading="lazy" />
             </div>
             <div class="mod-title">${mod.title}</div>
-            <div class="mod-meta">By ${mod.author}</div>
+            <div class="mod-meta">${getText('mods.byLabel')} ${mod.author}</div>
             <div class="mod-tags">
-              ${mod.tags.map((tag) => `<span class="badge">${tag}</span>`).join('')}
+              ${mod.tags.map((tag) => `<span class="badge">${getTagLabel(tag)}</span>`).join('')}
             </div>
             <div class="status ${mod.comingSoon ? 'coming' : ''}">
-              ${mod.comingSoon ? 'Coming Soon' : 'Available'}
+              ${mod.comingSoon ? getText('mods.statusComing') : getText('mods.statusAvailable')}
             </div>
             <a class="btn-primary mods-link" href="./mod-details.html?id=${encodeURIComponent(
               mod.id
-            )}">View Details</a>
+            )}">${getText('mods.viewDetails')}</a>
           `;
 
           fragment.appendChild(card);
@@ -294,7 +314,23 @@
         observer.observe(sentinel);
       }
 
-      init();
+      function translateUi() {
+        const selectedTags = Array.from(tagFilterContainer.querySelectorAll('input:checked')).map(
+          (input) => input.value
+        );
+        const label = document.querySelector('label[for="search"]');
+        if (label) label.textContent = getText('mods.searchLabel');
+        if (searchInput) searchInput.placeholder = getText('mods.searchPlaceholder');
+        const legend = document.querySelector('#tag-filters legend');
+        if (legend) legend.textContent = getText('mods.tagsLegend');
+        if (emptyState) emptyState.textContent = getText('mods.emptyState');
+        buildFilters(allMods, selectedTags);
+        applyFilters();
+      }
+
+      window.ALEPsychI18n?.onChange(() => translateUi());
+
+      init().then(() => translateUi());
     </script>
   </body>
 </html>

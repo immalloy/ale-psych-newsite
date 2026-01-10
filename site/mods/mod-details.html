@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -47,8 +47,18 @@
             </div>
             <div class="brand-text">
               <div class="brand-title">ALE Psych</div>
-              <div class="brand-subtitle">FNF modding engine</div>
+              <div class="brand-subtitle" data-i18n="common.brandSubtitle">Motor de modding de FNF</div>
             </div>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <div class="language-switch">
+            <span class="language-label" data-i18n="common.languageLabel" data-language-label>Idioma</span>
+            <label class="visually-hidden" for="language-select">Language</label>
+            <select id="language-select" data-i18n-attr="aria-label:common.languageLabel">
+              <option value="es">Español</option>
+              <option value="en">English</option>
+            </select>
           </div>
         </div>
       </div>
@@ -60,7 +70,7 @@
         <div class="hero-inner">
           <div class="hero-actions">
             <a class="btn-ghost" href="./mods.html">
-              Back to mods
+              <span data-i18n="mods.backToMods">Volver a mods</span>
               <span class="btn-icon" aria-hidden="true">
                 <img src="../assets/svgs/arrow-right.svg" alt="" aria-hidden="true" />
               </span>
@@ -85,7 +95,7 @@
 
           <div class="footer-meta">
             <div>© <span id="yearSpan"></span> ALE Psych</div>
-            <div class="muted">Website by Malloy</div>
+            <div class="muted" data-i18n="common.footerCredit">Sitio web por Malloy</div>
           </div>
         </div>
       </footer>
@@ -106,7 +116,7 @@
           </div>
           <div>
             <div class="brand-subtitle">ALE Psych</div>
-            <div class="sidebar-title">navigation</div>
+            <div class="sidebar-title" data-i18n="common.sidebarTitle">navegación</div>
           </div>
         </div>
 
@@ -116,13 +126,13 @@
       </div>
 
       <div class="sidebar-body">
-        <div class="sidebar-kicker">sections</div>
+        <div class="sidebar-kicker" data-i18n="common.sidebarSections">secciones</div>
         <nav class="sidebar-nav" id="sidebarNav"></nav>
       </div>
     </aside>
 
     <script type="module" src="../assets/js/main.js"></script>
-    <script>
+    <script type="module">
       // Inline markdown parser (simple, self-contained)
       function parseMarkdown(markdown) {
         // Escape HTML to keep content safe
@@ -165,6 +175,10 @@
 
       const DATA_PATH = './mods-data.json';
       const detailsRoot = document.getElementById('details-root');
+      const getText = (key) => window.ALEPsychI18n?.getText(key) ?? key;
+      const getTagLabel = (tag) => window.ALEPsychI18n?.getTagLabel(tag) ?? tag;
+      let cachedMod = null;
+      let cachedDescriptionHtml = '';
 
       function getModId() {
         const params = new URLSearchParams(window.location.search);
@@ -175,29 +189,9 @@
         detailsRoot.innerHTML = `<div class="mod-error">${message}</div>`;
       }
 
-      async function initDetails() {
-        const modId = getModId();
-
-        if (!modId) {
-          renderError('No mod id found in the URL.');
-          return;
-        }
-
-        const response = await fetch(DATA_PATH);
-        const mods = await response.json();
-        const mod = mods.find((entry) => entry.id === modId);
-
-        if (!mod) {
-          renderError('Mod not found.');
-          return;
-        }
-
-        const markdownResponse = await fetch(mod.markdown);
-        const markdownText = await markdownResponse.text();
-        const descriptionHtml = parseMarkdown(markdownText);
-
+      function renderDetails(mod, descriptionHtml) {
         const downloadsHtml = mod.comingSoon
-          ? '<p class="status coming">Coming Soon — downloads will appear here once available.</p>'
+          ? `<p class="status coming">${getText('mods.comingSoonNote')}</p>`
           : `
             <div class="download-list">
               ${mod.downloads
@@ -219,12 +213,12 @@
               </div>
               <div class="mod-details-info">
                 <h2 class="mod-details-title">${mod.title}</h2>
-                <p class="mod-meta">By ${mod.author}</p>
+                <p class="mod-meta">${getText('mods.byLabel')} ${mod.author}</p>
                 <div class="mod-meta-list">
-                  ${mod.tags.map((tag) => `<span class="badge">${tag}</span>`).join('')}
+                  ${mod.tags.map((tag) => `<span class="badge">${getTagLabel(tag)}</span>`).join('')}
                 </div>
                 <p class="status ${mod.comingSoon ? 'coming' : ''}">
-                  ${mod.comingSoon ? 'Coming Soon' : 'Available'}
+                  ${mod.comingSoon ? getText('mods.statusComing') : getText('mods.statusAvailable')}
                 </p>
                 ${downloadsHtml}
               </div>
@@ -233,6 +227,36 @@
           </article>
         `;
       }
+
+      async function initDetails() {
+        const modId = getModId();
+
+        if (!modId) {
+          renderError(getText('mods.errorNoId'));
+          return;
+        }
+
+        const response = await fetch(DATA_PATH);
+        const mods = await response.json();
+        const mod = mods.find((entry) => entry.id === modId);
+
+        if (!mod) {
+          renderError(getText('mods.errorNotFound'));
+          return;
+        }
+
+        const markdownResponse = await fetch(mod.markdown);
+        const markdownText = await markdownResponse.text();
+        const descriptionHtml = parseMarkdown(markdownText);
+
+        cachedMod = mod;
+        cachedDescriptionHtml = descriptionHtml;
+        renderDetails(mod, descriptionHtml);
+      }
+
+      window.ALEPsychI18n?.onChange(() => {
+        if (cachedMod) renderDetails(cachedMod, cachedDescriptionHtml);
+      });
 
       initDetails();
     </script>
