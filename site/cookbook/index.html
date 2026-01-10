@@ -328,6 +328,11 @@
       line-height: 1.7;
     }
 
+    #giscus-container {
+      max-width: 820px;
+      margin: 32px auto 0;
+    }
+
     .content h1 {
       margin-top: 0;
       font-size: 32px;
@@ -690,6 +695,7 @@
         <h1>Loading</h1>
         <p>Fetching documentation data.</p>
       </div>
+      <div id="giscus-container" aria-label="Comments"></div>
     </main>
     <aside id="toc" class="is-empty">
       <div class="toc-inner">
@@ -722,6 +728,7 @@
     const navToggle = document.getElementById('nav-toggle');
     const drawerOverlay = document.getElementById('drawer-overlay');
     const navDrawer = document.getElementById('nav-drawer');
+    const giscusContainer = document.getElementById('giscus-container');
     const wipBanner = document.getElementById('wip-banner');
     const wipBannerText = document.getElementById('wip-banner-text');
     const wipBannerDismiss = document.getElementById('wip-banner-dismiss');
@@ -792,6 +799,16 @@
     const wipStorageKey = 'cookbook_wip_notice_dismissed';
     const GITHUB_EDIT_BASE =
       'https://github.com/ALE-Psych-Crew/ale-psych-crew.github.io/edit/main/site/cookbook/';
+    const GISCUS_CONFIG = {
+      repo: 'ALE-Psych-Crew/ale-psych-crew.github.io',
+      repoId: 'R_kgDOQ3BiLQ',
+      category: 'Giscus',
+      categoryId: 'DIC_kwDOQ3BiLc4C0x6v',
+      reactionsEnabled: '1',
+      emitMetadata: '0',
+      inputPosition: 'bottom',
+      theme: 'dark',
+    };
 
     function getUiCopy() {
       return uiCopy[activeLanguage] || uiCopy.en;
@@ -1006,6 +1023,41 @@
       editPageLink.style.display = 'inline-flex';
     }
 
+    function buildGiscusTerm(doc) {
+      if (!doc) {
+        return null;
+      }
+      return `cookbook-${activeLanguage}-${doc.slug}`;
+    }
+
+    function loadGiscusThread(doc) {
+      if (!giscusContainer) {
+        return;
+      }
+      giscusContainer.innerHTML = '';
+      const term = buildGiscusTerm(doc);
+      if (!term) {
+        return;
+      }
+      const script = document.createElement('script');
+      script.src = 'https://giscus.app/client.js';
+      script.async = true;
+      script.crossOrigin = 'anonymous';
+      script.setAttribute('data-repo', GISCUS_CONFIG.repo);
+      script.setAttribute('data-repo-id', GISCUS_CONFIG.repoId);
+      script.setAttribute('data-category', GISCUS_CONFIG.category);
+      script.setAttribute('data-category-id', GISCUS_CONFIG.categoryId);
+      script.setAttribute('data-mapping', 'specific');
+      script.setAttribute('data-term', term);
+      script.setAttribute('data-strict', '0');
+      script.setAttribute('data-reactions-enabled', GISCUS_CONFIG.reactionsEnabled);
+      script.setAttribute('data-emit-metadata', GISCUS_CONFIG.emitMetadata);
+      script.setAttribute('data-input-position', GISCUS_CONFIG.inputPosition);
+      script.setAttribute('data-theme', GISCUS_CONFIG.theme);
+      script.setAttribute('data-lang', activeLanguage);
+      giscusContainer.appendChild(script);
+    }
+
     function showWipBanner() {
       localStorage.removeItem(wipStorageKey);
       updateWipBanner();
@@ -1042,12 +1094,14 @@
       if (!doc) {
         updateHeaderForDoc(null);
         content.innerHTML = `<h1>${ui.docNotFoundTitle}</h1><p>${ui.docNotFoundText}</p>`;
+        loadGiscusThread(null);
         return;
       }
       currentDoc = doc;
       updateHeaderForDoc(doc);
       updateEditLink(doc);
       setActiveLink(doc.slug);
+      loadGiscusThread(doc);
       fetch(doc.path)
         .then((res) => res.text())
         .then((text) => {
