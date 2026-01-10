@@ -10,7 +10,7 @@ export const WHY_SLIDES = [
     title: "Ease of Use",
     kicker: "No friction",
     blurb:
-      "You shouldn’t need a tutorial marathon to start charting. ALE PSYCH stays out of your way and lets you build.",
+      "You shouldn’t need a tutorial marathon to start charting. ALE Psych stays out of your way and lets you build.",
   },
   {
     title: "Clean Code",
@@ -33,7 +33,7 @@ export const WHY_SLIDES = [
   {
     title: "More Freedom",
     kicker: "Do it your way",
-    blurb: "Script it, swap it, bend it. ALE PSYCH is made to be customized without fighting the engine.",
+    blurb: "Script it, swap it, bend it. ALE Psych is made to be customized without fighting the engine.",
   },
   {
     title: "More Support",
