@@ -3,9 +3,15 @@ import { NAV_SECTIONS, WHY_SLIDES, SHOWCASE } from "./data.js";
 const AUTO_INTERVAL_MS = 5200;
 const PREVIEW_INTERVAL_MS = 6200;
 
-const siteRoot = window.location.pathname.includes("/mods/") ? ".." : ".";
+const { pathname } = window.location;
+const isRootIndex = !pathname.includes("/site/") && (pathname === "/" || pathname.endsWith("/index.html"));
+const isModsPage = pathname.includes("/site/mods/");
+const siteRoot = isRootIndex ? "site" : isModsPage ? ".." : ".";
 const assetRoot = siteRoot === "." ? "./assets" : `${siteRoot}/assets`;
-const resolveHref = (href) => (siteRoot === "." ? `./${href}` : `${siteRoot}/${href}`);
+const resolveHref = (href) => {
+  if (href.startsWith("/") || href.startsWith("http")) return href;
+  return siteRoot === "." ? `./${href}` : `${siteRoot}/${href}`;
+};
 const resolveAsset = (path) => `${assetRoot}/${path}`;
 
 const yearSpan = document.getElementById("yearSpan");

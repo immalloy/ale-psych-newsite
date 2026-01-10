@@ -1,8 +1,8 @@
 export const NAV_SECTIONS = [
-  { label: "Home", href: "index.html" },
-  { label: "Downloads", href: "downloads.html" },
-  { label: "Mods", href: "mods/mods.html" },
-  { label: "Cookbook", href: "cookbook/index.html" },
+  { label: "Home", href: "/index.html" },
+  { label: "Downloads", href: "/site/downloads.html" },
+  { label: "Mods", href: "/site/mods/mods.html" },
+  { label: "Cookbook", href: "/site/cookbook/index.html" },
 ];
 
 export const WHY_SLIDES = [
