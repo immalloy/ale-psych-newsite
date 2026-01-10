@@ -1,28 +1,35 @@
 ---
-title: Installing Mods
+title: Installing mods (built engine)
 category: Getting Started
 ---
 
-# Installing Mods
+## Overview
+Installing a mod is as simple as dropping a folder into `mods/`. The Mod Menu lists each subfolder (except for certain reserved folders) and lets you activate one mod at a time.
 
-Mods are installed by dropping them into the `mods/` folder and enabling them from the Mods menu in-game.
+## Prerequisites
+- A mod folder from a mod author.
 
-## Find the mods folder
+## Step-by-step
+1. Copy the mod folder into `mods/`.
+2. Launch the engine.
+3. Open the Mod Menu and select the new mod folder.
+4. Restart or return to the menu if required by the engine to apply the selection.
 
-- The engine looks for a `mods/` directory next to the game executable.
-- If it does not exist, create it manually and restart the game.
+## Examples
+The Mod Menu enumerates subfolders and filters out common asset folder names:
 
-## Install a mod package
+```haxe
+// funkin/substates/ModsMenuSubState.hx
+for (folder in FileSystem.readDirectory('mods'))
+  if (FileSystem.isDirectory('mods/' + folder) && !ignoreFolders.contains(folder))
+    options.push(folder);
+```
 
-1. Extract the mod zip or folder into `mods/`.
-2. Confirm the mod folder contains files like `data.json`, `pack.json`, or asset subfolders such as `images/` and `songs/`.
-3. Avoid nested folders (for example `mods/MyMod/MyMod/`).
+## Common pitfalls
+- Placing a mod **inside** another mod folder (nested mods won’t be detected).
+- Naming a mod folder `characters`, `songs`, `scripts`, etc. — these are ignored by the Mod Menu’s folder filter.
 
-## Enable the mod
-
-- Open the Mods menu with `Ctrl + Shift + M`.
-- Toggle the mod on and restart if prompted.
-
-## TODO
-
-TODO: This page is unfinished - complete this section.
+## Related pages
+- [Mod menu basics](./mod-menu-basics.md)
+- [Mod folder detection and ignore list](../file-paths-and-load-order/mod-folder-detection.md)
+- [Single-mod workflow](../mods-basics/single-mod-workflow.md)

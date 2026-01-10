@@ -1,47 +1,42 @@
-# Overview
-
-ALE Psych is a fork of [Psych Engine](https://gamebanana.com/mods/309789) (0.7.3) focused on letting modders create *amazing mods* without touching the source code.
-
-It centers on using scripts and JSON to customize different parts of the game.
-
-## What makes ALE Psych different?
-
-- Support for **custom menus** using **scripts**
-- Support for **custom Haxe classes**
-    - Powered by [RuleScript](https://github.com/Kriptel/RuleScript/tree/dev), an **amazing** addon for HScript
-- Support for **Lua modules**
-- **JSON** configuration for important engine settings
-    - Options, parameters, credits, and debug tools
-- Editor improvements to speed up common workflows
-    - Characters, charts, stages, weeks, etc. [WIP]
-- Optimizations for low-end devices
-
+---
+title: Engine overview (mods-first)
+category: Getting Started
 ---
 
-## What is this guide for?
+## Overview
+This engine is built to run **mods from the `mods/` folder**. You select one active mod at a time, and the engine resolves files from that mod before falling back to built-in assets. The engine bootstraps a normal HaxeFlixel game, but for modders the key point is: you can ship a complete mod without rebuilding the engine.
 
-- Helping new modders use the engine for the first time
-- Explaining how to migrate from Psych Engine to ALE Psych
-    - It can also help users coming from other engines
-- Introducing new features that not everyone is familiar with
+## Prerequisites
+- A built copy of the engine (no source build required).
+- Basic file management (create folders and copy files).
 
----
+## Step-by-step
+1. Locate the game’s install folder and confirm there is a `mods/` directory.
+2. Create a new mod folder inside `mods/` (for example `mods/MyMod`).
+3. Mirror the built-in `assets/` structure inside your mod folder.
+4. Use the in-game Mod Menu to select your mod.
+5. Launch gameplay to verify the mod loads before assets.
 
-## Community and support
+## Examples
+This engine initializes its main game state in `core/Main.hx`, and mod selection happens separately via the mods backend and menu. The important concept is that **mods are resolved at runtime** without rebuilding.
 
-Didn’t understand a step? Have a specific issue? Don’t worry!
-- Contact us on our [Discord server](https://discord.gg/NP4U9CUrsH)
+```haxe
+// core/Main.hx (bootstraps the game state)
+class Main extends Sprite {
+  private static var game = {
+    width: 1280,
+    height: 720,
+    initialState: #if mobile CopyState #else MainState #end,
+    framerate: 60
+  };
+}
+```
 
-## Credits
+## Common pitfalls
+- Expecting mods to stack: the engine uses **one active mod folder at a time**.
+- Placing files next to `assets/` instead of inside a mod folder. Only the active mod is prioritized.
 
-- [AlejoGDOfficial](https://www.youtube.com/@alejogdofficial) - Director, ALE Psych programmer
-- [THE VOID](https://www.youtube.com/@THEE_VOIDDD) - Co-founder of ALE Psych
-- [Malloy](https://x.com/ArtByHenry2010) - Website maintainer and ALE Psych documentation translator
-- [ManuArtz](https://www.youtube.com/@MArtz_06) - ALE Psych logo creator
-- [Kriptel](https://www.youtube.com/@kriptel_pro) - Macro creator and responsible for ALE Psych's powerful HScript
-- [Slushi](https://github.com/Slushi-Github) - Helped ALE Psych Apple device support
-- [Ina the Cat](https://www.youtube.com/@InaTheCat) - Improved ALE Psych video support
-
-## License
-
-ALE Psych is released under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0)
+## Related pages
+- [How mods are loaded (high level)](./how-mods-are-loaded.md)
+- [Mod folder anatomy](../mods-basics/mod-folder-anatomy.md)
+- [Path resolution rules](../file-paths-and-load-order/path-resolution-rules.md)
