@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -46,8 +46,18 @@
             </div>
             <div class="brand-text">
               <div class="brand-title">ALE Psych</div>
-              <div class="brand-subtitle">FNF modding engine</div>
+              <div class="brand-subtitle" data-i18n="common.brandSubtitle">Motor de modding de FNF</div>
             </div>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <div class="language-switch">
+            <span class="language-label" data-i18n="common.languageLabel" data-language-label>Idioma</span>
+            <label class="visually-hidden" for="language-select">Language</label>
+            <select id="language-select" data-i18n-attr="aria-label:common.languageLabel">
+              <option value="es">Español</option>
+              <option value="en">English</option>
+            </select>
           </div>
         </div>
       </div>
@@ -58,12 +68,12 @@
       <section class="hero">
         <div class="hero-inner">
           <h1 class="hero-title">
-            Download
-            <span class="grad-text">ALE Psych</span>
+            <span data-i18n="downloads.heroTitle">Descarga</span>
+            <span class="grad-text" data-i18n="downloads.heroHighlight">ALE Psych</span>
           </h1>
-          <p class="hero-desc">
-            Fresh nightly builds, sorted by platform. Pick the exact installer you need and jump
-            straight in.
+          <p class="hero-desc" data-i18n-html="downloads.heroDesc">
+            Elige entre las versiones del Motor.<br>
+            Escoge el instalador que necesites y <strong>empieza de inmediato</strong>.
           </p>
           <div class="hero-actions">
             <a
@@ -72,7 +82,7 @@
               rel="noopener"
               target="_blank"
             >
-              Browse GitHub releases
+              <span data-i18n="downloads.githubButton">GitHub Releases</span>
               <span class="btn-icon" aria-hidden="true">
                 <img src="./assets/svgs/github.svg" alt="" aria-hidden="true" />
               </span>
@@ -83,10 +93,10 @@
 
       <section class="section" id="downloads">
         <div class="section-head">
-          <h2 class="section-title">Choose your platform</h2>
-          <p class="section-subtitle">
-            All downloads open in a new tab. Nightlies update often, so check releases for stable
-            builds.
+          <h2 class="section-title" data-i18n="downloads.sectionTitle">Eljie tu Plataforma</h2>
+          <p class="section-subtitle" data-i18n="downloads.sectionSubtitle">
+            Todas las Descargas en una pestaña. El Engine se Actualiza con Frecuencia, mantente al
+            tanto para tener la Última Versión Estable.
           </p>
         </div>
 
@@ -97,11 +107,13 @@
                 <img src="./assets/svgs/os-windows.svg" alt="" aria-hidden="true" />
               </div>
               <div>
-                <div class="download-title">Windows 64-bit</div>
+                <div class="download-title" data-i18n="downloads.cards.windows64.title">Windows 64-bit</div>
                 <div class="download-version">ZIP · Win x64</div>
               </div>
             </div>
-            <p class="download-desc">For modern Windows installs. Recommended for most users.</p>
+            <p class="download-desc" data-i18n="downloads.cards.windows64.desc">
+              Para usuarios de Windows. Recomendado para la mayoría de Usuarios.
+            </p>
             <div class="download-actions">
               <a
                 class="btn-primary"
@@ -109,7 +121,7 @@
                 rel="noopener"
                 target="_blank"
               >
-                Download Windows 64-bit
+                <span data-i18n="downloads.cards.windows64.button">Descargar Windows 64-bit</span>
                 <span class="btn-icon" aria-hidden="true">
                   <img src="./assets/svgs/download.svg" alt="" aria-hidden="true" />
                 </span>
@@ -123,11 +135,15 @@
                 <img src="./assets/svgs/os-windows.svg" alt="" aria-hidden="true" />
               </div>
               <div>
-                <div class="download-title">Windows 32-bit</div>
+                <div class="download-title" data-i18n="downloads.cards.windows32.title">Windows 32-bit</div>
                 <div class="download-version">ZIP · Win x86</div>
               </div>
             </div>
-            <p class="download-desc">Legacy Windows support for older 32-bit machines.</p>
+            <p class="download-desc" data-i18n-html="downloads.cards.windows32.desc">
+              Compatible para máquinas antiguas de 32-bit. (Una vez
+              <a href="https://haxe.org/download/version/5.0.0-preview.1/" target="_blank" rel="noopener">Haxe 5</a>
+              salga, esto no estará disponible)
+            </p>
             <div class="download-actions">
               <a
                 class="btn-primary"
@@ -135,7 +151,7 @@
                 rel="noopener"
                 target="_blank"
               >
-                Download Windows 32-bit
+                <span data-i18n="downloads.cards.windows32.button">Descargar Windows 32-bit</span>
                 <span class="btn-icon" aria-hidden="true">
                   <img src="./assets/svgs/download.svg" alt="" aria-hidden="true" />
                 </span>
@@ -149,11 +165,11 @@
                 <img src="./assets/svgs/os-android.svg" alt="" aria-hidden="true" />
               </div>
               <div>
-                <div class="download-title">Android</div>
+                <div class="download-title" data-i18n="downloads.cards.android.title">Android</div>
                 <div class="download-version">APK/ZIP · Android</div>
               </div>
             </div>
-            <p class="download-desc">Grab the APK build for mobile devices and testing.</p>
+            <p class="download-desc" data-i18n="downloads.cards.android.desc">Build en APK.</p>
             <div class="download-actions">
               <a
                 class="btn-primary"
@@ -161,7 +177,7 @@
                 rel="noopener"
                 target="_blank"
               >
-                Download Android build
+                <span data-i18n="downloads.cards.android.button">Descargar Android</span>
                 <span class="btn-icon" aria-hidden="true">
                   <img src="./assets/svgs/download.svg" alt="" aria-hidden="true" />
                 </span>
@@ -175,11 +191,11 @@
                 <img src="./assets/svgs/os-apple.svg" alt="" aria-hidden="true" />
               </div>
               <div>
-                <div class="download-title">iOS</div>
+                <div class="download-title" data-i18n="downloads.cards.ios.title">iOS</div>
                 <div class="download-version">IPA/ZIP · iPhone/iPad</div>
               </div>
             </div>
-            <p class="download-desc">Nightly iOS builds packaged for testing devices.</p>
+            <p class="download-desc" data-i18n="downloads.cards.ios.desc">Build en IPA. (No Testeada)</p>
             <div class="download-actions">
               <a
                 class="btn-primary"
@@ -187,7 +203,7 @@
                 rel="noopener"
                 target="_blank"
               >
-                Download iOS build
+                <span data-i18n="downloads.cards.ios.button">Descargar iOS</span>
                 <span class="btn-icon" aria-hidden="true">
                   <img src="./assets/svgs/download.svg" alt="" aria-hidden="true" />
                 </span>
@@ -201,11 +217,13 @@
                 <img src="./assets/svgs/os-apple.svg" alt="" aria-hidden="true" />
               </div>
               <div>
-                <div class="download-title">macOS 32-bit</div>
+                <div class="download-title" data-i18n="downloads.cards.macos.title">macOS</div>
                 <div class="download-version">ZIP · Apple Silicon/Universal</div>
               </div>
             </div>
-            <p class="download-desc">Universal macOS bundle for modern Apple hardware.</p>
+            <p class="download-desc" data-i18n="downloads.cards.macos.desc">
+              Build para Hardware Reciente de Apple.
+            </p>
             <div class="download-actions">
               <a
                 class="btn-primary"
@@ -213,7 +231,7 @@
                 rel="noopener"
                 target="_blank"
               >
-                Download macOS 32-bit
+                <span data-i18n="downloads.cards.macos.button">Descargar macOS</span>
                 <span class="btn-icon" aria-hidden="true">
                   <img src="./assets/svgs/download.svg" alt="" aria-hidden="true" />
                 </span>
@@ -227,11 +245,13 @@
                 <img src="./assets/svgs/os-apple.svg" alt="" aria-hidden="true" />
               </div>
               <div>
-                <div class="download-title">macOS 64-bit</div>
+                <div class="download-title" data-i18n="downloads.cards.macos64.title">macOS 64-bit</div>
                 <div class="download-version">ZIP · Intel x64</div>
               </div>
             </div>
-            <p class="download-desc">Intel macOS build for x64 Macs.</p>
+            <p class="download-desc" data-i18n="downloads.cards.macos64.desc">
+              Build para Hardware de Intel de Apple.
+            </p>
             <div class="download-actions">
               <a
                 class="btn-primary"
@@ -239,7 +259,7 @@
                 rel="noopener"
                 target="_blank"
               >
-                Download macOS 64-bit
+                <span data-i18n="downloads.cards.macos64.button">Descargar macOS 64-bit</span>
                 <span class="btn-icon" aria-hidden="true">
                   <img src="./assets/svgs/download.svg" alt="" aria-hidden="true" />
                 </span>
@@ -253,11 +273,11 @@
                 <img src="./assets/svgs/os-linux.svg" alt="" aria-hidden="true" />
               </div>
               <div>
-                <div class="download-title">Linux</div>
+                <div class="download-title" data-i18n="downloads.cards.linux.title">Linux</div>
                 <div class="download-version">ZIP · Linux</div>
               </div>
             </div>
-            <p class="download-desc">Nightly Linux archive for desktop installs.</p>
+            <p class="download-desc" data-i18n="downloads.cards.linux.desc">Build para Linux.</p>
             <div class="download-actions">
               <a
                 class="btn-primary"
@@ -265,7 +285,7 @@
                 rel="noopener"
                 target="_blank"
               >
-                Download Linux build
+                <span data-i18n="downloads.cards.linux.button">Descargar Linux</span>
                 <span class="btn-icon" aria-hidden="true">
                   <img src="./assets/svgs/download.svg" alt="" aria-hidden="true" />
                 </span>
@@ -286,7 +306,7 @@
 
           <div class="footer-meta">
             <div>© <span id="yearSpan"></span> ALE Psych</div>
-            <div class="muted">Website by Malloy</div>
+            <div class="muted" data-i18n="common.footerCredit">Sitio web por Malloy</div>
           </div>
         </div>
       </footer>
@@ -307,7 +327,7 @@
           </div>
           <div>
             <div class="brand-subtitle">ALE Psych</div>
-            <div class="sidebar-title">navigation</div>
+            <div class="sidebar-title" data-i18n="common.sidebarTitle">navegación</div>
           </div>
         </div>
 
@@ -317,7 +337,7 @@
       </div>
 
       <div class="sidebar-body">
-        <div class="sidebar-kicker">sections</div>
+        <div class="sidebar-kicker" data-i18n="common.sidebarSections">secciones</div>
         <nav class="sidebar-nav" id="sidebarNav"></nav>
       </div>
     </aside>

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -46,8 +46,18 @@
             </div>
             <div class="brand-text">
               <div class="brand-title">ALE Psych</div>
-              <div class="brand-subtitle">FNF modding engine</div>
+              <div class="brand-subtitle" data-i18n="common.brandSubtitle">Motor de modding de FNF</div>
             </div>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <div class="language-switch">
+            <span class="language-label" data-i18n="common.languageLabel" data-language-label>Idioma</span>
+            <label class="visually-hidden" for="language-select">Language</label>
+            <select id="language-select" data-i18n-attr="aria-label:common.languageLabel">
+              <option value="es">Español</option>
+              <option value="en">English</option>
+            </select>
           </div>
         </div>
       </div>
@@ -58,24 +68,24 @@
       <section class="hero">
         <div class="hero-inner">
           <h1 class="hero-title">
-            Make FNF mods with
-            <span class="grad-text">style and speed</span>
+            <span data-i18n="home.heroTitle">Haz Mods para FNF con</span>
+            <span class="grad-text" data-i18n="home.heroHighlight">Estilo y Facilidad</span>
           </h1>
 
-          <p class="hero-desc">
-            A purpose-built Friday Night Funkin’ modding engine: clean foundations, flexible systems, and a workflow that
-            feels familiar without losing its own personality.
+          <p class="hero-desc" data-i18n-html="home.heroDesc">
+            Un Motor de Friday Night Funkin' Diseñado para <strong>No Lidiar con el Código Fuente</strong>: Basado en
+            <a href="https://gamebanana.com/mods/309789" target="_blank" rel="noopener">Psych</a>, pero con su propia personalidad
           </p>
 
           <div class="hero-actions">
             <a class="btn-primary" href="./site/downloads.html">
-              Get Started
+              <span data-i18n="home.primaryCta">Primeros Pasos</span>
               <span class="btn-icon" aria-hidden="true">
                 <img src="./site/assets/svgs/arrow-right.svg" alt="" aria-hidden="true" />
               </span>
             </a>
             <a class="btn-ghost" href="./site/cookbook/index.html">
-              Documentation
+              <span data-i18n="home.secondaryCta">Documentación</span>
               <span class="btn-icon" aria-hidden="true">
                 <img src="./site/assets/svgs/book.svg" alt="" aria-hidden="true" />
               </span>
@@ -104,7 +114,7 @@
       <!-- Why it feels right (auto cycles, one box) -->
       <section class="section">
         <div class="section-head">
-          <h2 class="section-title">Why it feels right</h2>
+          <h2 class="section-title" data-i18n="home.sectionWhyTitle">¿Cuál es su Encanto?</h2>
         </div>
 
         <div class="why-card" id="whyCard">
@@ -136,7 +146,7 @@
       <!-- Preview carousel -->
       <section class="section">
         <div class="section-head">
-          <h2 class="section-title">Features</h2>
+          <h2 class="section-title" data-i18n="home.sectionFeaturesTitle">Características</h2>
         </div>
 
         <div class="preview-card" id="previewCard">
@@ -178,19 +188,19 @@
         <div class="cta-bg" aria-hidden="true"></div>
         <div class="cta-inner">
           <div>
-            <div class="cta-title">Ready to build?</div>
-            <div class="cta-sub">Start modding in minutes.</div>
+            <div class="cta-title" data-i18n="home.ctaTitle">¿Listo para Empezar?</div>
+            <div class="cta-sub" data-i18n="home.ctaSubtitle">Empieza a hacer Mods en Minutos.</div>
           </div>
 
           <div class="cta-actions">
             <a class="btn-primary" href="./site/downloads.html">
-              Get Started
+              <span data-i18n="home.ctaPrimary">Primeros Pasos</span>
               <span class="btn-icon" aria-hidden="true">
                 <img src="./site/assets/svgs/arrow-right.svg" alt="" aria-hidden="true" />
               </span>
             </a>
             <a class="btn-ghost" href="./site/cookbook/index.html">
-              Read Docs
+              <span data-i18n="home.ctaSecondary">Documentación</span>
               <span class="btn-icon" aria-hidden="true">
                 <img src="./site/assets/svgs/book.svg" alt="" aria-hidden="true" />
               </span>
@@ -211,7 +221,7 @@
 
           <div class="footer-meta">
             <div>© <span id="yearSpan"></span> ALE Psych</div>
-            <div class="muted">Website by Malloy</div>
+            <div class="muted" data-i18n="common.footerCredit">Sitio web por Malloy</div>
           </div>
         </div>
       </footer>
@@ -232,7 +242,7 @@
           </div>
           <div>
             <div class="brand-subtitle">ALE Psych</div>
-            <div class="sidebar-title">navigation</div>
+            <div class="sidebar-title" data-i18n="common.sidebarTitle">navegación</div>
           </div>
         </div>
 
@@ -242,7 +252,7 @@
       </div>
 
       <div class="sidebar-body">
-        <div class="sidebar-kicker">sections</div>
+        <div class="sidebar-kicker" data-i18n="common.sidebarSections">secciones</div>
         <nav class="sidebar-nav" id="sidebarNav"></nav>
       </div>
     </aside>
