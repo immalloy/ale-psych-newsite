@@ -239,6 +239,7 @@ window.ALEPsychMeta = {
   updateOverrides,
   buildCanonicalUrl,
   toAbsoluteUrl,
+  siteBaseUrl: SITE_BASE_URL,
 };
 
 if (document.readyState === "loading") {

@@ -178,7 +178,7 @@
         return html;
       }
 
-      const SITE_BASE_URL = 'https://ale-psych-crew.github.io';
+      const SITE_BASE_URL = window.ALEPsychMeta?.siteBaseUrl ?? 'https://ale-psych-crew.github.io';
       const DATA_PATH = './mods-data.json';
       const detailsRoot = document.getElementById('details-root');
       const getText = (key) => window.ALEPsychI18n?.getText(key) ?? key;
