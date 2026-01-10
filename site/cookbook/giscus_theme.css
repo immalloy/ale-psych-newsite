@@ -4,36 +4,6 @@
  * https://github.com/primer/primitives/blob/main/LICENSE
  */
 main {
-  --color-prettylights-syntax-comment: #c9c2d7;
-  --color-prettylights-syntax-constant: #f6a15a;
-  --color-prettylights-syntax-entity: #f5f2fa;
-  --color-prettylights-syntax-storage-modifier-import: #c9c2d7;
-  --color-prettylights-syntax-entity-tag: #f28b3c;
-  --color-prettylights-syntax-keyword: #f6a15a;
-  --color-prettylights-syntax-string: #f28b3c;
-  --color-prettylights-syntax-variable: #f5f2fa;
-  --color-prettylights-syntax-brackethighlighter-unmatched: #e5534b;
-  --color-prettylights-syntax-invalid-illegal-text: #f5f2fa;
-  --color-prettylights-syntax-invalid-illegal-bg: #7b2525;
-  --color-prettylights-syntax-carriage-return-text: #f5f2fa;
-  --color-prettylights-syntax-carriage-return-bg: #7b2525;
-  --color-prettylights-syntax-string-regexp: #f28b3c;
-  --color-prettylights-syntax-markup-list: #f28b3c;
-  --color-prettylights-syntax-markup-heading: #f6a15a;
-  --color-prettylights-syntax-markup-italic: #c9c2d7;
-  --color-prettylights-syntax-markup-bold: #f5f2fa;
-  --color-prettylights-syntax-markup-deleted-text: #f5f2fa;
-  --color-prettylights-syntax-markup-deleted-bg: #7b2525;
-  --color-prettylights-syntax-markup-inserted-text: #f5f2fa;
-  --color-prettylights-syntax-markup-inserted-bg: #1f3c2c;
-  --color-prettylights-syntax-markup-changed-text: #f5f2fa;
-  --color-prettylights-syntax-markup-changed-bg: #5c3a14;
-  --color-prettylights-syntax-markup-ignored-text: #c9c2d7;
-  --color-prettylights-syntax-markup-ignored-bg: #4a2e1f;
-  --color-prettylights-syntax-meta-diff-range: #f6a15a;
-  --color-prettylights-syntax-brackethighlighter-angle: #c9c2d7;
-  --color-prettylights-syntax-sublimelinter-gutter-mark: #332e40;
-  --color-prettylights-syntax-constant-other-reference-link: #f6a15a;
   --color-btn-text: #f5f2fa;
   --color-btn-bg: #23202b;
   --color-btn-border: #332e40;
