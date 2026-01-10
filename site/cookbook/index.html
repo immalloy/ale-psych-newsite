@@ -984,12 +984,12 @@
     function renderMarkdown(markdown) {
       const stripped = markdown.replace(/^---[\s\S]*?---\s*/, '');
       const rendered = marked.parse(stripped);
-      const withCallouts = decorateNoteCallouts(rendered);
+      const withCallouts = decorateCallouts(rendered);
       const sanitized = DOMPurify.sanitize(withCallouts, { USE_PROFILES: { html: true } });
       return sanitized || '<p>No content available.</p>';
     }
 
-    function decorateNoteCallouts(html) {
+    function decorateCallouts(html) {
       if (!html) {
         return html;
       }
@@ -1003,36 +1003,60 @@
           return;
         }
         const firstText = firstParagraph.textContent?.trim();
-        if (!firstText || !firstText.startsWith('[!NOTE]')) {
+        if (!firstText) {
           return;
         }
+        const calloutMatch = firstText.match(/^\s*\[!([A-Za-z0-9_-]+)\]/);
+        if (!calloutMatch) {
+          return;
+        }
+        const calloutType = calloutMatch[1].toLowerCase();
         const callout = doc.createElement('div');
-        callout.className = 'callout callout-note';
+        callout.className = `callout callout-${calloutType}`;
         const title = doc.createElement('div');
         title.className = 'callout-title';
         const icon = doc.createElement('span');
         icon.className = 'callout-icon';
         icon.setAttribute('aria-hidden', 'true');
-        icon.textContent = 'i';
+        icon.textContent = calloutType === 'warning' ? '!' : 'i';
         const label = doc.createElement('span');
         label.className = 'callout-label';
-        label.textContent = ui.noteLabel || 'Note';
+        const labelKey = `${calloutType}Label`;
+        label.textContent = ui[labelKey] || calloutType.charAt(0).toUpperCase() + calloutType.slice(1);
         title.append(icon, label);
         const body = doc.createElement('div');
         body.className = 'callout-body';
-        if (firstText === '[!NOTE]') {
+        stripCalloutToken(firstParagraph, calloutType);
+        if (!firstParagraph.textContent?.trim() && firstParagraph.children.length === 0) {
           firstParagraph.remove();
-        } else {
-          firstParagraph.textContent = firstParagraph.textContent.replace('[!NOTE]', '').trim();
-          if (!firstParagraph.textContent) {
-            firstParagraph.remove();
-          }
         }
         body.innerHTML = blockquote.innerHTML;
         callout.append(title, body);
         blockquote.replaceWith(callout);
       });
       return doc.body.innerHTML;
+    }
+
+    function stripCalloutToken(paragraph, calloutType) {
+      if (!paragraph) {
+        return;
+      }
+      const tokenRegex = new RegExp(`^\\s*\\[!${calloutType}\\]\\s*`, 'i');
+      const walker = paragraph.ownerDocument.createTreeWalker(paragraph, NodeFilter.SHOW_TEXT);
+      let node = walker.nextNode();
+      while (node) {
+        const value = node.nodeValue || '';
+        const updated = value.replace(tokenRegex, '');
+        if (updated !== value) {
+          if (updated) {
+            node.nodeValue = updated;
+          } else {
+            node.remove();
+          }
+          break;
+        }
+        node = walker.nextNode();
+      }
     }
 
     function parseFrontMatter(markdown) {
