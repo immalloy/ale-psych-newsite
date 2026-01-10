@@ -2,6 +2,7 @@ import { NAV_SECTIONS, WHY_SLIDES, SHOWCASE } from "./data.js";
 
 const AUTO_INTERVAL_MS = 5200;
 const PREVIEW_INTERVAL_MS = 6200;
+const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
 const { pathname } = window.location;
 const isRootIndex = !pathname.includes("/site/") && (pathname === "/" || pathname.endsWith("/index.html"));
@@ -118,6 +119,7 @@ const setWhyIndex = (next) => {
 };
 
 const startWhyTimer = () => {
+  if (prefersReducedMotion.matches) return;
   if (whyTimer) window.clearInterval(whyTimer);
   whyTimer = window.setInterval(() => setWhyIndex(whyIdx + 1), AUTO_INTERVAL_MS);
 };
@@ -195,6 +197,7 @@ const setPrevIndex = (next) => {
 };
 
 const startPrevTimer = () => {
+  if (prefersReducedMotion.matches) return;
   if (prevTimer) window.clearInterval(prevTimer);
   prevTimer = window.setInterval(() => setPrevIndex(prevIdx + 1), PREVIEW_INTERVAL_MS);
 };

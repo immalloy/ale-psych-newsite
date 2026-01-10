@@ -65,7 +65,7 @@ img{ display:block; max-width:100%; }
 .blob{
   position:absolute;
   border-radius: 9999px;
-  filter: blur(64px);
+  filter: blur(48px);
   mix-blend-mode: screen;
 }
 .blob-1{ top:-7rem; left:6%; width:460px; height:460px; background: rgba(124,58,237,.30); }
@@ -98,4 +98,13 @@ img{ display:block; max-width:100%; }
     opacity: .75;
   }
   .grid-overlay{ opacity: .12; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .blob{
+    filter: blur(28px);
+    mix-blend-mode: normal;
+    opacity: .6;
+  }
+  .grid-overlay{ opacity: .08; }
 }
